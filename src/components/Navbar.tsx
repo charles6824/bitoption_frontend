@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom"
 import logo from  "../assets/images/logo-dark.png"
 import { FaUser, FaUserPlus } from "react-icons/fa";
-import { TfiAngleDown } from "react-icons/tfi";
-
+ 
 
 const Navbar = () => {
   return (
