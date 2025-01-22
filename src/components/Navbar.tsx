@@ -41,7 +41,7 @@ const Navbar = () => {
     <div className="bg-black text-white p-5 ">
       <ul className="flex items-center justify-center space-x-5">
         <li className="space-x-7 text-center text-[14px] font-[600px]"><Link to="">HOME</Link></li>
-        <li className="space-x-7 text-center text-[14px] font-[600px]"><Link to="">ABOUTUS</Link> </li>
+        <li className="space-x-7 text-center text-[14px] font-[600px]"><Link to="">ABOUT</Link> </li>
         <li className="space-x-7 text-center text-[14px] font-[600px]"><Link to="">SERVICES</Link> </li>
         <li className="space-x-7 text-center text-[14px] font-[600px]"><Link to="">PRICING</Link> </li>
         <li className="space-x-7 text-center text-[14px] font-[600px] group relative "><Link className="flex items-center" to="">BLOG</Link>

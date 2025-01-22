@@ -1,0 +1,80 @@
+import { useState, useEffect } from "react";
+import bg1 from "../assets/images/bg1.jpg";
+import bg2 from "../assets/images/bg2.jpg";
+
+const Hero = () => {
+  const slides = [
+    {
+      image: bg1,
+      text: (
+        <div className="text-[60px] uppercase ">
+          Welcome to <span className="text-[#fa9e1f] text-[60px] font-bold">Our Platform</span> <br />
+          <span className=" text-[60px]">Your trusted partner in growth.</span>
+        </div>
+      ),
+    },
+    {
+      image: bg2,
+      text: (
+        <div className=" text-[60px] uppercase">
+          Experience the <span className="text-[#fa9e1f] font-bold text-[60px]">Best Services</span> <br />
+          <span className="text-[60px]">Tailored just for you.</span>
+        </div>
+      ),
+    },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 7000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  const handleNavigation = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  return (
+    <div className="relative w-full h-[80vh] overflow-hidden">
+      {/* Image and Text Display */}
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ${
+            index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+          }`}
+        >
+          <img
+            src={slide.image}
+            alt={`Slide ${index + 1}`}
+            className="w-full h-full object-cover"
+          />
+          {/* Text Overlay */}
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 text-center px-4">
+            <h1 className="text-white text-4xl font-bold leading-relaxed">
+              {slide.text}
+            </h1>
+          </div>
+        </div>
+      ))}
+
+      {/* Navigation Dots */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => handleNavigation(index)}
+            className={`w-3 h-3 rounded-full ${
+              index === currentIndex ? "bg-white" : "bg-gray-400"
+            }`}
+          ></button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Hero;

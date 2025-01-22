@@ -24,22 +24,22 @@ const DashboardLayout = () => {
       url: "/dashboard",
     },
     {
-      name: "Dispute Resolution",
+      name: "Deposit",
       // icon: <img src={dispute} alt="Dispute Resolution Icon" className="w-5 h-5" />,
       url: "/dispute",
     },
     {
-      name: "Legal Expert",
+      name: "packages",
       // icon: <img src={legal} alt="Legal Expert Icon" className="w-5 h-5" />,
       url: "/legal",
     },
     {
-      name: "Messages",
+      name: "Investments",
       // icon: <img src={message} alt="Messages Icon" className="w-5 h-5" />,
       url: "/messages",
     },
     {
-      name: "Calendar",
+      name: "withdrawals",
       // icon: <img src={calendar} alt="Calendar Icon" className="w-5 h-5" />,
       url: "/calendar",
     },
