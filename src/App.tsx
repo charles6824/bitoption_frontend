@@ -12,6 +12,9 @@ import Register from "./pages/Register";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Settings from "./pages/Dashboard/Settings";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Contact from "./pages/Contact";
 
 
 const App = () => {
@@ -20,6 +23,9 @@ const App = () => {
 			<>
 				<Route path="/" element={<MainLayout />}>
 					<Route index element={<HomePage />} />
+					<Route path="/about" element={<About />} />
+					<Route path="/services" element={<Services />} />
+					<Route path="/contact" element={<Contact />} />
 				</Route>
 				<Route element={<AuthLayout />}>
 					<Route path="/sign-in" index element={<LoginPage />} />

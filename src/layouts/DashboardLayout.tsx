@@ -55,25 +55,25 @@ const DashboardLayout = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100 overflow-hidden">
+    <div className="flex h-screen bg-[#1d1d1d] overflow-hidden">
       {/* Sidebar */}
       <aside
         className={`fixed z-20 inset-y-0 left-0 bg-[#f5f9fa] sm:bg-sidebar-gradient shadow-custom w-[300px] transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform sm:translate-x-0 sm:relative sm:z-auto`}
       >
-        <div className="p-6">
+        <div className="p-6 bg-[#1d1d1d] h-full text-[#fa9e1f]">
           {/* <img src={logo} alt="" width="200px" /> */}
           <h1>247BitOptions</h1>
-          <nav className="mt-[90px]">
+          <nav className="mt-[90px] ">
             <ul className="space-y-3">
               {navList.map((item) => (
                 <li
                   key={item.name}
                   className={`flex items-center p-3 rounded-md text-[16px] font-medium ${
                     location.pathname === item.url
-                      ? "bg-[#51A8B11A] text-[#3A5A5A]"
-                      : "text-[#3A5A5A]"
+                      ? "bg-[#51A8B11A] text-[#fa9e1f]"
+                      : "text-[#ffff]"
                   }`}
                 >
                   <Link to={item.url} className="flex items-center w-full">
@@ -83,7 +83,7 @@ const DashboardLayout = () => {
                 </li>
               ))}
 
-              <li className="flex items-center p-3 rounded-md text-[16px] font-medium text-[#3A5A5A] mt-[50px] cursor-pointer">
+              <li className="flex items-center p-3 rounded-md text-[16px] font-medium text-[#fff] mt-[50px] cursor-pointer">
                 <span className="flex items-center w-full">
                   {/* <img src={logout} alt="" className="w-5 h-5" /> */}
                   <span className="ml-4">Log Out</span>
@@ -123,7 +123,7 @@ const DashboardLayout = () => {
           
           <div className="flex justify-between items-center space-x-6">
             {/* <img src={notification} alt="" className="" /> */}
-            <FaBell />
+            <FaBell className="text-[#fa9e1f]" />
             <div className="hidden sm:flex items-center space-x-2 cursor-pointer">
               {/* <img
                 src={profile}
@@ -131,26 +131,26 @@ const DashboardLayout = () => {
                 className="w-8 h-8 rounded-full border border-gray-300"
               /> */}
               <FaUser />
-              <span className="text-sm font-medium text-gray-700">Jennifer Balablu</span>
+              <span className="text-sm font-medium text-white">Jennifer Balablu</span>
               {/* <img src={arrow} alt="" className="w-[20px] h-[20px]" /> */}
-              <FaArrowDown />
+              <FaArrowDown className="text-[#fa9e1f]" />
             </div>
           </div>
         </header>
 
-        <header className="bg-white px-[50px] py-[20px] hidden sm:flex justify-between items-center fixed top-0 left-0 sm:left-[300px] w-full sm:w-[calc(100%-300px)] z-10">
+        <header className="bg-[#1d1d1d] px-[50px] py-[20px] hidden sm:flex justify-between items-center fixed top-0 left-0 sm:left-[300px] w-full sm:w-[calc(100%-300px)] z-10">
           <div>
-            <h1 className="text-[24px] font-medium text-[#3A5A5A]">Good Afternoon, James</h1>
-            <p className="text-[12px] text-[#3A5A5A]">Welcome Back! Let’s pick up where you left off</p>
+            <h1 className="text-[24px] font-medium text-white">Good Afternoon,<span className="text-[#fa9e1f]">James</span> </h1>
+            <p className="text-[12px] text-[#fff]">Welcome Back! Let’s pick up where you left off</p>
           </div>
           <div className="flex justify-between items-center space-x-6">
             {/* <img src={notification} alt="" className="" /> */}
-            <FaBell />
+            <FaBell className="text-[#fa9e1f]" />
             <div className="hidden sm:flex items-center space-x-2 cursor-pointer">
-              <FaUser />
-              <span className="text-sm font-medium text-gray-700">Jennifer Balablu</span>
+              <FaUser className="text-[#fa9e1f]" />
+              <span className="text-sm font-medium text-white">Jennifer Balablu</span>
               {/* <img src={arrow} alt="" className="w-[20px] h-[20px]" /> */}
-              <FaArrowDown />
+              <FaArrowDown className="text-[#fa9e1f]" />
             </div>
           </div>
         </header>

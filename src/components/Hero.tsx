@@ -2,27 +2,55 @@ import { useState, useEffect } from "react";
 import bg1 from "../assets/images/bg1.jpg";
 import bg2 from "../assets/images/bg2.jpg";
 
+
 const Hero = () => {
   const slides = [
     {
       image: bg1,
       text: (
-        <div className="text-[60px] uppercase ">
-          Welcome to <span className="text-[#fa9e1f] text-[60px] font-bold">Our Platform</span> <br />
-          <span className=" text-[60px]">Your trusted partner in growth.</span>
+        <div className="text-center px-4">
+          <h1 className="text-[30px] sm:text-[35px] md:text-[45px] lg:text-[50px] font-bold leading-tight uppercase">
+            Welcome to{" "}
+            <span className="text-[#fa9e1f] font-bold">
+              Our Platform
+            </span>
+          </h1>
+          <p className="text-[20px] sm:text-[25px] md:text-[30px] leading-normal mt-2">
+            Your trusted partner in growth.
+          </p>
+
+          <button
+            className="mt-8 px-6 py-2 text-[14px] sm:text-[16px] md:text-[18px] font-bold text-[#fa9e1f] border-2 border-[#fa9e1f] hover:bg-[#f29827] "
+          >
+            LEARN MORE
+          </button>
         </div>
       ),
     },
     {
       image: bg2,
       text: (
-        <div className=" text-[60px] uppercase">
-          Experience the <span className="text-[#fa9e1f] font-bold text-[60px]">Best Services</span> <br />
-          <span className="text-[60px]">Tailored just for you.</span>
+        <div className="text-center px-4">
+          <h1 className="text-[30px] sm:text-[35px] md:text-[45px] lg:text-[50px] font-bold leading-tight uppercase">
+            Experience the{" "}
+            <span className="text-[#fa9e1f] font-bold">
+              Best Services
+            </span>
+          </h1>
+          <p className="text-[20px] sm:text-[25px] md:text-[30px] leading-normal mt-2">
+            Tailored just for you.
+          </p>
+          <button
+            className="mt-8 px-7 py-2 text-[14px] sm:text-[16px] md:text-[18px] font-bold text-[#fa9e1f] border-2 border-[#fa9e1f] hover:bg-[#f29827] "
+          >
+            OUR PRICES
+          </button>
         </div>
       ),
     },
   ];
+  
+  
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -38,7 +66,11 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative w-full h-[80vh] overflow-hidden">
+
+    <>
+
+       
+    <div className="relative w-full h-[60vh] md:h-[80vh] overflow-hidden m">
       {/* Image and Text Display */}
       {slides.map((slide, index) => (
         <div
@@ -54,7 +86,7 @@ const Hero = () => {
           />
           {/* Text Overlay */}
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 text-center px-4">
-            <h1 className="text-white text-4xl font-bold leading-relaxed">
+            <h1 className="text-white text-3xl md:text-4xl font-bold leading-relaxed">
               {slide.text}
             </h1>
           </div>
@@ -74,6 +106,7 @@ const Hero = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 
