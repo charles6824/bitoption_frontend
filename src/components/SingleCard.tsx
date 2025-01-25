@@ -4,7 +4,6 @@ interface SingleCardProps {
   }
     
 
- 
  const SingleCard = ({className,children}:SingleCardProps) => {
    return (
      <div className={className}>

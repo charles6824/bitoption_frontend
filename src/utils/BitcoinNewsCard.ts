@@ -11,8 +11,8 @@ export const bitcoinNewsCards= [
        },
        {
            img:member2,
-           name: "Cryptocurrency - Who Are Involved With It? Words about members",
-           position: "incididunt ut labore et dolore magna aliqua. Ut enim aminim veniam, quis nostrud."
+           name: "Cryptocurrency - Who Are Involved With It? Words",
+           position: "incididunt ut labore et dolore magna aliqua. Ut enim aminim veniam."
 
 
    

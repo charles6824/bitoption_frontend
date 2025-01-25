@@ -32,7 +32,7 @@ const HomePage = () => {
       <img src={abtImg} alt="About Us" className="max-w-full md:max-w-[400px] w-full h-auto" />
       <div className="text-[#fff] max-w-full md:max-w-[600px] text-center md:text-left">
         <h1 className="text-[24px] md:text-[32px] font-bold mb-4">WE ARE BAYYA</h1>
-        <p className="w-full leading-relaxed mb-7 text-sm md:text-base">
+        <p className="w-full leading-relaxed mb-7 text-sm md:text-[17px]">
           A place for everyone who wants to simply buy and sell Bitcoins. Deposit funds using your
           Visa/MasterCard or bank transfer. Instant buy/sell of Bitcoins at fair price is
           guaranteed. Nothing extra. Join over 700,000 users from all over the world satisfied with
@@ -53,7 +53,7 @@ const HomePage = () => {
     <h1 className="text-[#fff] uppercase text-[28px] md:text-[40px] font-bold">AFFORDABLE PACKAGES</h1>
     <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-center py-4">
       <hr className="w-[50px] border border-[#fa9e1f]" />
-      <p className="text-[#fff] text-sm md:text-base">
+      <p className="text-[#fff] text-sm md:text-[20px]">
         Purchase Bitcoin using a credit card or with your linked bank account
       </p>
       <hr className="w-[50px] border border-[#fa9e1f]" />
@@ -131,7 +131,7 @@ const HomePage = () => {
       <h1 className="text-[#FFFFFF] text-[20px] md:text-[40px] font-bold mb-4">
         Get Started Today With Bitcoin
       </h1>
-      <p className="text-[14px] text-[#FFFFFF] text-center font-normal leading-5 mb-6">
+      <p className="text-[20px] text-[#FFFFFF] text-center font-normal leading-5 mb-6">
         Open an account for free and start trading Bitcoins!
       </p>
       <button className="py-3 px-6 md:px-10 bg-[#fa9e1f] text-[#fff] font-bold text-sm md:text-base">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
 // import dashboard from "../assets/img/svg/dashboard.svg";
 // import dispute from "../assets/img/svg/dispute.svg";
 // import legal from "../assets/img/svg/legal.svg";

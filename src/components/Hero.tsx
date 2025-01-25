@@ -50,7 +50,6 @@ const Hero = () => {
     },
   ];
   
-  
 
   const [currentIndex, setCurrentIndex] = useState(0);
 

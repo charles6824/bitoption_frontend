@@ -37,7 +37,7 @@ const Contact = () => {
         <label htmlFor="">FIRSTNAME</label>
         <Input 
           placeholder="FIRST NAME" 
-          className="py-4 px-16   b" 
+          className="py-4 md:px-16 px-7 " 
           onPointerEnterCapture={() => {}} 
           onPointerLeaveCapture={() => {}} 
           crossOrigin="" 

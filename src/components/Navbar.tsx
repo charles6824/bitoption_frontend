@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/images/logo-dark.png";
 import { FaTimes, FaUser, FaUserPlus } from "react-icons/fa";
 import { CiMenuFries } from "react-icons/ci";
@@ -11,14 +11,18 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+
+  const activeStyle = ({isActive}: {isActive: boolean}) => isActive ? "text-[#d37d38]" : "text-white"
+
   return (
     <>
       {/* Desktop Navbar */}
       <nav className="hidden bg-[#1d1d1d] px-[5%] py-5 text-[#FFF] md:flex justify-between">
-        <img src={logo} alt="" className="h-11" />
+        {/* <img src={logo} alt="" className="h-11" /> */}
+        <h1 className="text-[30px] ">247bit<span className="text-[#fa9e1f] text-[30px] italic">option</span> </h1>
         <div className="flex items-center space-x-7 text-[13px]">
           <div>
-            <h1 className="font-bold">9,450 USD</h1>
+            <h1 className="font-bold ">9,450 USD</h1>
             <p className="text-[#b4a7a1]">last trade price</p>
           </div>
           <div>
@@ -41,14 +45,14 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           <Link
             to="/sign-in"
-            className="border border-[#d37d38] py-3 px-4  flex items-center text-[#d37d38] font-bold"
+            className="border border-[#fa9e1f] py-3 px-4  flex items-center text-[#fa9e1f] font-bold"
           >
-            <FaUser className="text-[#d37d38]" />
+            <FaUser className="text-[#fa9e1f]" />
             SIGN IN
           </Link>
           <Link
             to="/sign-up"
-            className="bg-[#d37d38] py-3 px-7 flex items-center"
+            className="bg-[#fa9e1f] py-3 px-7 flex items-center"
           >
             <FaUserPlus />
             REGISTER
@@ -60,25 +64,25 @@ const Navbar = () => {
       <div className="hidden md:block bg-black text-white p-5">
         <ul className="flex items-center justify-center space-x-5">
           <li className="text-center text-[14px] font-bold">
-            <Link to="/">HOME</Link>
+            <NavLink className={activeStyle} to="/">HOME</NavLink>
           </li>
           <li className="text-center text-[14px] font-bold">
-            <Link to="/about">ABOUT</Link>
+            <NavLink className={activeStyle} to="/about">ABOUT</NavLink>
           </li>
           <li className="text-center text-[14px] font-bold">
-            <Link to="/services">SERVICES</Link>
+            <NavLink className={activeStyle} to="/services">SERVICES</NavLink>
           </li>
+          {/* <li className="text-center text-[14px] font-bold">
+            <NavLink className={activeStyle} to="">PRICING</NavLink>
+          </li> */}
+          {/* <li className="text-center text-[14px] font-bold">
+            <NavLink to="">BLOG</NavLink>
+          </li> */}
+          {/* <li className="text-center text-[14px] font-bold">
+            <NavLink to="">PAGES</NavLink>
+          </li> */}
           <li className="text-center text-[14px] font-bold">
-            <Link to="">PRICING</Link>
-          </li>
-          <li className="text-center text-[14px] font-bold">
-            <Link to="">BLOG</Link>
-          </li>
-          <li className="text-center text-[14px] font-bold">
-            <Link to="">PAGES</Link>
-          </li>
-          <li className="text-center text-[14px] font-bold">
-            <Link to="/contact">CONTACT</Link>
+            <NavLink className={activeStyle} to="/contact">CONTACT</NavLink>
           </li>
         </ul>
       </div>
@@ -99,14 +103,14 @@ const Navbar = () => {
         <div className="flex  items-center mt-7  w-full justify-center gap-5 ">
         <Link
             to="/sign-in"
-            className="border border-[#d37d38] py-3 px-7  flex items-center text-[#d37d38] font-bold"
+            className="border border-[#fa9e1f] py-3 px-7  flex items-center text-[#fa9e1f] font-bold"
           >
             <FaUser className="text-[#fa9e1f]" />
             SIGN IN
           </Link>
           <Link
             to="/sign-up"
-            className="bg-[#d37d38] py-3 px-7 flex text-white items-center"
+            className="bg-[#fa9e1f] py-3 px-7 flex text-white items-center"
           >
             <FaUserPlus />
             REGISTER
