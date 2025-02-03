@@ -1,18 +1,10 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { FiLogOut } from "react-icons/fi";
-// import dashboard from "../assets/img/svg/dashboard.svg";
-// import dispute from "../assets/img/svg/dispute.svg";
-// import legal from "../assets/img/svg/legal.svg";
-// import message from "../assets/img/svg/message.svg";
-// import calendar from "../assets/img/svg/calendar.svg";
-// import settings from "../assets/img/svg/settings.svg";
-// import logout from "../assets/img/svg/logout.svg";
-// import logo from "../assets/img/png/nav-logo.png";
-// import notification from "../assets/img/png/notification.png";
-// import profile from "../assets/img/png/profile.png";
-// import arrow from "../assets/img/png/arrow-down.png";
-import { FaArrowDown, FaBell, FaUser } from "react-icons/fa";
+import { FaAngleDown, FaArrowDown,  FaUser, FaUserCircle } from "react-icons/fa";
+import { MdDashboard, MdLogout, MdOutlineAttachMoney, MdOutlineSettings, MdPayment } from "react-icons/md";
+import { GiPayMoney } from "react-icons/gi";
+import { BiTransferAlt } from "react-icons/bi";
+import { LucideChartNoAxesCombined } from "lucide-react";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,31 +14,43 @@ const DashboardLayout = () => {
     {
       name: "Dashboard",
       // icon: <img src={dashboard} alt="Dashboard Icon" className="w-5 h-5" />,
+      icon: <MdDashboard />,
       url: "/dashboard",
     },
     {
       name: "Deposit",
       // icon: <img src={dispute} alt="Dispute Resolution Icon" className="w-5 h-5" />,
-      url: "/dispute",
+     icon: <GiPayMoney />,
+      url: "/deposit",
     },
     {
-      name: "packages",
+      name: "Transfer",
       // icon: <img src={legal} alt="Legal Expert Icon" className="w-5 h-5" />,
-      url: "/legal",
+      icon :<BiTransferAlt/>,
+      url: "/transfers",
     },
     {
       name: "Investments",
       // icon: <img src={message} alt="Messages Icon" className="w-5 h-5" />,
-      url: "/messages",
+      icon:<LucideChartNoAxesCombined />,
+      url: "/investments",
+    },
+    {
+      name: "Packages",
+      // icon: <img src={message} alt="Messages Icon" className="w-5 h-5" />,
+      icon:<LucideChartNoAxesCombined />,
+      url: "/packages",
     },
     {
       name: "withdrawals",
       // icon: <img src={calendar} alt="Calendar Icon" className="w-5 h-5" />,
-      url: "/calendar",
+      icon :<MdPayment/>,
+      url: "/withdrawals",
     },
     {
       name: "Settings",
       // icon: <img src={settings} alt="Settings Icon" className="w-5 h-5" />,
+      icon: <MdOutlineSettings />,
       url: "/settings",
     },
   ];
@@ -65,7 +69,6 @@ const DashboardLayout = () => {
       >
         <div className="p-6 bg-[#1d1d1d] h-full text-[#fa9e1f]">
           {/* <img src={logo} alt="" width="200px" /> */}
-          <h1>247BitOptions</h1>
           <nav className="mt-[90px] ">
             <ul className="space-y-3">
               {navList.map((item) => (
@@ -78,7 +81,7 @@ const DashboardLayout = () => {
                   }`}
                 >
                   <Link to={item.url} className="flex items-center w-full">
-                    {/* {item.icon} */}
+                    {item.icon}
                     <span className="ml-4">{item.name}</span>
                   </Link>
                 </li>
@@ -87,6 +90,7 @@ const DashboardLayout = () => {
               <li className="flex items-center p-3 rounded-md text-[16px] font-medium text-[#fff] mt-[50px] cursor-pointer">
                 <span className="flex items-center w-full">
                   {/* <img src={logout} alt="" className="w-5 h-5" /> */}
+                  <MdLogout />
                   <span className="ml-4">Log Out</span>
                 </span>
               </li>
@@ -124,7 +128,6 @@ const DashboardLayout = () => {
           
           <div className="flex justify-between items-center space-x-6">
             {/* <img src={notification} alt="" className="" /> */}
-            <FaBell className="text-[#fa9e1f]" />
             <div className="hidden sm:flex items-center space-x-2 cursor-pointer">
               {/* <img
                 src={profile}
@@ -146,12 +149,11 @@ const DashboardLayout = () => {
           </div>
           <div className="flex justify-between items-center space-x-6">
             {/* <img src={notification} alt="" className="" /> */}
-            <FaBell className="text-[#fa9e1f]" />
             <div className="hidden sm:flex items-center space-x-2 cursor-pointer">
-              <FaUser className="text-[#fa9e1f]" />
+              <FaUserCircle className="text-[#fa9e1f]" />
               <span className="text-sm font-medium text-white">Jennifer Balablu</span>
               {/* <img src={arrow} alt="" className="w-[20px] h-[20px]" /> */}
-              <FaArrowDown className="text-[#fa9e1f]" />
+              <FaAngleDown className="text-[#fa9e1f]" />
             </div>
           </div>
         </header>

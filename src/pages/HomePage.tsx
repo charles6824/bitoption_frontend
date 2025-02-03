@@ -9,13 +9,15 @@ import ExpertCard from "../components/ExpertCard";
 import BitcoinNewsCard from "../components/BitcoinNewsCard";
 import { bitcoinNewsCards } from "../utils/BitcoinNewsCard";
 import callToAction_Bg from "../assets/images/call-to-action-bg.jpg"
+import VidoeSection from "../components/VidoeSection";
+import img from "../assets/images/bitcoin-6992422_1920.jpg"
 
 const HomePage = () => {
   return (
     <>
 
       <Hero/>
-      <main className="bg-[#111111] px-4 md:px-[50px]">
+      <main className="bg-[#111111] px-4 ">
   {/* ABOUT US */}
   <div className="py-16">
     <h1 className="text-[#FFF] text-center text-[28px] md:text-[40px] font-bold">
@@ -31,7 +33,7 @@ const HomePage = () => {
     <div className="flex flex-col md:flex-row justify-center items-center gap-8 py-6">
       <img src={abtImg} alt="About Us" className="max-w-full md:max-w-[400px] w-full h-auto" />
       <div className="text-[#fff] max-w-full md:max-w-[600px] text-center md:text-left">
-        <h1 className="text-[24px] md:text-[32px] font-bold mb-4">WE ARE BAYYA</h1>
+        <h1 className="text-[24px] md:text-[32px] font-bold mb-4">247 <span className="text-[#fa9e1f]">BITOPTION</span> </h1>
         <p className="w-full leading-relaxed mb-7 text-sm md:text-[17px]">
           A place for everyone who wants to simply buy and sell Bitcoins. Deposit funds using your
           Visa/MasterCard or bank transfer. Instant buy/sell of Bitcoins at fair price is
@@ -41,14 +43,22 @@ const HomePage = () => {
         <Link
           to="/about"
           className="bg-[#fa9e1f] font-semibold text-[#fff] py-4 px-6 text-sm md:py-3 md:px-8 hover:text-[#d37d38]"
-        >
+          >
           READ MORE
         </Link>
       </div>
     </div>
   </div>
 
-  {/* AFFORDABLE PACKAGES */}
+  {/* video section and  */}
+<div className="bg-gray-50">
+
+<VidoeSection/>
+</div>
+
+
+
+{/* AFFORDABLE PACKAGES */}
   <div className="py-16 text-center">
     <h1 className="text-[#fff] uppercase text-[28px] md:text-[40px] font-bold">AFFORDABLE PACKAGES</h1>
     <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-center py-4">
@@ -67,6 +77,8 @@ const HomePage = () => {
       </button>
     </div>
   </div>
+
+
 
   {/* BITCOIN CARD */}
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 py-6">
@@ -98,6 +110,34 @@ const HomePage = () => {
     </div>
   </div>
 
+
+
+
+{/* Review */}
+  <>
+  <div className="flex md:flex-row flex-col items-center relative ">
+  {/* Left Section */}
+
+  <div className="relative flex items-center justify-center ">
+    <img
+      src={img}
+      className="md:w-[450px] h-auto  shadow-lg opacity-30"
+    />
+
+    {/* Text Overlay */}
+    <div className="absolute text-white italic md:text-[13px] text-[16px] md:w-80 w-64 leading-6">
+      <p>Bitcoin is one of the most important inventions in all of human history. For the first time ever, anyone can send or receive any amount of money with anyone else, anywhere on the planet, conveniently and without restriction. It’s the dawn of a better, more free world.</p>
+    </div>
+  </div>
+  {/* Image Section with Text Overlay */}
+  <div className="bg-[#1d1d1d] py-5 md:px-24 md:w-[70%] md:h-[100vh] text-center">
+    {/* Your content */}
+  </div>
+</div>
+
+
+</>
+
   {/* BITCOIN NEWS */}
   <div className="py-16 text-center">
     <h1 className="text-[#fff] uppercase text-[28px] md:text-[40px] font-bold">BITCOIN NEWS</h1>
@@ -117,6 +157,7 @@ const HomePage = () => {
         ))}
     </div>
   </div>
+
 
   {/* CALL TO ACTION */}
   <div
@@ -140,9 +181,6 @@ const HomePage = () => {
     </div>
   </div>
 </main>
-
-
-
 
     </>
     

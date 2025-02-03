@@ -1,4 +1,3 @@
-import { Input } from "@material-tailwind/react"
 import hero from "../assets/images/bg-banner.jpg"
 import { FaAddressBook, FaFacebook, FaHome, FaInstagram, FaLink, FaLinkedin, FaTwitter } from "react-icons/fa"
 import { Link } from "react-router-dom"
@@ -34,43 +33,42 @@ const Contact = () => {
 
         
       <div className="mb-6">
-        <label htmlFor="">FIRSTNAME</label>
-        <Input 
-          placeholder="FIRST NAME" 
-          className="py-4 md:px-16 px-7 " 
-          onPointerEnterCapture={() => {}} 
-          onPointerLeaveCapture={() => {}} 
-          crossOrigin="" 
-        />
+        <input
+              type="Firstname"
+              className="w-full py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
+              placeholder="Enter your firstname"
+            
+            />
       </div>
       <div className="mb-6">
-        <label htmlFor="">LASTNAME</label>
-        <Input 
-          placeholder="LAST NAME"  
-          className="py-4 md:px-16 px-7 focus:ring-[#fa9e1f]  " 
-          onPointerEnterCapture={() => {}} 
-          onPointerLeaveCapture={() => {}} 
-          crossOrigin="" 
-        />
+        <input
+              type="password"
+              className="w-full py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
+              placeholder="Enter your lastname"
+            
+            />
       </div>
       </div>
 
       <div className="md:flex items-center justify-center gap-6">
 
       <div className="mb-6">
-        <label htmlFor="">EMAIL</label>
-        <Input 
-          placeholder="EMAIL"  
-          type="email"
-          className="py-4 md:px-16 px-7 focus:ring-[#fa9e1f] " 
-          onPointerEnterCapture={() => {}} 
-          onPointerLeaveCapture={() => {}} 
-          crossOrigin="" 
-        />
+       
+        <input
+              type="password"
+              className="py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
+              placeholder="Enter your email"
+            
+            />
       </div>
       <div className="mb-6">
-        <label htmlFor="">SUBJECT</label>
-        <Input placeholder="SUBJECT" className="py-4 border border-gray-400 md:px-16 px-7 focus:ring-[#fa9e1f] " onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}} crossOrigin="" />
+        
+        <input
+              type="password"
+              className="w-full py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
+              placeholder="subject"
+            
+            />
       </div>
       </div>
 

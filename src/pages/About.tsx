@@ -39,7 +39,7 @@ const About = () => {
     <div className="flex flex-col md:flex-row justify-center items-center gap-8 py-6 px-4 md:px-0 text-justify">
       <img src={abtImg} alt="About Us" className="max-w-full md:max-w-[400px] w-full h-auto" />
       <div className="text-[#fff] max-w-full md:max-w-[600px] text-center md:text-left">
-        <h1 className="text-[24px] md:text-[32px] font-bold mb-4">WE ARE BAYYA</h1>
+        <h1 className="text-[24px] md:text-[32px] font-bold mb-4">247 <span className="text-[#fa9e1f]">BITOPTION</span> </h1>
         <p className="w-full leading-relaxed mb-7 text-sm md:text-base">
           A place for everyone who wants to simply buy and sell Bitcoins. Deposit funds using your
           Visa/MasterCard or bank transfer. Instant buy/sell of Bitcoins at fair price is

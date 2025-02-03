@@ -1,0 +1,44 @@
+.token-input-wrapper {
+    position: relative;
+  }
+  
+  .token-input {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border: 0.5px solid #9ca7b8;
+    background-color: #eff3fe;
+    outline: none;
+    border-radius: 5px;
+    font-size: 20px; 
+    color: transparent;
+    caret-color: transparent;
+  }
+  
+  .token-input:focus {
+    border-bottom: 3px solid #ffbd00;
+  }
+  
+  .token-input-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    background-color: #3E4652;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    visibility: hidden;
+  }
+  
+  .token-input.filled + .token-input-dot {
+    visibility: visible;
+  }
+  
+  @media(max-width: 576px){
+    .token-input{
+      width: 30px;
+      height: 30px;
+    }
+  }

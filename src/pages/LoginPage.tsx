@@ -1,19 +1,30 @@
-import { Carousel, Input } from "@material-tailwind/react";
-import bgUser1 from "../assets/images/bg-user.jpg"
-import bgUser2 from "../assets/images/bg-user-2.jpg"
-import bgUser3 from "../assets/images/bg-user-3.jpg"
+import { Carousel } from "@material-tailwind/react";
+
 import { Link } from "react-router-dom";
+import bgUser4 from "../assets/images/btcn.jpg"
+import bgUser5 from "../assets/images/bitcoin-7678812_1920.jpg"
+import bgUser7 from "../assets/images/btc.jpg"
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LoginPage = () => {
+
+   const [showPassword,setShowPassword] =useState(false);
+  
+    const handleShow = ()=>{
+      setShowPassword(!showPassword)
+    }
   return (
-    <div className="flex items-center justify-between h-full   bg-[#111111]">
+    <div className="flex items-center md:gap-16 h-screen bg-[#111111]">
       {/* Carousel */}
-      <div className="hidden md:block h-[100vh]  w-[40%]">
+      <div className="hidden md:block h-[100vh]  w-[45%]">
         <Carousel
           autoplay
           loop
           className="rounded-sm h-full"
           placeholder=""
+          nextArrow={false}
+          prevArrow={false}
           onPointerEnterCapture={() => {}}
           onPointerLeaveCapture={() => {}}
           navigation={({ setActiveIndex, activeIndex, length }) => (
@@ -31,17 +42,17 @@ const LoginPage = () => {
           )}
         >
           <img
-            src={bgUser1}
+            src={bgUser5}
             alt="image 1"
             className="h-full w-full object-cover"
           />
           <img
-            src={bgUser2}
+            src={bgUser4}
             alt="image 2"
             className="h-full w-full object-cover"
           />
           <img
-            src={bgUser3}
+            src={bgUser7 }
             alt="image 3"
             className="h-full w-full object-cover"
           />
@@ -49,33 +60,31 @@ const LoginPage = () => {
       </div>
 
       {/* Login Form */}
-      <div className=" md:w-[42%] md:mr-20 px-3 md:px-0 uppercase  ">
+      <div className=" md:w-[39%] md:mr-20 px-3 md:px-0 uppercase  ">
       <div className=" md:p-8 p-4  text-white rounded-lg">
-        <h1 className="md:text-[50px] text-[30px] text-center font-bold mb-4 md:mb-6 uppercase">member <span className="text-[#fa9e1f]">login</span></h1>
-        <p className="mb-6 text-center text-[15px] text-gray-500">Send, receive and securely store your coins in your wallet</p>
+        <h1 className="md:text-[35px] text-[30px] text-center font-bold mb-4 md:mb-6 uppercase">member <span className="text-[#fa9e1f]">login</span></h1>
+        <p className="mb-6 text-center text-[15px] text-gray-500">Send, receive and securely store your coins</p>
         <form className="space-y-4">
           <div>
-            <label className="block text-sm mb-2">EMAIL</label>
-            <Input
+             <input
               type="email"
-              className="w-full py-4 border border-gray-400 rounded focus:outline-none focus:border-[#fa9e1f]"
+              className="w-full mb-4 py-3 bg-[#222222] text-[13px] px-3 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
               placeholder="Enter your email"
-              onPointerEnterCapture={() => {}}
-              onPointerLeaveCapture={() => {}}
-              crossOrigin=""
+            
             />
           </div>
-          <div>
-            <label className="block text-sm mb-2">PASSWORD</label>
-            <Input
-              type="password"
-              className="w-full p-5 border border-gray-400 rounded focus:outline-none focus:border-[#fa9e1f]"
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              className="w-full py-3 bg-[#222222] text-[13px] px-3 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
               placeholder="Enter your password"
-              onPointerEnterCapture={() => {}}
-              onPointerLeaveCapture={() => {}}
-              crossOrigin=""
+            
             />
+                     <span onClick={handleShow} className="absolute top-4 right-8 ">
+                         {showPassword ?  <FaEyeSlash/> : <FaEye className="text-white"/>}
+                        </span>
           </div>
+          <Link to= "/forgot-password" className="capitalize text-[13px] float-right text-[#fa9e1f]">forgot your Password?</Link>
           <button className="w-full bg-[#fa9e1f] text-white py-3 rounded hover:bg-[#e88c15] transition">
             LOGIN
           </button>
