@@ -58,7 +58,6 @@ const App = () => {
 				<Route element={<DashboardLayout />}>
 					<Route path="/dashboard" index element={<Dashboard />} />
 					<Route path="/settings"  element={<Settings />} />
-					<Route path="/settings"  element={<Settings />} />
 					<Route path="/deposit"  element={<Deposit />} />
 					<Route path="/withdrawals" element={<Withdrawal />} />
 					<Route path="/transfers" element={<Transfer />} />
