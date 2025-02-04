@@ -28,7 +28,6 @@ const App = () => {
 				
 				<Route element={<DashboardLayout />}>
 					<Route path="/dashboard" index element={<Dashboard />} />
-					
 					<Route path="/settings" index element={<Settings />} />
 					
 				</Route>
