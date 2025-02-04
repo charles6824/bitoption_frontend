@@ -52,5 +52,5 @@ export const apiSlice = createApi({
   reducerPath: "apiService",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["base"],
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });
