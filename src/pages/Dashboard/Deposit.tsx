@@ -73,7 +73,7 @@ const Deposit = () => {
             inputMode="numeric"
             pattern="[0-9]*"
           placeholder="0.00"
-          className="px-3 py-3 outline-none"
+          className="px-3 py-3 outline-none bg-gray-50 w-full"
            onInput={(e) => {
          const target = e.target as HTMLInputElement;
          target.value = target.value.replace(/\D/g, "");
@@ -88,7 +88,7 @@ const Deposit = () => {
                     
                   <input
                     type="text"
-                    className="border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none"
+                    className="border border-[#ccc] bg-gray-50 p-4 w-[60%] py-3 rounded-md outline-none"
                     placeholder="Enter your Narration here..."
                   />
                 </div>

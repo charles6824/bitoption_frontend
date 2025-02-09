@@ -23,6 +23,16 @@ import { useEffect, useState } from "react";
 import Transfer from "./pages/Dashboard/Transfer";
 import Investment from "./pages/Dashboard/Investment";
 import Packages from "./pages/Dashboard/Packages";
+import AdminLayout from "./layouts/AdminLayout";
+import AdminDashBoard from "./pages/AdminDashboard/AdminDashBoard";
+import AdminSettings from "./pages/AdminDashboard/AdminSettings";
+import AdminDeposit from "./pages/AdminDashboard/AdminDeposit";
+import AdminWithdrawal from "./pages/AdminDashboard/AdminWithdrawal";
+import AdminInvestment from "./pages/AdminDashboard/AdminInvestment";
+import AdminPackages from "./pages/AdminDashboard/AdminPackages";
+import AdminTranfer from "./pages/AdminDashboard/AdminTranfer";
+import AdminUsers from "./pages/AdminDashboard/AdminUsers";
+import SinglePackage from "./pages/Dashboard/SinglePackage";
 
 
 
@@ -63,8 +73,21 @@ const App = () => {
 					<Route path="/transfers" element={<Transfer />} />
 					<Route path="/investments" element={<Investment />} />
 					<Route path="/packages" element={<Packages />} />
+					<Route path="/packages/:id" element={<SinglePackage />} />
 					
 				</Route>
+
+				 <Route element={<AdminLayout/>}>
+				    <Route path="/admin/dashboard" index element={<AdminDashBoard />} />
+					<Route path="/admin/settings" element={<AdminSettings />} />
+                    <Route path="/admin/deposit" element={<AdminDeposit />} />
+                    <Route path="/admin/withdrawals" element={<AdminWithdrawal />} />
+                     <Route path="/admin/transfers" element={<AdminTranfer />} />
+                     <Route path="/admin/investments" element={<AdminInvestment />} />
+                     <Route path="/admin/packages" element={<AdminPackages />} />
+                     <Route path="/admin/users" element={<AdminUsers />} />
+
+				 </Route>
 			</>
 		)
 	);

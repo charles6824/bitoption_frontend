@@ -41,14 +41,7 @@ export function Table({ data,tableHead,children }: TableProps) {
 						height={1884}
 					/>
 
-					{/* <div className="w-full text-center leading-4">
-						<h3 className="text-dark-natural font-semibold text-base ">
-							No Records found
-						</h3>
-						<h5 className="font-normal text-xs text-dark-natural/75">
-							No relevant details are available at this time
-						</h5>
-					</div> */}
+					
 				</div>
 			) : null}
 

@@ -15,7 +15,7 @@ interface Expert {
 const ExpertCard = ({ expert }: { expert: Expert }) => {
   return (
     
-     <Card className="mt-6" placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
+     <Card className="mt-6 h-[80%]" placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
       <CardHeader 
         color="blue-gray" 
         className="relative rounded-none" 
@@ -25,6 +25,7 @@ const ExpertCard = ({ expert }: { expert: Expert }) => {
         <img
           src={expert.img}
           alt="card-image"
+          loading="lazy"
           className="rounded-none border-2 border-[#ea9b3e] "
         />
       </CardHeader>

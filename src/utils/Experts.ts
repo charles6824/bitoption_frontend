@@ -1,16 +1,16 @@
-import member1 from "../assets/images/member1.jpg"
-import member2 from "../assets/images/member2.jpg"
+import member1 from "../assets/images/images.jpeg"
+import member2 from "../assets/images/reeves.jpg"
 import member3 from "../assets/images/member3.jpg"
 import member4 from "../assets/images/member4.jpg"
 export const experts =[
     {
      img:member1,
-     name: "John Doe",
+     name: "Elon musk",
      position: "CEO, BitOption"
     },
     {
         img:member2,
-        name: "Jane Doe",
+        name: "keanu reeves",
         position: "CTO, BitOption"
 
     },

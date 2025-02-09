@@ -7,9 +7,9 @@ const handleResponse = (response: unknown) => {
 
 export const baseApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		login: builder.mutation({
+		registerUser: builder.mutation({
 			query: ({ data }: { data: any }) => ({
-				url: `${import.meta.env.VITE_BASE_URL}/authentication/login`,
+				url: `${import.meta.env.VITE_BASE_URL}/users/register`,
 				method: "POST",
 				body: data,
 				headers: {
@@ -19,9 +19,73 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			transformResponse: handleResponse,
 		}),
 
+		login: builder.mutation({
+			query: ({ data }: { data: any }) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/users/auth`,
+				method: "POST",
+				body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
+		validateAccount: builder.mutation({
+			query: ({ data }: { data: any }) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/users/validate-account`,
+				method: "POST",
+				body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
+		verifyOtp: builder.mutation({
+			query: ({ data }: { data: any }) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/users/verifyOtp`,
+				method: "POST",
+				body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
+		resetPassword: builder.mutation({
+			query: ({ data }: { data: any }) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/users/reset-password`,
+				method: "POST",
+				body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
+    logout: builder.mutation({
+			query: () => ({
+				url: `${import.meta.env.VITE_BASE_URL}/users/logout`,
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					// "Authorization": `Bearer ${token }`, 
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
 	}),
 });
 
 export const {
 	useLoginMutation,
+	useRegisterUserMutation,
+	useValidateAccountMutation,
+	useVerifyOtpMutation,
+	useResetPasswordMutation,
+     useLogoutMutation,
 } = baseApiSlice;
