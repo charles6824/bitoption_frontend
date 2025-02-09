@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import Hero from "../components/Hero"
 import abtImg from "../assets/images/about-us.png"
-// import { MdSecurity } from "react-icons/md";
 import Card from "../components/Card";
 import { cards } from "../utils/BitcoinCard";
 import { experts } from "../utils/Experts";
@@ -11,8 +10,12 @@ import { bitcoinNewsCards } from "../utils/BitcoinNewsCard";
 import callToAction_Bg from "../assets/images/call-to-action-bg.jpg"
 import VidoeSection from "../components/VidoeSection";
 import img from "../assets/images/bitcoin-6992422_1920.jpg"
+import { useGetAllPackagesQuery } from "../slices/packageSlice";
 
 const HomePage = () => {
+
+  const {data:packages} =useGetAllPackagesQuery({}) as any;
+  console.log('packages',packages)
   return (
     <>
 
@@ -51,7 +54,7 @@ const HomePage = () => {
   </div>
 
   {/* video section and  */}
-<div className="bg-gray-50">
+<div className=" h-full ">
 
 <VidoeSection/>
 </div>
@@ -82,12 +85,13 @@ const HomePage = () => {
 
   {/* BITCOIN CARD */}
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 py-6">
-    {cards &&
-      cards.map((card) => (
-        <div key={card.id}>
-          <Card card={card} />
+    {packages &&
+      packages.data.map((item: any, i: number) => {
+        return (
+        <div key={i}>
+          <Card card={item} link="/packages" />
         </div>
-      ))}
+      )})}
   </div>
 
   {/* EXPERTS CARDS */}
@@ -115,22 +119,22 @@ const HomePage = () => {
 
 {/* Review */}
   <>
-  <div className="flex md:flex-row flex-col items-center relative ">
+  <div className="flex md:flex-row flex-col items-center relative p-2">
   {/* Left Section */}
 
-  <div className="relative flex items-center justify-center ">
+  <div className="relative flex items-center justify-center  ">
     <img
       src={img}
-      className="md:w-[450px] h-auto  shadow-lg opacity-30"
+      className="md:w-[400px] h-[70vh]  shadow-lg opacity-30"
     />
 
     {/* Text Overlay */}
-    <div className="absolute text-white italic md:text-[13px] text-[16px] md:w-80 w-64 leading-6">
+    <div className="absolute  text-white italic md:text-[15px] text-[20px] md:w-80 w-64 leading-7 font-bold">
       <p>Bitcoin is one of the most important inventions in all of human history. For the first time ever, anyone can send or receive any amount of money with anyone else, anywhere on the planet, conveniently and without restriction. It’s the dawn of a better, more free world.</p>
     </div>
   </div>
   {/* Image Section with Text Overlay */}
-  <div className="bg-[#1d1d1d] py-5 md:px-24 md:w-[70%] md:h-[100vh] text-center">
+  <div className="bg-[#1d1d1d] py-5 md:px-24 md:w-[70%] md:h-[70vh] text-center">
     {/* Your content */}
   </div>
 </div>

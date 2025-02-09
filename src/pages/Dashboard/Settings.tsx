@@ -21,22 +21,22 @@ const Settings = () => {
       value:"changepassword",
     
     },
-    {
+    // {
 
-      label: "Add Bank Account",
-      value: "addbankaccount",
+    //   label: "Add Bank Account",
+    //   value: "addbankaccount",
      
-    },
+    // },
     {
       label: "Send feedback",
       value: "sendfeedback",
     
     },
-    {
-      label: "Set Limit",
-      value: "setlimit",
+    // {
+    //   label: "Set Limit",
+    //   value: "setlimit",
     
-    },
+    // },
    
    
   ];
@@ -125,7 +125,7 @@ const Settings = () => {
                 <div>
                   <input
                     type="text"
-                    className="w-[60%] py-3  px-4 text-[13px]  border border-[#ccc] rounded-md "
+                    className="w-[60%] py-3 bg-gray-50  px-4 text-[13px]  border border-[#ccc] rounded-md "
                     placeholder="Enter your name"
                    
                   />
@@ -133,7 +133,7 @@ const Settings = () => {
                 <div className="py-3">
                   <input
                     type="email"
-                    className="w-[60%] py-3  text-[13px]  px-3 border border-[#ccc] rounded-md "
+                    className="w-[60%] bg-gray-50 py-3  text-[13px]  px-3 border border-[#ccc] rounded-md "
                     placeholder="Enter your email"
                   
                   />
@@ -141,7 +141,7 @@ const Settings = () => {
                 <div className="relative">
                   <input
                     type="text" 
-                    className="w-[60%] py-3 bg-gray-50 border border-[#ccc] text-[13px] px-3   rounded-md "
+                    className="w-[60%]  py-3 bg-gray-50 border border-[#ccc] text-[13px] px-3   rounded-md "
                     placeholder="Enter your password"
                   />
                  
@@ -198,10 +198,10 @@ const Settings = () => {
           </div></>)}
 
          {/* Add account */}
-          {activeTab === "addbankaccount" && (<><div>
+          {/* {activeTab === "addbankaccount" && (<><div>
             <AddaccountCard/>
             
-            </div></>)}
+            </div></>)} */}
           {activeTab === "sendfeedback" && (<><div>
             <div className="mt-20">
           <select
@@ -232,10 +232,10 @@ const Settings = () => {
             </div></>)}
 
             {/* setlimit */}
-          {activeTab === "setLimit" && (<><div>
+          {/* {activeTab === "setLimit" && (<><div>
             hello Limit
             
-            </div></>)}
+            </div></>)} */}
         
       </TabsBody>
     </Tabs>

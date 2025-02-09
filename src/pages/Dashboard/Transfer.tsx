@@ -1,6 +1,16 @@
 import { FaUserCircle } from "react-icons/fa"
+import { useGetAccountDetailsQuery } from "../../slices/accountApiSlice"
 
 const Transfer = () => {
+
+    const {data} =useGetAccountDetailsQuery({}) as any
+    const user_data: any = sessionStorage.getItem("userInfo")
+    const userInfo = user_data && JSON.parse(user_data)
+  
+     const accountDetails = userInfo && userInfo.data.accountDetails;
+
+    console.log("accountDetails",accountDetails)
+  
   return (
     
       // Transfer
@@ -21,24 +31,19 @@ const Transfer = () => {
         
                             <div>
                               <p className="text-[#fa9e1f] text-nowrap whitespace-nowrap text-[11px] md:text-[13px]">
-                                Savings Account
+                                {accountDetails.accountType}
                               </p>
                               <h1 className="text-[14px] text-white md:text-[16px] uppercase leading-tight">
-                                Charles Daniel
+                                {accountDetails.accountNumber}
                               </h1>
                             
                             </div>
                           </div>
                           <div className="flex flex-col text-right">
-                            <h1 className="text-[#EDEFF2]  text-[14px] md:text-[20px]">
-                             $45, 0000
+                            <h1 className="text-[#EDEFF2]  text-[25px] md:text-[20px]">
+                            Balance: ${Number(accountDetails.balance).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                             </h1>
-                            {/* <p className="text-[#9CA7B8] text-[10px]">
-                              Book Balance:{" "}
-                              <span className="text-[#fa9e1f]">
-                                $123, 000
-                              </span>
-                            </p> */}
+                          
                           </div>
                         </div>
                       
@@ -46,11 +51,11 @@ const Transfer = () => {
                   </div>
                 </div>
       
-             <form className="space-y-4  py-2">
+             <form className="space-y-4 py-3">
                 <div>
                   <input
                     type="text"
-                    className="w-[60%] py-3  px-4 text-[13px]  border border-[#ccc] rounded-md "
+                    className="w-[60%] py-3 bg-gray-50 px-4 text-[13px]  border border-[#ccc] rounded-md "
                     placeholder="Destination account"
                     readOnly
                    
@@ -59,19 +64,19 @@ const Transfer = () => {
                 <div className="py-3">
                   <input
                     type="email"
-                    className="w-[60%] py-3  text-[13px]  px-3 border border-[#ccc] rounded-md "
+                    className="w-[60%] py-3  text-[13px] bg-gray-50  px-3 border border-[#ccc] rounded-md "
                     placeholder="Account name"
                   
                   />
                 </div>
-                <div className="relative">
+                <div className="relative py-2">
                   <input
                     type="text" 
                     className="w-[60%] py-3 bg-gray-50 border border-[#ccc] text-[13px] px-3   rounded-md "
                     placeholder="Amount" />
                  
                 </div>
-                <div className="relative">
+                <div className="relative py-2">
                   <input
                     type="text" 
                     className="w-[60%] py-3 bg-gray-50 border border-[#ccc] text-[13px] px-3  rounded-md "

@@ -9,7 +9,7 @@ const baseQuery = fetchBaseQuery({
     if (userInfo) {
       try {
         const parsedUserInfo = JSON.parse(userInfo);
-        const token = parsedUserInfo?.value?.token;
+        const token = parsedUserInfo?.data?.token;
 
         // If the token exists, add it to the Authorization header
         if (token) {

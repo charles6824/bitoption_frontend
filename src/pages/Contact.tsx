@@ -95,14 +95,14 @@ const Contact = () => {
         <FaHome className="text-[#fa9e1f] text-[30px]" />
         <h1 className="text-xl font-bold uppercase">Address</h1>
     </div>
-    <p className="text-sm text-gray-400 pl-10">Lorem ipsum dolor sit amet</p>
+    <p className="text-sm text-gray-400 pl-10">906 S. Francisco Street.Los Angeles</p>
 
     {/* Phone Numbers Section */}
     <div className="flex items-center gap-4">
         <FaAddressBook className="text-[#fa9e1f] text-[24px]" />
         <h1 className="text-xl font-bold uppercase">Phone Numbers</h1>
     </div>
-    <p className="text-sm text-gray-400 pl-10">+123 456 7890</p>
+    <p className="text-sm text-gray-400 pl-10">+12136309890</p>
 
     {/* Email Section */}
     <div className="space-y-2">
@@ -111,8 +111,8 @@ const Contact = () => {
             <h1 className="text-xl font-bold uppercase">Email Address</h1>
         </div>
         <div className="pl-10 text-sm text-gray-400 space-y-1">
-            <p>contact@example.com</p>
-            <p>info@example.com</p>
+            <p>support@247Bitoption.com</p>
+            {/* <p>info@example.com</p> */}
         </div>
     </div>
 
