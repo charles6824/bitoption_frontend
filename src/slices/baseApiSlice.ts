@@ -1,7 +1,7 @@
 import { apiSlice } from "./apiSlice";
 
 // Handle the response using the responseInterceptor
-const handleResponse = (response: unknown) => {
+const handleResponse = (response: any) => {
 	return response;
 };
 
@@ -67,13 +67,13 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			transformResponse: handleResponse,
 		}),
 
-    logout: builder.mutation({
+		logout: builder.mutation({
 			query: () => ({
 				url: `${import.meta.env.VITE_BASE_URL}/users/logout`,
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					// "Authorization": `Bearer ${token }`, 
+					// "Authorization": `Bearer ${token }`,
 				},
 			}),
 			transformResponse: handleResponse,
@@ -87,5 +87,5 @@ export const {
 	useValidateAccountMutation,
 	useVerifyOtpMutation,
 	useResetPasswordMutation,
-     useLogoutMutation,
+	useLogoutMutation,
 } = baseApiSlice;

@@ -1,16 +1,35 @@
-import { useParams } from "react-router-dom";
-import { useGetSinglePackageQuery } from "../../slices/packageSlice"
+import { useNavigate, useParams } from "react-router-dom";
+import { useBuyPackageMutation, useGetSinglePackageQuery } from "../../slices/packageSlice"
 import LoadingBtn from "../../components/LoadingBtn";
 import { useGetAccountBalanceQuery } from "../../slices/accountApiSlice";
+import { toast } from "react-toastify";
 
 const SinglePackage = () => {
   const params = useParams();
+  const navigate = useNavigate()
   const {data,isLoading} = useGetSinglePackageQuery(params.id) as any;
-  const {data:walletBalance,refetch} = useGetAccountBalanceQuery({}) as any;
-  let packages = data?.data
+  const {data:walletBalance, refetch} = useGetAccountBalanceQuery({}) as any;
+  const [buyPackages, {isLoading: packageLoading}] = useBuyPackageMutation()
+  const packages = data?.data
 
+  const investPackage = async () => {
+    try {
+      const model ={
+        packageId: params.id
+      }
 
-  
+      const response: any = await buyPackages({data: {payload: model}}).unwrap()
+      if(response.status){
+        toast.success(response.message)
+        navigate("/investments")
+      }else{
+        toast.error(response.message)
+      }
+    } catch (error: any) {
+      toast.error(error.message)
+    }
+  }
+
 
   return (
     <div className="w-[60%] mx-auto mt-10 p-8 bg-white shadow-lg rounded-lg">
@@ -45,10 +64,10 @@ const SinglePackage = () => {
     </p>
 
     {/* Proceed Button */}
-    {isLoading ? (
+    {packageLoading ? (
       <LoadingBtn />
     ) : (
-      <button className="w-full bg-[#1d1d1d] text-white font-semibold py-3 rounded-md transition hover:bg-black">
+      <button className="w-full bg-[#1d1d1d] text-white font-semibold py-3 rounded-md transition hover:bg-black" onClick={investPackage}>
         Proceed
       </button>
     )}

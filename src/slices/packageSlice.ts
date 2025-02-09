@@ -29,7 +29,17 @@ export const packageApiSlice = apiSlice.injectEndpoints({
             transformResponse: handleResponse,
         }),
 
-        
+        buyPackage: builder.mutation({
+          query: ({ data }: { data: any }) => ({
+            url: `${import.meta.env.VITE_BASE_URL}/investments`,
+            method: "POST",
+            body: data,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }),
+          transformResponse: handleResponse,
+        }),
    
 
     }),
@@ -37,5 +47,6 @@ export const packageApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useGetAllPackagesQuery,
-    useGetSinglePackageQuery
+    useGetSinglePackageQuery,
+    useBuyPackageMutation,
 } = packageApiSlice;
