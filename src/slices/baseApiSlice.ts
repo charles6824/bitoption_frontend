@@ -67,13 +67,13 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			transformResponse: handleResponse,
 		}),
 
-    logout: builder.mutation({
-			query: (token) => ({
+		logout: builder.mutation({
+			query: () => ({
 				url: `${import.meta.env.VITE_BASE_URL}/users/logout`,
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"Authorization": `Bearer ${token }`, 
+					// "Authorization": `Bearer ${token }`,
 				},
 			}),
 			transformResponse: handleResponse,
@@ -87,5 +87,5 @@ export const {
 	useValidateAccountMutation,
 	useVerifyOtpMutation,
 	useResetPasswordMutation,
-  useLogoutMutation,
+	useLogoutMutation,
 } = baseApiSlice;

@@ -1,37 +1,19 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import AccountCard from "../../components/AccountCard";
 import TokenInput from "../../components/TokenInput";
-const data = [
-  {
-    accountId: "1",
-    accountNumber: "1234567890",
-    accountName: "Faith Brains",
-    currencyCode: "USD",
-    bookBalance: 50000000,
-    availableBalance: 45000000,
-    accountStatus: "A",
-  },
-  {
-    accountId: "2",
-    accountNumber: "9876543210",
-    accountName: "John Doe",
-    currencyCode: "USD",
-    bookBalance: 20000,
-    availableBalance: 15000,
-    accountStatus: "I",
-  },
-];
-
+import { useGetAccountDetailsQuery} from "../../slices/accountApiSlice";
 const Withdrawal = () => {
   const [step, setStep] = useState(1);
-  // const [page, setPage] = useState(1);
   const [withdrawalMethod, setWithdrawalMethod] = useState(""); 
-  const [cardData, setCardData] = useState<any>([]);
-	const [selectedCard, setSelectedCard] = useState<any | undefined>({});
-  const [isTokenComplete, setIsTokenComplete] = useState(false);
-  const [token, setToken] = useState<string[]>(Array(8).fill(""));
+  const [_isTokenComplete, setIsTokenComplete] = useState(false);
+  const [_token, setToken] = useState<string[]>(Array(8).fill(""));
+  const {data} =useGetAccountDetailsQuery({}) as any
+  const user_data: any = sessionStorage.getItem("userInfo")
+  const userInfo = user_data && JSON.parse(user_data)
+
+  const accountDetails = userInfo && userInfo.data.accountDetails;
 
 
   const handleTokenComplete = (isComplete: boolean, tokens: string[]) => {
@@ -45,12 +27,6 @@ const Withdrawal = () => {
       setStep(step + 1);
     }
   };
-
-  useEffect(() => {
-		setCardData(data);
-		setSelectedCard(data[0]);
-	}, []);
-
 
   return (
     <div className="py-2">
@@ -67,9 +43,8 @@ const Withdrawal = () => {
             <div className="mt-10">
              
               <AccountCard 
-                cardData={cardData}
-                selectedCard={selectedCard}
-                setSelectedCard={setSelectedCard}
+                cardData={accountDetails}
+                data={data}
 
               />
               <div className="w-[60%] flex items-center border border-[#ccc] rounded-md overflow-hidden mt-5">
@@ -82,7 +57,7 @@ const Withdrawal = () => {
                inputMode="numeric"
               pattern="[0-9]*"
               placeholder="0.00"
-              className="px-3 py-3 outline-none"
+              className="px-3 py-3 outline-none bg-gray-50 w-full"
               onInput={(e) => {
             const target = e.target as HTMLInputElement;
             target.value = target.value.replace(/\D/g, "");
@@ -93,7 +68,7 @@ const Withdrawal = () => {
 
               <div className="mt-5">
                 <select
-                  className="border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none"
+                  className="border border-[#ccc] bg-gray-50 p-4 w-[60%] py-3 rounded-md outline-none"
                   value={withdrawalMethod} // Bind to state
                   onChange={(e) => setWithdrawalMethod(e.target.value)} // Update state
                 >
@@ -109,17 +84,17 @@ const Withdrawal = () => {
                   <input
                     type="text"
                     placeholder="Bank Name"
-                    className="border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none"
+                    className=" bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none"
                   />
                   <input
                     type="text"
                     placeholder="Account Number"
-                    className="border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
+                    className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
                   />
                   <input
                     type="text"
                     placeholder="Account Name"
-                    className="border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
+                    className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
                   />
                 </div>
               )}

@@ -1,10 +1,11 @@
 // import { Table } from "../../components/Table"
 
-import { FaCircle, FaPrint } from "react-icons/fa"
+import { FaCircle, FaSyncAlt } from "react-icons/fa"
 import { Table } from "../../components/Table"
 import CashFlowChart from "../../components/CashFlowChart"
 import { useState } from "react"
 import { MdOutlineLocalPrintshop } from "react-icons/md"
+import { useGetAccountBalanceQuery } from "../../slices/accountApiSlice"
 const tableHead:any = ["Narration", "Date", "Amount", "Status", ""]
 
 const data:any = [
@@ -65,9 +66,9 @@ const data:any = [
 const Dashboard = () => {
 
   const [period, setPeriod] = useState('1W');
-
+  
   // const periods = ['1D', '1W', '1M', '3M', '6M', '1Y'];
-
+  
   const getDataForPeriod = (period: string) => {
     switch (period) {
       case '1D':
@@ -114,37 +115,68 @@ const Dashboard = () => {
         };
     }
   };
-
+  
   const { labels, inflowData, outflowData } = getDataForPeriod(period);
+  
+  const [refreshing, setRefreshing] = useState(false);
+  const user_data: any = sessionStorage.getItem("userInfo")
+  const userInfo = user_data && JSON.parse(user_data);
+  
+   const { data: accountBalance,isLoading,refetch} = useGetAccountBalanceQuery({}) as any
+
+   const handleRefreshBalance = async () => {
+    setRefreshing(true);
+    await refetch(); 
+    setRefreshing(false);
+  };
+
+ 
   return (
 
     <>
-    <div className="bg-[#fa9e1f] p-2 ">
+    <div className="bg-[#fa9e1f] p-2 text-white  ">
       <div className="rounded-md text-[#fff] px-7 bg-[#1d1d1d] p-9">
         <div className="flex justify-between items-center">
           <div>
-            <p>Account Name</p>
-            <h1 className="text-[25px] ">JOHNSON EZRA CHUKWEMEKA</h1>
+            <p>{userInfo.data.accountDetails.accountLevel}</p>
+            <h1 className="text-[25px] ">{userInfo.data.userDetails.fullName}</h1>
           </div>
           <div className="flex items-center gap-2">
             <FaCircle size={10} className="text-green-700" />
-            <p className="">Active</p>
+            <p className="">{userInfo.data.accountDetails.accountStatus}</p>
           </div>
         </div>
         <div className="flex justify-between items-center">
             <div className="mt-5">
-          <p className="text-[#fa9e1f] ">Account Number</p>
-          <h1>31046473373</h1>
+          <p className="text-[#fa9e1f] "> {userInfo.data.accountDetails.accountNumber}</p>
             </div>
-          <div>
-           <p className="text-[20px] ">$11,000000000000</p> 
-            <p>book balance</p>
+
+            
+
+
+          <div className="flex items-center gap-4">
+
+          <button 
+              onClick={handleRefreshBalance} 
+              className="text-gray-600 hover:text-gray-900 transition duration-200 flex items-center gap-2"
+              title="Refresh Balance"
+            >
+              <FaSyncAlt color="white" size={18} className={refreshing ? "animate-spin" : ""} />
+            </button>
+            {isLoading || refreshing ? (<>
+              {/* <div className="w-4 h-4 border-4 border-[#FFF] border-dotted rounded-full animate-spin mr-4"></div> */}
+            
+            </>):(<>
+            
+            
+            <p className="text-[25px]"> Balance: ${Number(accountBalance?.balance).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+            </>)}
           </div>
         </div>
       </div>
     </div>
     {/* Table section */}
-    <div className="py-5">
+    <div className="py-5 px-4 ">
       <h1 className="text-[25px] mb-2">Transaction History</h1>
       <Table data={data} tableHead={tableHead} >
         {data && data.map((table:any,index:number) =>
@@ -152,13 +184,13 @@ const Dashboard = () => {
 
             <td className="py-3 ">{table.narration}</td>
             <td>{table.date}</td>
-            <td >${table.amount}</td>
+            <td >${Number(table?.amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
             <td>{table.iscredit ? (<div className="flex items-center gap-2">
               <FaCircle size={8} color="green"/>
               <p>succesfull</p>
               </div>)
-               :(<div  className="flex items-center gap-2"><FaCircle size={8} color="red"/>
-               <p>failed</p>
+               :(<div  className="flex items-center gap-2"><FaCircle size={8} color="orange"/>
+               <p>pending</p>
                
                
                </div>)}</td>
@@ -170,7 +202,7 @@ const Dashboard = () => {
     </div>
 
 {/* chart */}
-    <div className="w-full ">
+    <div className="w-full px-5 ">
             <CashFlowChart
               inflowData={inflowData}
               outflowData={outflowData}

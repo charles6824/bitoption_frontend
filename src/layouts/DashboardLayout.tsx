@@ -1,32 +1,62 @@
 import { useState } from "react";
 import { Link, Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { FaAngleDown, FaArrowDown,  FaUser, FaUserCircle } from "react-icons/fa";
-import { MdDashboard, MdLogout, MdOutlineAttachMoney, MdOutlineSettings, MdPayment } from "react-icons/md";
+import { MdDashboard, MdLogout, MdOutlineSettings, MdPayment } from "react-icons/md";
 import { GiPayMoney } from "react-icons/gi";
 import { BiTransferAlt } from "react-icons/bi";
-import { LucideChartNoAxesCombined } from "lucide-react";
+import { LucideChartNoAxesCombined,Folder } from "lucide-react";
 import { useLogoutMutation } from "../slices/baseApiSlice";
+import PromptsCard from "../components/PromptsCard";
+import Modal from "../components/Modal";
+import LoadingBtn from "../components/LoadingBtn";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showModal,setShowModal] =useState(false)
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const [logout, {isLoading}] =useLogoutMutation();
+
+  const handleLogout = async() => {
+    try {
+			await logout({}).unwrap();
+			sessionStorage.clear(); 
+			navigate('/sign-in'); 
+		} catch (error) {
+			console.error('Logout failed:', error);
+		}
+  }
+ 
+  
+
 
   const user_data: any = sessionStorage.getItem("userInfo")
   const userInfo = user_data && JSON.parse(user_data)
-  const token = userInfo && userInfo.data.token
+  const token = userInfo && userInfo.data.token;
 
-  const [logout, {isLoading}] = useLogoutMutation()
+  
+  const currentTime = new Date().getHours();
+  let greeting;
+  if (currentTime >=5 && currentTime < 12) {
+    greeting = "Good Morning";
+  }else if(currentTime >=12 && currentTime < 17) {
+    greeting = "Good Afternoon";
+  }else if(currentTime >=17 && currentTime < 22){
+    greeting = "Good Evening";
+  }else {
+    greeting = "Good Night";
+  }
 
   const navList = [
-    {
+    { 
       name: "Dashboard",
       // icon: <img src={dashboard} alt="Dashboard Icon" className="w-5 h-5" />,
       icon: <MdDashboard />,
       url: "/dashboard",
     },
     {
-      name: "Deposit",
+      name: "Fund Wallet",
       // icon: <img src={dispute} alt="Dispute Resolution Icon" className="w-5 h-5" />,
      icon: <GiPayMoney />,
       url: "/deposit",
@@ -40,7 +70,7 @@ const DashboardLayout = () => {
     {
       name: "Investments",
       // icon: <img src={message} alt="Messages Icon" className="w-5 h-5" />,
-      icon:<LucideChartNoAxesCombined />,
+      icon:<Folder />,
       url: "/investments",
     },
     {
@@ -66,16 +96,6 @@ const DashboardLayout = () => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-
-  const handleLogout = async() => {
-    try {
-			await logout(token).unwrap(); 
-			sessionStorage.clear(); 
-			navigate('/sign-in'); 
-		} catch (error) {
-			console.error('Logout failed:', error);
-		}
-  }
 
   return (
     <>
@@ -108,10 +128,9 @@ const DashboardLayout = () => {
                     </li>
                   ))}
 
-                  <li className="flex items-center p-3 rounded-md text-[16px] font-medium text-[#fff] mt-[50px] cursor-pointer" onClick={handleLogout}>
-                    <span className="flex items-center w-full">
-                      {/* <img src={logout} alt="" className="w-5 h-5" /> */}
-                      <MdLogout />
+                  <li className="flex items-center p-3 rounded-md text-[16px] font-medium text-[#fff] mt-[50px] cursor-pointer">
+                    <span onClick={()=>setShowModal(true)} className="flex items-center w-full">
+                      <MdLogout  />
                       <span className="ml-4">Log Out</span>
                     </span>
                   </li>
@@ -121,7 +140,7 @@ const DashboardLayout = () => {
           </aside>
 
           {/* Content Area */}
-          <div className="flex-1 flex flex-col overflow-hidden" style={{
+          <div className="flex-1 flex flex-col overflow-hidden " style={{
             background: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),url(/dash_bg.jpeg)`,
             backgroundSize: "cover"
           }}>
@@ -156,28 +175,31 @@ const DashboardLayout = () => {
                     className="w-8 h-8 rounded-full border border-gray-300"
                   /> */}
                   <FaUser />
-                  <span className="text-sm font-medium text-white">Jennifer Balablu</span>
+                  <span className="text-sm font-medium text-white">{userInfo.data.userDetails.fullName}</span>
                   {/* <img src={arrow} alt="" className="w-[20px] h-[20px]" /> */}
                   <FaArrowDown className="text-[#fa9e1f]" />
                 </div>
               </div>
             </header>
 
-            <header className="bg-[#1d1d1d] px-[50px] py-[20px] hidden sm:flex justify-between items-center fixed top-0 left-0 sm:left-[300px] w-full sm:w-[calc(100%-300px)] z-10">
+            <header className="bg-[#1d1d1d]   px-[50px] py-[20px] hidden sm:flex justify-between items-center fixed top-0 left-0 sm:left-[300px] w-full sm:w-[calc(100%-300px)] z-10">
               <div>
-                <h1 className="text-[24px] font-medium text-white">Good Afternoon,<span className="text-[#fa9e1f]">James</span> </h1>
+                <h1 className="text-[24px] font-medium text-white">{greeting}, <span className="text-[#fa9e1f]">{userInfo.data.userDetails.fullName}</span> </h1>
                 <p className="text-[12px] text-[#fff]">Welcome Back! Let’s pick up where you left off</p>
               </div>
               <div className="flex justify-between items-center space-x-6">
                 {/* <img src={notification} alt="" className="" /> */}
                 <div className="hidden sm:flex items-center space-x-2 cursor-pointer">
                   <FaUserCircle className="text-[#fa9e1f]" />
-                  <span className="text-sm font-medium text-white">Jennifer Balablu</span>
+                  <span className="text-sm font-medium text-white">{userInfo.data.userDetails.fullName}</span>
                   {/* <img src={arrow} alt="" className="w-[20px] h-[20px]" /> */}
                   <FaAngleDown className="text-[#fa9e1f]" />
                 </div>
               </div>
             </header>
+
+
+
 
             {/* Main Content */}
             <main className="flex-1 overflow-y-auto mt-[80px] sm:mt-[120px] px-6 sm:px-[50px]">
@@ -192,6 +214,42 @@ const DashboardLayout = () => {
               onClick={toggleSidebar}
             ></div>
           )}
+
+
+{
+        showModal && (
+          <Modal
+							isShowCancelButton={false}
+							cancelButtonFunction={() => setShowModal(false)}
+						>
+							<div className="p-10">
+              <PromptsCard title={""}>
+									<div className="p-10 flex flex-col justify-center items-center">
+										<h2 className="text-2xl text-center pt-8 pb-5 font-medium text-gray-900">
+											Are you sure you want to log out?
+										</h2>
+										<div className="mb-8 text-center">
+                      {
+                        isLoading ? (
+                        <>
+                        <LoadingBtn/>
+                        </>) : (
+                          <div className="flex gap-9">
+                            <button onClick={()=>setShowModal(false)} className="bg-black py-2 px-7 text-white">No</button>
+                            <button onClick={handleLogout} className="bg-black py-2 px-7 text-white">YES</button>
+
+                          </div>
+                        )
+                      }
+									</div>
+									</div>
+                  </PromptsCard>
+							</div>
+						</Modal>
+        )
+      }
+
+
         </div>
 
       ) : (
