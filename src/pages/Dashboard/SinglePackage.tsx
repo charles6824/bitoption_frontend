@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useGetSinglePackageQuery } from "../../slices/packageSlice"
 import LoadingBtn from "../../components/LoadingBtn";
 import { useGetAccountBalanceQuery } from "../../slices/accountApiSlice";
-import { FaSyncAlt } from "react-icons/fa";
 
 const SinglePackage = () => {
   const params = useParams();
