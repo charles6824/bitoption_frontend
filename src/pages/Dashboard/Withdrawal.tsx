@@ -1,20 +1,18 @@
 import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AccountCard from "../../components/AccountCard";
 import TokenInput from "../../components/TokenInput";
-import checkIcon from "../../assets/images/checkIcon.png"
+import checkIcon from "../../assets/images/checkIcon.png";
 import { useGetAccountDetailsQuery } from "../../slices/accountApiSlice";
-import {
-	useInitiateWithdrawalMutation,
-	useLazySendOTPQuery,
-} from "../../slices/withdrawalSlice";
+import {useInitiateWithdrawalMutation,useLazySendOTPQuery} from "../../slices/withdrawalSlice";
 import { toast } from "react-toastify";
 import LoadingBtn from "../../components/LoadingBtn";
 const Withdrawal = () => {
+	const navigate = useNavigate();
 	const [step, setStep] = useState(1);
 	const [amount, setAmount] = useState(0);
-	const [walletID, setWalletID] = useState(0);
+	const [walletID, setWalletID] = useState("");
 	const [accountNumber, setAccountNumer] = useState("");
 	const [accountName, setAccountName] = useState("");
 	const [bankName, setBankName] = useState("");
@@ -48,32 +46,48 @@ const Withdrawal = () => {
 				return toast.error("Please select a withdrawal method.");
 			}
 	
+<<<<<<< HEAD
+=======
+			if (withdrawalMethod === "crypto" && !walletID) {
+				return toast.error("Crypto wallet address is required.");
+			}
+	
+>>>>>>> main
 			if (withdrawalMethod === "bank") {
 				if (!bankName.trim()) {
 					return toast.error("Bank name is required.");
 				}
+<<<<<<< HEAD
 				if (!accountNumber.trim() || isNaN(Number(accountNumber))) {
 					return toast.error("Please enter a valid account number.");
+=======
+				if (!accountNumber.trim()) {
+					return toast.error("Account number is required.");
+>>>>>>> main
 				}
 				if (!accountName.trim()) {
 					return toast.error("Account name is required.");
 				}
 			}
 	
+<<<<<<< HEAD
 			if (withdrawalMethod === "crypto" && !walletID) {
 				return toast.error("Crypto wallet address is required.");
 			}
 			
 	
+=======
+>>>>>>> main
 			try {
 				const response: any = await sendOTP({}).unwrap();
 				if (response.status) {
-					setStep(step + 1);
+					setStep(2);
 					toast.success(response.message);
 				} else {
 					toast.error(response.message);
 				}
 			} catch (error: any) {
+<<<<<<< HEAD
 				toast.error(error?.data?.message || "Something went wrong.");
 			}
 		}
@@ -104,22 +118,55 @@ const Withdrawal = () => {
 					  };
 	
 			try {
+=======
+				toast.error(error?.data?.message || "An error occurred.");
+			}
+			try {
+				const model =
+					withdrawalMethod === "crypto"
+						? {
+								mode: withdrawalMethod,
+								amount: amount,
+								cryptoWallet: walletID,
+								otp: token.join(""),
+						  }
+						: {
+								mode: withdrawalMethod,
+								amount: amount,
+								bankDetails: {
+									accountNumber: accountNumber,
+									accountName: accountName,
+									bankName: bankName,
+								},
+								otp: token.join(""),
+						  };
+				console.log(model);
+>>>>>>> main
 				const response: any = await initiateWithdrawal({
 					data: { payload: model },
 				}).unwrap();
 	
 				if (response.status) {
 					toast.success(response.message);
-					setStep((prev) => prev + 1);
+					setStep(3);
 				} else {
 					toast.error(response.message);
 				}
 			} catch (error: any) {
+<<<<<<< HEAD
 				toast.error(error?.data?.message || "Something went wrong.");
 			}
 		}
 	};
 	
+
+=======
+				toast.error(error?.data?.message || "An error occurred.");
+			}
+	
+	};
+	
+	}
 
 	return (
 		<div className="py-2">
@@ -159,8 +206,8 @@ const Withdrawal = () => {
 								<div className="mt-5">
 									<select
 										className="border border-[#ccc] bg-gray-50 p-4 w-[60%] py-3 rounded-md outline-none"
-										value={withdrawalMethod} // Bind to state
-										onChange={(e) => setWithdrawalMethod(e.target.value)} // Update state
+										value={withdrawalMethod} 
+										onChange={(e) => setWithdrawalMethod(e.target.value)}
 									>
 										<option>Select Account for withdrawal</option>
 										<option value="bank">Bank Account</option>
@@ -217,7 +264,11 @@ const Withdrawal = () => {
 
 						<div className="mt-5">
 							{otpLoading || otpLoading ? (
+<<<<<<< HEAD
 								<div className="w-[30%]">
+=======
+								<div className="w-[20%]">
+>>>>>>> main
 									<LoadingBtn />
 								</div>
 							) : (
@@ -233,14 +284,24 @@ const Withdrawal = () => {
 				</div>
 			)}
 
-      {step === 3 && (
-        <div className="shadow p-8 rounded mt-7 text-center flex flex-col space-y-4 items-center justify-center">
-          <img src={checkIcon} alt="" />
-          <p className="text-[25px] font-bold text-[#fa9e1f]">Withdrawal Initiated Successfully</p>
-          <p className="">Your request for withdrawal have been sent and you will be notified as soon as it is completed</p>
-          <button className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]">Back to Dashboard</button>
-        </div>
-      )}
+			{step === 3 && (
+				<div className="shadow p-8 rounded mt-7 text-center flex flex-col space-y-4 items-center justify-center">
+					<img src={checkIcon} alt="" />
+					<p className="text-[25px] font-bold text-[#fa9e1f]">
+						Withdrawal Initiated Successfully
+					</p>
+					<p className="">
+						Your request for withdrawal have been sent and you will be notified
+						as soon as it is completed
+					</p>
+					<button
+						className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]"
+						onClick={() => navigate("/dashboard")}
+					>
+						Back to Dashboard
+					</button>
+				</div>
+			)}
 		</div>
 	);
 };

@@ -78,6 +78,19 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			}),
 			transformResponse: handleResponse,
 		}),
+
+		fundWithCrypto: builder.mutation({
+			query: ({ data }: { data: any }) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/deposit/fund-crypto`,
+				method: "POST",
+        body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
 	}),
 });
 
@@ -88,4 +101,5 @@ export const {
 	useVerifyOtpMutation,
 	useResetPasswordMutation,
 	useLogoutMutation,
+  useFundWithCryptoMutation,
 } = baseApiSlice;
