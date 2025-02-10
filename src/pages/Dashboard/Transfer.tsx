@@ -4,6 +4,7 @@ import { useGetAccountDetailsQuery } from "../../slices/accountApiSlice"
 const Transfer = () => {
 
     const {data} =useGetAccountDetailsQuery({}) as any
+    console.log("data",data)
     const user_data: any = sessionStorage.getItem("userInfo")
     const userInfo = user_data && JSON.parse(user_data)
   

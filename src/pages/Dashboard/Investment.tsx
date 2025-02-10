@@ -1,55 +1,34 @@
+import { useState } from "react";
 import LoadingComponent from "../../components/LoadingComponent";
 import { Table } from "../../components/Table";
 import { useFetchUserInvestmentQuery } from "../../slices/investmentSlice";
+import Modal from "../../components/Modal";
+import PromptsCard from "../../components/PromptsCard";
+import { FaTimesCircle } from "react-icons/fa";
+import { Data } from "../../interface/package";
 
 const Investment = () => {
 	const tableHead = [
 		"S/N",
 		"Amount Invested",
 		"Expected Amount",
-		"Completion Date",
+		"Start Date",
 		"Status",
-		"",
+		" ",
 	];
-	const tableData: any = [
-		{
-			id: "1",
-			amountInvested: 40000,
-			expectedAmount: 50000,
-			completionDate: "2023-01-01",
-			status: "Completed",
-		},
-		{
-			id: "2",
-			amountInvested: 60000,
-			expectedAmount: 50000,
-			completionDate: "2023-02-01",
-			status: "Completed",
-		},
-		{
-			id: "3",
-			amountInvested: 80000,
-			expectedAmount: 50000,
-			completionDate: "2023-03-01",
-			status: "Pending",
-		},
-		{
-			id: "4",
-			amountInvested: 100000,
-			expectedAmount: 50000,
-			completionDate: "2023-04-01",
-			status: "Completed",
-		},
-		{
-			id: "5",
-			amountInvested: 120000,
-			expectedAmount: 50000,
-			completionDate: "2023-05-01",
-			status: "Pending",
-		},
-	];
+	
 
-	const { isLoading, data } = useFetchUserInvestmentQuery({});
+	
+	const [selectedItem, setSelectedItem] = useState<Data | null>(null);
+	const [showModal, setShowModal] = useState(false)
+
+	const { isLoading, data } = useFetchUserInvestmentQuery({}) as any;
+
+	const viewDetails = (item: Data) => {
+		setSelectedItem(item)
+		setShowModal(true)
+	}
+	
 
 	return (
 		<div>
@@ -58,28 +37,66 @@ const Investment = () => {
 				<LoadingComponent />
 			) : (
 				<>
-					<Table data={tableData} tableHead={tableHead}>
-						{tableData.map((table: any, index: number) => (
+					<Table data={data?.data} tableHead={tableHead}>
+						{data?.data.map((table: any, index: number) => (
 							<tr key={index}>
-								<td className="px-2">{table.id}</td>
-								<td className="py-2 px-2">{table.amountInvested}</td>
-								<td className="px-2">{table.expectedAmount}</td>
-								<td className="px-2">{table.completionDate}</td>
+								<td className="px-2">{index + 1}</td>
+								<td className="py-2 px-2">${table.amount}</td>
+								<td className="px-2">${table.amountToReceive}</td>
+								<td className="px-2">{table.createdAt}</td>
 
 								<td
 									className={` text-[15px]  ${
-										table.status === "Completed"
+										table.completed
 											? "text-green-700"
-											: "text-yellow-400 "
+											: "text-[#fa9e1f] "
 									}`}
 								>
-									{table.status}
+									{table.completed ? "Completed" : "Pending"}
 								</td>
+								<td className=" py-2 rounded-md  text-white bg-[#fa9e1f] text-center cursor-pointer" onClick={() => viewDetails(table)}>View Details</td>
 							</tr>
 						))}
 					</Table>
-				</>
-			)}
+
+					{showModal && (
+             <Modal isShowCancelButton={false} cancelButtonFunction={() => setShowModal(false)}>
+             <div className="p-10">
+             <PromptsCard title={""}>
+             <div className="p-6 flex flex-col justify-center items-center relative">
+          
+          {/* Close Button Positioned Properly */}
+          <div className="absolute top-2 right-2">
+            <FaTimesCircle 
+              size={40} 
+              onClick={() => setShowModal(!showModal)} 
+              className="cursor-pointer text-gray-600 hover:text-gray-800"
+            />
+          </div>
+
+          <h2 className="text-lg font-semibold text-[30px] mb-3">Transaction Details</h2>
+          
+          <div className="max-w-lg mx-auto p-5 bg-white shadow-lg rounded-lg border border-gray-200">
+            <div className="space-y-6 text-gray-700">
+              <p><strong>Transaction ID:</strong> {selectedItem?.transactionID}</p>
+              <p><strong>Package ID:</strong> {selectedItem?.package}</p>
+              <p><strong>Amount:</strong> ${selectedItem?.amount}</p>
+              <p><strong>Amount to Receive:</strong> ${selectedItem?.amountToReceive}</p>
+              <p><strong>Paid:</strong> {selectedItem?.paid ? "True" : "False"}</p>
+			  <p><strong>Payment Date:</strong>{" "}{selectedItem?.paymentDate ? new Date(selectedItem.paymentDate).toLocaleDateString()
+    : "N/A"}
+</p>
+
+              <p><strong>Completed:</strong> {selectedItem?.completed ? "succesful" : "Failed"}</p>
+              <p><strong>Updated Price:</strong> ${selectedItem?.updatedPrice}</p>
+            </div>
+          </div>
+        </div>
+      </PromptsCard>
+    </div>
+  </Modal>
+)}		</>
+)}
 		</div>
 	);
 };

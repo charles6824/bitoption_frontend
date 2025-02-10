@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import Hero from "../components/Hero"
 import abtImg from "../assets/images/about-us.png"
 import Card from "../components/Card";
-import { cards } from "../utils/BitcoinCard";
+// import { cards } from "../utils/BitcoinCard";
 import { experts } from "../utils/Experts";
 import ExpertCard from "../components/ExpertCard";
 import BitcoinNewsCard from "../components/BitcoinNewsCard";
@@ -11,10 +11,11 @@ import callToAction_Bg from "../assets/images/call-to-action-bg.jpg"
 import VidoeSection from "../components/VidoeSection";
 import img from "../assets/images/bitcoin-6992422_1920.jpg"
 import { useGetAllPackagesQuery } from "../slices/packageSlice";
+import LoadingComponent from "../components/LoadingComponent";
 
 const HomePage = () => {
 
-  const {data:packages} =useGetAllPackagesQuery({}) as any;
+  const {data:packages,isLoading} =useGetAllPackagesQuery({}) as any;
   console.log('packages',packages)
   return (
     <>
@@ -26,7 +27,8 @@ const HomePage = () => {
     <h1 className="text-[#FFF] text-center text-[28px] md:text-[40px] font-bold">
       ABOUT <span className="text-[#fa9e1f]">US</span>
     </h1>
-    <div className="flex flex-col md:flex-row items-center justify-center gap-4 py-3">
+    <div className="flex flex-
+    {}col md:flex-row items-center justify-center gap-4 py-3">
       <hr className="w-[50px] border border-[#fa9e1f]" />
       <p className="text-[#fff] text-center uppercase text-sm md:text-base">
         A commercial website that lists wallets, exchanges, and other bitcoin-related info
@@ -84,6 +86,13 @@ const HomePage = () => {
 
 
   {/* BITCOIN CARD */}
+  {isLoading ? (<>
+  <LoadingComponent/>
+  
+  </>) : 
+
+  
+  (<>
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 py-6">
     {packages &&
       packages.data.map((item: any, i: number) => {
@@ -93,6 +102,7 @@ const HomePage = () => {
         </div>
       )})}
   </div>
+  </>)}
 
   {/* EXPERTS CARDS */}
   <div className="py-16 text-center">
