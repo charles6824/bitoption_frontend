@@ -4,7 +4,7 @@ import { Table } from "../../components/Table";
 import { useFetchUserInvestmentQuery } from "../../slices/investmentSlice";
 import Modal from "../../components/Modal";
 import PromptsCard from "../../components/PromptsCard";
-import { FaTimesCircle } from "react-icons/fa";
+import { FaRegArrowAltCircleRight, FaTimesCircle } from "react-icons/fa";
 import { Data } from "../../interface/package";
 
 const Investment = () => {
@@ -16,19 +16,16 @@ const Investment = () => {
 		"Status",
 		" ",
 	];
-	
 
-	
 	const [selectedItem, setSelectedItem] = useState<Data | null>(null);
-	const [showModal, setShowModal] = useState(false)
+	const [showModal, setShowModal] = useState(false);
 
 	const { isLoading, data } = useFetchUserInvestmentQuery({}) as any;
 
 	const viewDetails = (item: Data) => {
-		setSelectedItem(item)
-		setShowModal(true)
-	}
-	
+		setSelectedItem(item);
+		setShowModal(true);
+	};
 
 	return (
 		<div>
@@ -47,56 +44,87 @@ const Investment = () => {
 
 								<td
 									className={` text-[15px]  ${
-										table.completed
-											? "text-green-700"
-											: "text-[#fa9e1f] "
+										table.completed ? "text-green-700" : "text-[#fa9e1f] "
 									}`}
 								>
 									{table.completed ? "Completed" : "Pending"}
 								</td>
-								<td className=" py-2 rounded-md  text-white bg-[#fa9e1f] text-center cursor-pointer" onClick={() => viewDetails(table)}>View Details</td>
+								<td
+									className=" py-2 rounded-md text-[#fa9e1f] text-center cursor-pointer flex gap-1 items-center"
+									onClick={() => viewDetails(table)}
+								>
+									<FaRegArrowAltCircleRight />View Details
+								</td>
 							</tr>
 						))}
 					</Table>
-
 					{showModal && (
-             <Modal isShowCancelButton={false} cancelButtonFunction={() => setShowModal(false)}>
-             <div className="p-10">
-             <PromptsCard title={""}>
-             <div className="p-6 flex flex-col justify-center items-center relative">
-          
-          {/* Close Button Positioned Properly */}
-          <div className="absolute top-2 right-2">
-            <FaTimesCircle 
-              size={40} 
-              onClick={() => setShowModal(!showModal)} 
-              className="cursor-pointer text-gray-600 hover:text-gray-800"
-            />
-          </div>
+						<Modal
+							isShowCancelButton={false}
+							cancelButtonFunction={() => setShowModal(false)}
+						>
+							<div className="p-10">
+								<PromptsCard title={""}>
+									<div className="p-6 flex flex-col justify-center items-center relative">
+										{/* Close Button Positioned Properly */}
+										<div className="absolute top-2 right-2">
+											<FaTimesCircle
+												size={40}
+												onClick={() => setShowModal(!showModal)}
+												className="cursor-pointer text-gray-600 hover:text-gray-800"
+											/>
+										</div>
 
-          <h2 className="text-lg font-semibold text-[30px] mb-3">Transaction Details</h2>
-          
-          <div className="max-w-lg mx-auto p-5 bg-white shadow-lg rounded-lg border border-gray-200">
-            <div className="space-y-6 text-gray-700">
-              <p><strong>Transaction ID:</strong> {selectedItem?.transactionID}</p>
-              <p><strong>Package ID:</strong> {selectedItem?.package}</p>
-              <p><strong>Amount:</strong> ${selectedItem?.amount}</p>
-              <p><strong>Amount to Receive:</strong> ${selectedItem?.amountToReceive}</p>
-              <p><strong>Paid:</strong> {selectedItem?.paid ? "True" : "False"}</p>
-			  <p><strong>Payment Date:</strong>{" "}{selectedItem?.paymentDate ? new Date(selectedItem.paymentDate).toLocaleDateString()
-    : "N/A"}
-</p>
+										<h2 className="text-lg font-semibold text-[30px] mb-3">
+											Transaction Details
+										</h2>
 
-              <p><strong>Completed:</strong> {selectedItem?.completed ? "succesful" : "Failed"}</p>
-              <p><strong>Updated Price:</strong> ${selectedItem?.updatedPrice}</p>
-            </div>
-          </div>
-        </div>
-      </PromptsCard>
-    </div>
-  </Modal>
-)}		</>
-)}
+										<div className="max-w-lg mx-auto p-5 bg-white shadow-lg rounded-lg border border-gray-200">
+											<div className="space-y-6 text-gray-700">
+												<p>
+													<strong>Transaction ID:</strong>{" "}
+													{selectedItem?.transactionID}
+												</p>
+												<p>
+													<strong>Package ID:</strong> {selectedItem?.package}
+												</p>
+												<p>
+													<strong>Amount:</strong> ${selectedItem?.amount}
+												</p>
+												<p>
+													<strong>Amount to Receive:</strong> $
+													{selectedItem?.amountToReceive}
+												</p>
+												<p>
+													<strong>Paid:</strong>{" "}
+													{selectedItem?.paid ? "True" : "False"}
+												</p>
+												<p>
+													<strong>Payment Date:</strong>{" "}
+													{selectedItem?.paymentDate
+														? new Date(
+																selectedItem.paymentDate
+														  ).toLocaleDateString()
+														: "N/A"}
+												</p>
+
+												<p>
+													<strong>Completed:</strong>{" "}
+													{selectedItem?.completed ? "succesful" : "Failed"}
+												</p>
+												<p>
+													<strong>Updated Price:</strong> $
+													{selectedItem?.updatedPrice}
+												</p>
+											</div>
+										</div>
+									</div>
+								</PromptsCard>
+							</div>
+						</Modal>
+					)}{" "}
+				</>
+			)}
 		</div>
 	);
 };

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AccountCard from "../../components/AccountCard";
 import TokenInput from "../../components/TokenInput";
-import checkIcon from "../../assets/images/checkIcon.png"
+import checkIcon from "../../assets/images/checkIcon.png";
 import { useGetAccountDetailsQuery } from "../../slices/accountApiSlice";
 import {
 	useInitiateWithdrawalMutation,
@@ -12,9 +12,10 @@ import {
 import { toast } from "react-toastify";
 import LoadingBtn from "../../components/LoadingBtn";
 const Withdrawal = () => {
+	const navigate = useNavigate();
 	const [step, setStep] = useState(1);
 	const [amount, setAmount] = useState(0);
-	const [walletID, setWalletID] = useState(0);
+	const [walletID, setWalletID] = useState("");
 	const [accountNumber, setAccountNumer] = useState("");
 	const [accountName, setAccountName] = useState("");
 	const [bankName, setBankName] = useState("");
@@ -48,7 +49,6 @@ const Withdrawal = () => {
 					toast.error(response.message);
 				}
 			} else {
-
 				const model =
 					withdrawalMethod === "crypto"
 						? {
@@ -79,7 +79,6 @@ const Withdrawal = () => {
 				}
 			}
 		} catch (error: any) {
-    
 			toast.error(error.message);
 		}
 	};
@@ -196,14 +195,24 @@ const Withdrawal = () => {
 				</div>
 			)}
 
-      {step === 3 && (
-        <div className="shadow p-8 rounded mt-7 text-center flex flex-col space-y-4 items-center justify-center">
-          <img src={checkIcon} alt="" />
-          <p className="text-[25px] font-bold text-[#fa9e1f]">Withdrawal Initiated Successfully</p>
-          <p className="">Your request for withdrawal have been sent and you will be notified as soon as it is completed</p>
-          <button className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]">Back to Dashboard</button>
-        </div>
-      )}
+			{step === 3 && (
+				<div className="shadow p-8 rounded mt-7 text-center flex flex-col space-y-4 items-center justify-center">
+					<img src={checkIcon} alt="" />
+					<p className="text-[25px] font-bold text-[#fa9e1f]">
+						Withdrawal Initiated Successfully
+					</p>
+					<p className="">
+						Your request for withdrawal have been sent and you will be notified
+						as soon as it is completed
+					</p>
+					<button
+						className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]"
+						onClick={() => navigate("/dashboard")}
+					>
+						Back to Dashboard
+					</button>
+				</div>
+			)}
 		</div>
 	);
 };
