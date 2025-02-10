@@ -28,8 +28,7 @@ const Withdrawal = () => {
 	const accountDetails = userInfo && userInfo.data.accountDetails;
 
 	const [sendOTP, { isLoading: otpLoading }] = useLazySendOTPQuery();
-	const [initiateWithdrawal, { isLoading: withdrawLoading }] =
-		useInitiateWithdrawalMutation();
+	const [initiateWithdrawal, { isLoading: withdrawLoading }] =useInitiateWithdrawalMutation();
 
 	const handleTokenComplete = (isComplete: boolean, tokens: string[]) => {
 		setIsTokenComplete(isComplete);
@@ -38,8 +37,35 @@ const Withdrawal = () => {
 
 	const handleStep = async (e: React.FormEvent) => {
 		e.preventDefault();
-		try {
-			if (step < 2) {
+	
+		// Step 1 Validations
+		if (step === 1) {
+			if (!amount || amount <= 0) {
+				return toast.error("Please enter a valid withdrawal amount.");
+			}
+	
+			if (!withdrawalMethod) {
+				return toast.error("Please select a withdrawal method.");
+			}
+	
+			if (withdrawalMethod === "bank") {
+				if (!bankName.trim()) {
+					return toast.error("Bank name is required.");
+				}
+				if (!accountNumber.trim() || isNaN(Number(accountNumber))) {
+					return toast.error("Please enter a valid account number.");
+				}
+				if (!accountName.trim()) {
+					return toast.error("Account name is required.");
+				}
+			}
+	
+			if (withdrawalMethod === "crypto" && !walletID) {
+				return toast.error("Crypto wallet address is required.");
+			}
+			
+	
+			try {
 				const response: any = await sendOTP({}).unwrap();
 				if (response.status) {
 					setStep(step + 1);
@@ -47,40 +73,53 @@ const Withdrawal = () => {
 				} else {
 					toast.error(response.message);
 				}
-			} else {
-				const model =
-					withdrawalMethod === "crypto"
-						? {
-								mode: withdrawalMethod,
-								amount: amount,
-								cryptoWallet: walletID,
-								otp: token.join(""),
-						  }
-						: {
-								mode: withdrawalMethod,
-								amount: amount,
-								bankDetails: {
-									accountNumber: accountNumber,
-									accountName: accountName,
-									bankName: bankName,
-								},
-								otp: token.join(""),
-						  };
-				console.log(model);
+			} catch (error: any) {
+				toast.error(error?.data?.message || "Something went wrong.");
+			}
+		}
+	
+		// Step 2 Validations (OTP)
+		else if (step === 2) {
+			if (!_isTokenComplete || token.join("").length !== 6) {
+				return toast.error("Please enter the complete 6-digit OTP.");
+			}
+	
+			const model =
+				withdrawalMethod === "crypto"
+					? {
+							mode: withdrawalMethod,
+							amount: amount,
+							cryptoWallet: walletID,
+							otp: token.join(""),
+					  }
+					: {
+							mode: withdrawalMethod,
+							amount: amount,
+							bankDetails: {
+								accountNumber: accountNumber,
+								accountName: accountName,
+								bankName: bankName,
+							},
+							otp: token.join(""),
+					  };
+	
+			try {
 				const response: any = await initiateWithdrawal({
 					data: { payload: model },
 				}).unwrap();
+	
 				if (response.status) {
 					toast.success(response.message);
 					setStep((prev) => prev + 1);
 				} else {
 					toast.error(response.message);
 				}
+			} catch (error: any) {
+				toast.error(error?.data?.message || "Something went wrong.");
 			}
-		} catch (error: any) {
-			toast.error(error.message);
 		}
 	};
+	
 
 	return (
 		<div className="py-2">
@@ -163,7 +202,7 @@ const Withdrawal = () => {
 											placeholder="Crypto Wallet Address"
 											className="border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none"
 											value={walletID}
-											onChange={(e) => setWalletID(e.target.value)}
+											onChange={(e) => setWalletID(Number(e.target.value))}
 										/>
 									</div>
 								)}
@@ -178,9 +217,9 @@ const Withdrawal = () => {
 
 						<div className="mt-5">
 							{otpLoading || otpLoading ? (
-								<>
+								<div className="w-[30%]">
 									<LoadingBtn />
-								</>
+								</div>
 							) : (
 								<button
 									className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]"
