@@ -1,136 +1,209 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import AccountCard from "../../components/AccountCard";
 import TokenInput from "../../components/TokenInput";
-import { useGetAccountDetailsQuery} from "../../slices/accountApiSlice";
+import checkIcon from "../../assets/images/checkIcon.png"
+import { useGetAccountDetailsQuery } from "../../slices/accountApiSlice";
+import {
+	useInitiateWithdrawalMutation,
+	useLazySendOTPQuery,
+} from "../../slices/withdrawalSlice";
+import { toast } from "react-toastify";
+import LoadingBtn from "../../components/LoadingBtn";
 const Withdrawal = () => {
-  const [step, setStep] = useState(1);
-  const [withdrawalMethod, setWithdrawalMethod] = useState(""); 
-  const [_isTokenComplete, setIsTokenComplete] = useState(false);
-  const [_token, setToken] = useState<string[]>(Array(8).fill(""));
-  const {data} =useGetAccountDetailsQuery({}) as any
-  const user_data: any = sessionStorage.getItem("userInfo")
-  const userInfo = user_data && JSON.parse(user_data)
+	const [step, setStep] = useState(1);
+	const [amount, setAmount] = useState(0);
+	const [walletID, setWalletID] = useState(0);
+	const [accountNumber, setAccountNumer] = useState("");
+	const [accountName, setAccountName] = useState("");
+	const [bankName, setBankName] = useState("");
+	const [withdrawalMethod, setWithdrawalMethod] = useState("");
+	const [_isTokenComplete, setIsTokenComplete] = useState(false);
+	const [token, setToken] = useState<string[]>(Array(6).fill(""));
+	const { data } = useGetAccountDetailsQuery({}) as any;
+	const user_data: any = sessionStorage.getItem("userInfo");
+	const userInfo = user_data && JSON.parse(user_data);
 
-  const accountDetails = userInfo && userInfo.data.accountDetails;
+	const accountDetails = userInfo && userInfo.data.accountDetails;
 
+	const [sendOTP, { isLoading: otpLoading }] = useLazySendOTPQuery();
+	const [initiateWithdrawal, { isLoading: withdrawLoading }] =
+		useInitiateWithdrawalMutation();
 
-  const handleTokenComplete = (isComplete: boolean, tokens: string[]) => {
-    setIsTokenComplete(isComplete);
-    setToken(tokens);
-  };
+	const handleTokenComplete = (isComplete: boolean, tokens: string[]) => {
+		setIsTokenComplete(isComplete);
+		setToken(tokens);
+	};
 
-  const handleStep = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (step < 2) {
-      setStep(step + 1);
-    }
-  };
+	const handleStep = async (e: React.FormEvent) => {
+		e.preventDefault();
+		try {
+			if (step < 2) {
+				const response: any = await sendOTP({}).unwrap();
+				if (response.status) {
+					setStep(step + 1);
+					toast.success(response.message);
+				} else {
+					toast.error(response.message);
+				}
+			} else {
+				const model =
+					withdrawalMethod === "crypto"
+						? {
+								mode: withdrawalMethod,
+								amount: amount,
+								cryptoWallet: walletID,
+								otp: token.join(""),
+						  }
+						: {
+								mode: withdrawalMethod,
+								amount: amount,
+								bankDetails: {
+									accountNumber: accountNumber,
+									accountName: accountName,
+									bankName: bankName,
+								},
+								otp: token.join(""),
+						  };
+				console.log(model);
+				const response: any = await initiateWithdrawal({
+					data: { payload: model },
+				}).unwrap();
+				if (response.status) {
+					toast.success(response.message);
+					setStep((prev) => prev + 1);
+				} else {
+					toast.error(response.message);
+				}
+			}
+		} catch (error: any) {
+			toast.error(error.message);
+		}
+	};
 
-  return (
-    <div className="py-2">
-      <Link to="/withdrawals" className="flex items-center text-[#fa9e1f] mb-1">
-        <FaArrowLeft />
-        Go Back
-      </Link>
-      <h1 className="text-[28px]">Withdrawal</h1>
-      <p className="text-[12px]">Withdraw to your wallet with crypto or PayPal</p>
+	return (
+		<div className="py-2">
+			<Link to="/withdrawals" className="flex items-center text-[#fa9e1f] mb-1">
+				<FaArrowLeft />
+				Go Back
+			</Link>
+			<h1 className="text-[28px]">Withdrawal</h1>
+			<p className="text-[12px]">Withdraw to your crypto wallet or bank</p>
 
-      <div className="shadow p-4 rounded-md border border-[#ccc] mt-3">
-        <form>
-          {step === 1 && (
-            <div className="mt-10">
-             
-              <AccountCard 
-                cardData={accountDetails}
-                data={data}
+			{step < 3 && (
+				<div className="shadow p-4 rounded-md border border-[#ccc] mt-3">
+					<form>
+						{step === 1 && (
+							<div className="mt-10">
+								<AccountCard cardData={accountDetails} data={data} />
+								<div className="w-[60%] flex items-center border border-[#ccc] rounded-md overflow-hidden mt-5">
+									<span className="px-3 py-3 bg-gray-100 text-gray-500 border-r border-[#ccc]">
+										$
+									</span>
+									<input
+										type="text"
+										id="crypto"
+										inputMode="numeric"
+										value={amount}
+										pattern="[0-9]*"
+										placeholder="0.00"
+										className="px-3 py-3 outline-none bg-gray-50 w-full"
+										onInput={(e) => {
+											const target = e.target as HTMLInputElement;
+											target.value = target.value.replace(/\D/g, "");
+										}}
+										onChange={(e) => setAmount(Number(e.target.value))}
+									/>
+								</div>
 
-              />
-              <div className="w-[60%] flex items-center border border-[#ccc] rounded-md overflow-hidden mt-5">
-                <span className="px-3 py-3 bg-gray-100 text-gray-500 border-r border-[#ccc]">
-                  $
-                </span>
-                <input
-               type="text"
-                id="crypto"
-               inputMode="numeric"
-              pattern="[0-9]*"
-              placeholder="0.00"
-              className="px-3 py-3 outline-none bg-gray-50 w-full"
-              onInput={(e) => {
-            const target = e.target as HTMLInputElement;
-            target.value = target.value.replace(/\D/g, "");
-       }}
-/>
-              
-              </div>
+								<div className="mt-5">
+									<select
+										className="border border-[#ccc] bg-gray-50 p-4 w-[60%] py-3 rounded-md outline-none"
+										value={withdrawalMethod} // Bind to state
+										onChange={(e) => setWithdrawalMethod(e.target.value)} // Update state
+									>
+										<option>Select Account for withdrawal</option>
+										<option value="bank">Bank Account</option>
+										<option value="crypto">Crypto Wallet</option>
+									</select>
+								</div>
 
-              <div className="mt-5">
-                <select
-                  className="border border-[#ccc] bg-gray-50 p-4 w-[60%] py-3 rounded-md outline-none"
-                  value={withdrawalMethod} // Bind to state
-                  onChange={(e) => setWithdrawalMethod(e.target.value)} // Update state
-                >
-                  <option>Select Account for withdrawal</option>
-                  <option value="paypal">Bank Account</option>
-                  <option value="crypto">Crypto Wallet</option>
-                </select>
-              </div>
+								{/* Conditionally render inputs based on the selected withdrawal method */}
+								{withdrawalMethod === "bank" && (
+									<div className="mt-5">
+										<input
+											type="text"
+											placeholder="Bank Name"
+											className=" bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none"
+											value={bankName}
+											onChange={(e) => setBankName(e.target.value)}
+										/>
+										<input
+											type="text"
+											placeholder="Account Number"
+											className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
+											value={accountNumber}
+											onChange={(e) => setAccountNumer(e.target.value)}
+										/>
+										<input
+											type="text"
+											placeholder="Account Name"
+											className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
+											value={accountName}
+											onChange={(e) => setAccountName(e.target.value)}
+										/>
+									</div>
+								)}
 
-              {/* Conditionally render inputs based on the selected withdrawal method */}
-              {withdrawalMethod === "paypal" && (
-                <div className="mt-5">
-                  <input
-                    type="text"
-                    placeholder="Bank Name"
-                    className=" bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Account Number"
-                    className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Account Name"
-                    className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
-                  />
-                </div>
-              )}
+								{withdrawalMethod === "crypto" && (
+									<div className="mt-5">
+										<input
+											type="text"
+											placeholder="Crypto Wallet Address"
+											className="border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none"
+											value={walletID}
+											onChange={(e) => setWalletID(e.target.value)}
+										/>
+									</div>
+								)}
+							</div>
+						)}
 
-              {withdrawalMethod === "crypto" && (
-                <div className="mt-5">
-                  <input
-                    type="text"
-                    placeholder="Crypto Wallet Address"
-                    className="border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none"
-                  />
-                </div>
-              )}
-            </div>
-          )}
+						{step === 2 && (
+							<>
+								<TokenInput onComplete={handleTokenComplete} />
+							</>
+						)}
 
-          {step === 2 && (
-            <>
-          <TokenInput onComplete={handleTokenComplete} />
+						<div className="mt-5">
+							{otpLoading || otpLoading ? (
+								<>
+									<LoadingBtn />
+								</>
+							) : (
+								<button
+									className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]"
+									onClick={handleStep}
+								>
+									{step === 1 ? "Continue" : "Submit"}
+								</button>
+							)}
+						</div>
+					</form>
+				</div>
+			)}
 
-            </>
-          )}
-
-          <div className="mt-5">
-            <button
-              className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]"
-              onClick={handleStep}
-            >
-              {step === 1 ? "Continue" : "Submit"}
-            </button>
-          </div>
-        </form>
-      </div>
-     
-    </div>
-  );
+      {step === 3 && (
+        <div className="shadow p-8 rounded mt-7 text-center flex flex-col space-y-4 items-center justify-center">
+          <img src={checkIcon} alt="" />
+          <p className="text-[25px] font-bold text-[#fa9e1f]">Withdrawal Initiated Successfully</p>
+          <p className="">Your request for withdrawal have been sent and you will be notified as soon as it is completed</p>
+          <button className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]">Back to Dashboard</button>
+        </div>
+      )}
+		</div>
+	);
 };
 
 export default Withdrawal;
