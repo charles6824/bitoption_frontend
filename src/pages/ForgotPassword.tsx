@@ -21,7 +21,7 @@ const ForgotPassword = () => {
   const [verifyOtp] = useVerifyOtpMutation();
   const [isLoading, setIsLoading] = useState(false);
   const [_isTokenComplete, setIsTokenComplete] = useState(false);
-  const [token, setToken] = useState<string[]>(Array(8).fill(""));
+  const [token, setToken] = useState<string[]>(Array(6).fill(""));
   const [trackingCode,setTrackingCode] = useState("")
   const isLastStep = activeStep === 4;
   const isFirstStep = activeStep === 1;
