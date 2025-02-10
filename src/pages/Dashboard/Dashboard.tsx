@@ -134,47 +134,52 @@ const Dashboard = () => {
   return (
 
     <>
-    <div className="bg-[#fa9e1f] p-2 text-white  ">
-      <div className="rounded-md text-[#fff] px-7 bg-[#1d1d1d] p-9">
-        <div className="flex justify-between items-center">
-          <div>
-            <p>{userInfo.data.accountDetails.accountLevel}</p>
-            <h1 className="text-[25px] ">{userInfo.data.userDetails.fullName}</h1>
-          </div>
-          <div className="flex items-center gap-2">
-            <FaCircle size={10} className="text-green-700" />
-            <p className="">{userInfo.data.accountDetails.accountStatus}</p>
-          </div>
-        </div>
-        <div className="flex justify-between items-center">
-            <div className="mt-5">
-          <p className="text-[#fa9e1f] "> {userInfo.data.accountDetails.accountNumber}</p>
-            </div>
-
-            
-
-
-          <div className="flex items-center gap-4">
-
-          <button 
-              onClick={handleRefreshBalance} 
-              className="text-gray-600 hover:text-gray-900 transition duration-200 flex items-center gap-2"
-              title="Refresh Balance"
-            >
-              <FaSyncAlt color="white" size={18} className={refreshing ? "animate-spin" : ""} />
-            </button>
-            {isLoading || refreshing ? (<>
-              {/* <div className="w-4 h-4 border-4 border-[#FFF] border-dotted rounded-full animate-spin mr-4"></div> */}
-            
-            </>):(<>
-            
-            
-            <p className="text-[25px]"> Balance: ${Number(accountBalance?.balance).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-            </>)}
-          </div>
-        </div>
+    <div className="bg-[#fa9e1f] p-2 text-white">
+  <div className="rounded-md text-[#fff] px-5 sm:px-7 bg-[#1d1d1d] p-5 sm:p-9">
+    <div className="flex flex-wrap justify-between items-center gap-3">
+      <div>
+        <p className="text-sm sm:text-base">{userInfo.data.accountDetails.accountLevel}</p>
+        <h1 className="text-[20px] sm:text-[25px] font-semibold">
+          {userInfo.data.userDetails.fullName}
+        </h1>
+      </div>
+      <div className="flex items-center gap-2">
+        <FaCircle size={10} className="text-green-700" />
+        <p className="text-sm sm:text-base">{userInfo.data.accountDetails.accountStatus}</p>
       </div>
     </div>
+
+    <div className="flex flex-wrap justify-between items-center gap-3">
+      <div className="mt-5">
+        <p className="text-[#fa9e1f] text-sm sm:text-base">
+          {userInfo.data.accountDetails.accountNumber}
+        </p>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+        <button
+          onClick={handleRefreshBalance}
+          className="text-gray-400 hover:text-gray-200 transition duration-200 flex items-center gap-2"
+          title="Refresh Balance"
+        >
+          <FaSyncAlt color="white" size={18} className={refreshing ? "animate-spin" : ""} />
+        </button>
+
+        {isLoading || refreshing ? (
+          <div className="w-4 h-4 border-4 border-[#FFF] border-dotted rounded-full animate-spin mr-4"></div>
+        ) : (
+          <p className="text-lg sm:text-[px] font-medium">
+            Balance: ${Number(accountBalance?.balance).toLocaleString("en-US", { 
+              minimumFractionDigits: 2, 
+              maximumFractionDigits: 2 
+            })}
+          </p>
+        )}
+      </div>
+    </div>
+  </div>
+</div>
+
     {/* Table section */}
     <div className="py-5 px-4 ">
       <h1 className="text-[25px] mb-2">Transaction History</h1>

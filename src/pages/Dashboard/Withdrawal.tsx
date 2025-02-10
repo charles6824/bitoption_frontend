@@ -5,10 +5,7 @@ import AccountCard from "../../components/AccountCard";
 import TokenInput from "../../components/TokenInput";
 import checkIcon from "../../assets/images/checkIcon.png"
 import { useGetAccountDetailsQuery } from "../../slices/accountApiSlice";
-import {
-	useInitiateWithdrawalMutation,
-	useLazySendOTPQuery,
-} from "../../slices/withdrawalSlice";
+import {useInitiateWithdrawalMutation,useLazySendOTPQuery} from "../../slices/withdrawalSlice";
 import { toast } from "react-toastify";
 import LoadingBtn from "../../components/LoadingBtn";
 const Withdrawal = () => {
@@ -38,51 +35,87 @@ const Withdrawal = () => {
 
 	const handleStep = async (e: React.FormEvent) => {
 		e.preventDefault();
-		try {
-			if (step < 2) {
+	
+		// Step 1 Validations
+		if (step === 1) {
+			if (!amount || amount <= 0) {
+				return toast.error("Please enter a valid withdrawal amount.");
+			}
+	
+			if (!withdrawalMethod) {
+				return toast.error("Please select a withdrawal method.");
+			}
+	
+			if (withdrawalMethod === "crypto" && !walletID) {
+				return toast.error("Crypto wallet address is required.");
+			}
+	
+			if (withdrawalMethod === "bank") {
+				if (!bankName.trim()) {
+					return toast.error("Bank name is required.");
+				}
+				if (!accountNumber.trim()) {
+					return toast.error("Account number is required.");
+				}
+				if (!accountName.trim()) {
+					return toast.error("Account name is required.");
+				}
+			}
+	
+			try {
 				const response: any = await sendOTP({}).unwrap();
 				if (response.status) {
-					setStep(step + 1);
+					setStep(2);
 					toast.success(response.message);
 				} else {
 					toast.error(response.message);
 				}
-			} else {
-
-				const model =
-					withdrawalMethod === "crypto"
-						? {
-								mode: withdrawalMethod,
-								amount: amount,
-								cryptoWallet: walletID,
-								otp: token.join(""),
-						  }
-						: {
-								mode: withdrawalMethod,
-								amount: amount,
-								bankDetails: {
-									accountNumber: accountNumber,
-									accountName: accountName,
-									bankName: bankName,
-								},
-								otp: token.join(""),
-						  };
-				console.log(model);
+			} catch (error: any) {
+				toast.error(error?.data?.message || "An error occurred.");
+			}
+		}
+	
+		// Step 2 Validations (OTP)
+		else if (step === 2) {
+			if (!_isTokenComplete) {
+				return toast.error("Please enter the full OTP.");
+			}
+	
+			const model =
+				withdrawalMethod === "crypto"
+					? {
+						  mode: withdrawalMethod,
+						  amount: amount,
+						  cryptoWallet: walletID,
+						  otp: token.join(""),
+					  }
+					: {
+						  mode: withdrawalMethod,
+						  amount: amount,
+						  bankDetails: {
+							  accountNumber: accountNumber,
+							  accountName: accountName,
+							  bankName: bankName,
+						  },
+						  otp: token.join(""),
+					  };
+	
+			try {
 				const response: any = await initiateWithdrawal({
 					data: { payload: model },
 				}).unwrap();
 				if (response.status) {
 					toast.success(response.message);
-					setStep((prev) => prev + 1);
+					setStep(3);
 				} else {
 					toast.error(response.message);
 				}
+			} catch (error: any) {
+				toast.error(error?.data?.message || "An error occurred.");
 			}
-		} catch (error: any) {
-    
-			toast.error(error.message);
 		}
 	};
+	
 
 	return (
 		<div className="py-2">
@@ -122,8 +155,8 @@ const Withdrawal = () => {
 								<div className="mt-5">
 									<select
 										className="border border-[#ccc] bg-gray-50 p-4 w-[60%] py-3 rounded-md outline-none"
-										value={withdrawalMethod} // Bind to state
-										onChange={(e) => setWithdrawalMethod(e.target.value)} // Update state
+										value={withdrawalMethod} 
+										onChange={(e) => setWithdrawalMethod(e.target.value)}
 									>
 										<option>Select Account for withdrawal</option>
 										<option value="bank">Bank Account</option>
@@ -180,9 +213,9 @@ const Withdrawal = () => {
 
 						<div className="mt-5">
 							{otpLoading || otpLoading ? (
-								<>
+								<div className="w-[20%]">
 									<LoadingBtn />
-								</>
+								</div>
 							) : (
 								<button
 									className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]"
@@ -201,7 +234,7 @@ const Withdrawal = () => {
           <img src={checkIcon} alt="" />
           <p className="text-[25px] font-bold text-[#fa9e1f]">Withdrawal Initiated Successfully</p>
           <p className="">Your request for withdrawal have been sent and you will be notified as soon as it is completed</p>
-          <button className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]">Back to Dashboard</button>
+          <Link to="/dashboard" className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]">Back to Dashboard</Link>
         </div>
       )}
 		</div>
