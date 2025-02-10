@@ -74,6 +74,11 @@ const Dashboard = () => {
 
 	// const periods = ['1D', '1W', '1M', '3M', '6M', '1Y'];
 
+<<<<<<< HEAD
+=======
+	
+
+>>>>>>> 3538ef89f44234f5864b165ab90e499c85918394
 	// const { labels, inflowData, outflowData } = getDataForPeriod(period);
 
 	const [refreshing, setRefreshing] = useState(false);
