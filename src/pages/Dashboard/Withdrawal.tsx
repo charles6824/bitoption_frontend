@@ -48,6 +48,7 @@ const Withdrawal = () => {
 					toast.error(response.message);
 				}
 			} else {
+
 				const model =
 					withdrawalMethod === "crypto"
 						? {
@@ -78,6 +79,7 @@ const Withdrawal = () => {
 				}
 			}
 		} catch (error: any) {
+    
 			toast.error(error.message);
 		}
 	};
