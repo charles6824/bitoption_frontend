@@ -13,10 +13,10 @@ const Footer = () => {
             <div className="uppercase text-[15px]">
               <h3 className="text-lg font-semibold mb-4 text-[#fa9e1f] ">Our Company</h3>
               <ul className="space-y-2 ">
-                <li className="hover:text-[#fa9e1f]">Home</li>
-                <li className="hover:text-[#fa9e1f]">About</li>
-                <li className="hover:text-[#fa9e1f]">Services</li>
-                <li className="hover:text-[#fa9e1f]">Contact</li>
+                <li className="hover:text-[#fa9e1f]"><Link to='/'>Home</Link></li>
+                <li className="hover:text-[#fa9e1f]"> <Link to='/'>about</Link></li>
+                <li className="hover:text-[#fa9e1f]"> <Link to='/'>services</Link></li>
+                <li className="hover:text-[#fa9e1f]"> <Link to='/'>contact</Link></li>
               </ul>
             </div>
   
@@ -27,8 +27,8 @@ const Footer = () => {
                 <Link className="hover:text-[#fa9e1f]" to="/contact">Contact Us</Link>
                 <div className="flex flex-col space-y-3">
 
-                <Link className="hover:text-[#fa9e1f]"  to="/sign-up">Register</Link>
-                <Link className="hover:text-[#fa9e1f]" to="/sign-in">Login</Link>
+                <Link to="/sign-up" className="hover:text-[#fa9e1f]" >Register</Link>
+                <Link to="/sign-in" className="hover:text-[#fa9e1f]">Login</Link>
                 </div>
                 <li className="hover:text-[#fa9e1f]">Coming Soon</li>
               </ul>

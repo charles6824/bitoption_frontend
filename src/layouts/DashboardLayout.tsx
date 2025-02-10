@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { FaAngleDown, FaArrowDown,  FaUser, FaUserCircle } from "react-icons/fa";
+import { FaAngleDown, FaArrowDown,  FaEdit,  FaUser, FaUserCircle } from "react-icons/fa";
 import { MdDashboard, MdLogout, MdOutlineSettings, MdPayment } from "react-icons/md";
 import { GiPayMoney } from "react-icons/gi";
 import { BiTransferAlt } from "react-icons/bi";
@@ -9,6 +9,14 @@ import { useLogoutMutation } from "../slices/baseApiSlice";
 import PromptsCard from "../components/PromptsCard";
 import Modal from "../components/Modal";
 import LoadingBtn from "../components/LoadingBtn";
+import {
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Avatar,
+  Typography,
+} from "@material-tailwind/react";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -190,10 +198,61 @@ const DashboardLayout = () => {
               <div className="flex justify-between items-center space-x-6">
                 {/* <img src={notification} alt="" className="" /> */}
                 <div className="hidden sm:flex items-center space-x-2 cursor-pointer">
-                  <FaUserCircle className="text-[#fa9e1f]" />
                   <span className="text-sm font-medium text-white">{userInfo.data.userDetails.fullName}</span>
+
                   {/* <img src={arrow} alt="" className="w-[20px] h-[20px]" /> */}
-                  <FaAngleDown className="text-[#fa9e1f]" />
+                  
+                  <Menu>
+      <MenuHandler>
+        <Avatar
+          variant="circular"
+          alt="tania andrew"
+          className="cursor-pointer"
+          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+          placeholder=""
+          onPointerEnterCapture={() => {}}
+          onPointerLeaveCapture={() => {}}
+        />
+      </MenuHandler>
+      <MenuList placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
+        <MenuItem className="flex items-center gap-2" placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
+        <FaUserCircle className="text-[#fa9e1f]"/>
+ 
+          <Typography variant="small" className="font-medium" placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
+            My Profile
+          </Typography>
+        </MenuItem>
+        <MenuItem className="flex items-center gap-2" placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
+           <FaEdit className="text-[#fa9e1f]"/>
+ 
+          <Typography 
+            variant="small" 
+            className="font-medium" 
+            placeholder="" 
+            onPointerEnterCapture={() => {}} 
+            onPointerLeaveCapture={() => {}}>
+            Edit Profile
+          </Typography>
+        </MenuItem>
+      
+       
+        <hr className="my-2 border-blue-gray-50" />
+        <MenuItem className="flex items-center gap-2 " placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
+        <MdLogout className="text-[#fa9e1f]" />
+          <Typography 
+            variant="small" 
+            className="font-medium" 
+            placeholder="" 
+            onPointerEnterCapture={() => {}} 
+            onPointerLeaveCapture={() => {}}>
+            <span onClick={handleLogout}>
+
+            Sign Out
+            </span>
+          </Typography>
+        </MenuItem>
+      </MenuList>
+    </Menu>
                 </div>
               </div>
             </header>

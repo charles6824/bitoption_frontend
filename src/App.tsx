@@ -16,7 +16,6 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Deposit from "./pages/Dashboard/Deposit";
-import Withdrawal from "./pages/Dashboard/Withdrawal";
 import ForgotPassword from "./pages/ForgotPassword";
 import PreLoader from "./components/PreLoader"
 import { useEffect, useState } from "react";
@@ -33,6 +32,7 @@ import AdminPackages from "./pages/AdminDashboard/AdminPackages";
 import AdminTranfer from "./pages/AdminDashboard/AdminTranfer";
 import AdminUsers from "./pages/AdminDashboard/AdminUsers";
 import SinglePackage from "./pages/Dashboard/SinglePackage";
+import Withdrawal from "./pages/Dashboard/Withdrawal";
 
 
 

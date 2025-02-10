@@ -185,9 +185,9 @@ const Deposit = () => {
 								{step < 3 && (
 									<>
 										{cryptoLoading ? (
-											<>
-												<LoadingBtn />
-											</>
+											<div className="w-[25%]">
+												<LoadingBtn  />
+											</div>
 										) : (
 											<button
 												onClick={handleStep}

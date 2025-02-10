@@ -73,12 +73,12 @@ const HomePage = () => {
       <hr className="w-[50px] border border-[#fa9e1f]" />
     </div>
     <div className="flex flex-col md:flex-row justify-center items-center md:space-x-4 md:py-6 space-y-6 md:space-y-0">
-      <button className="bg-[#fa9e1f] hover:bg-[#d37d38] py-4 md:py-2 px-28 md:px-8 text-[#fff] font-bold text-sm">
+      {/* <button className="bg-[#fa9e1f] hover:bg-[#d37d38] py-4 md:py-2 px-28 md:px-8 text-[#fff] font-bold text-sm">
         BUY
       </button>
       <button className="text-[#fff] bg-[#fa9e1f] hover:bg-[#d37d38] py-4 md:py-2 px-28 md:px-8 font-bold text-sm">
         SELL
-      </button>
+      </button> */}
     </div>
   </div>
 
@@ -188,9 +188,9 @@ const HomePage = () => {
       <p className="text-[20px] text-[#FFFFFF] text-center font-normal leading-5 mb-6">
         Open an account for free and start trading Bitcoins!
       </p>
-      <button className="py-3 px-20 md:px-10  bg-[#fa9e1f] hover:bg-[#d37d38] text-[#fff] font-bold text-sm md:text-base">
+      <Link to="/sign-up" className="py-3 px-20 md:px-10  bg-[#fa9e1f] hover:bg-[#d37d38] text-[#fff] font-bold text-sm md:text-base">
         REGISTER NOW
-      </button>
+      </Link>
     </div>
   </div>
 </main>

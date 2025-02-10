@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import hero from "../assets/images/bg-banner.jpg"
 import ServicesCard from "../components/ServicesCard"
 
@@ -40,9 +41,9 @@ const Services = () => {
       <p className="text-[14px] text-[#FFFFFF] text-center font-normal leading-5 mb-6">
         Open an account for free and start trading Bitcoins!
       </p>
-      <button className="py-3 px-24 md:px-10 bg-[#fa9e1f]  text-[#fff] font-bold text-sm md:text-base">
+      <Link to="/sign-up" className="py-3 px-24 md:px-10 bg-[#fa9e1f]  text-[#fff] font-bold text-sm md:text-base">
         REGISTER NOW
-      </button>
+      </Link>
     </div>
   </div>
       
