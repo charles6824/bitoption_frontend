@@ -1,7 +1,4 @@
 
-
-
-
 interface TableProps {
 	data: [];
 	tableHead?: string[];
@@ -22,7 +19,6 @@ export function Table({ data,tableHead,children }: TableProps) {
 							))}
 						</tr>
 					</thead>
-
 					{data.length > 0 ? (
 						<tbody className="divide-y-[0.5px] divide-[#1d1d1d1]" >
 							{children}
@@ -39,9 +35,7 @@ export function Table({ data,tableHead,children }: TableProps) {
 						aria-label="empty-data-icons"
 						width={225}
 						height={1884}
-					/>
-
-					
+					/>	
 				</div>
 			) : null}
 

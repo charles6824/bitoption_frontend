@@ -8,7 +8,7 @@ const SinglePackage = () => {
   const params = useParams();
   const navigate = useNavigate()
   const {data,isLoading} = useGetSinglePackageQuery(params.id) as any;
-  const {data:walletBalance, refetch} = useGetAccountBalanceQuery({}) as any;
+  const {data:walletBalance} = useGetAccountBalanceQuery({}) as any;
   const [buyPackages, {isLoading: packageLoading}] = useBuyPackageMutation()
   const packages = data?.data
 
