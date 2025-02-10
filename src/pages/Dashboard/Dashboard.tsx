@@ -68,7 +68,7 @@ const tableHead: any = ["Narration", "Date", "Amount", "Status", ""];
 // ];
 
 const Dashboard = () => {
-	const [period, setPeriod] = useState("1M");
+	const period = "1M";
 	const [history, setHistory] = useState<any>([]);
 	const [cashflow, setCashflow] = useState<any>([]);
 
@@ -144,7 +144,7 @@ const Dashboard = () => {
 		}
 	};
 
-	const { labels, inflowData, outflowData } = getDataForPeriod(period);
+	// const { labels, inflowData, outflowData } = getDataForPeriod(period);
 
 	const [refreshing, setRefreshing] = useState(false);
 	const user_data: any = sessionStorage.getItem("userInfo");
@@ -259,7 +259,11 @@ const Dashboard = () => {
 								<tr key={index}>
 									<td className="py-3 ">{table?.description}</td>
 									<td>{formatDate(table.date)}</td>
-									<td className={table.type == "inflow" ? "text-[green]" :"text-[red]"}>
+									<td
+										className={
+											table.type == "inflow" ? "text-[green]" : "text-[red]"
+										}
+									>
 										{table.type == "inflow" ? (
 											<>
 												+$
@@ -307,11 +311,15 @@ const Dashboard = () => {
 
 			{/* chart */}
 			<div className="w-full px-5 ">
-				<CashFlowChart
-					inflowData={cashflow.inflowData}
-					outflowData={cashflow?.outflowData}
-					labels={cashflow?.labels}
-				/>
+				{cahflowLoading ? (
+					<LoadingComponent />
+				) : (
+					<CashFlowChart
+						inflowData={cashflow.inflowData}
+						outflowData={cashflow?.outflowData}
+						labels={cashflow?.labels}
+					/>
+				)}
 			</div>
 		</>
 	);

@@ -1,9 +1,5 @@
 
-import { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
-
-
-
 
 interface SourceAccountProps {
   cardData: any;
@@ -12,7 +8,6 @@ interface SourceAccountProps {
 
 const AccountCard: React.FC<SourceAccountProps> = ({
   cardData,
-  data
 }) => {
 
 
