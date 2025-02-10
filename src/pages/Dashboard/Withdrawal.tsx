@@ -34,6 +34,8 @@ const Withdrawal = () => {
 		setToken(tokens);
 	};
 
+  console.log(_isTokenComplete)
+
 	const handleStep = async (e: React.FormEvent) => {
 		e.preventDefault();
 	
@@ -205,10 +207,10 @@ const Withdrawal = () => {
 						)}
 
 						<div className="mt-5">
-							{otpLoading || otpLoading ? (
-								<div className="w-[20%]">
+							{otpLoading || withdrawLoading ? (
+								<>
 									<LoadingBtn />
-								</div>
+								</>
 							) : (
 								<button
 									className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]"

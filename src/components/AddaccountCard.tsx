@@ -4,12 +4,12 @@ const AddaccountCard = () => {
   const [activeState, setActiveState] = useState("crypto");
   const [step, setStep] = useState(1);
 
-  const handleStep = (e: React.FormEvent) => {
-    e.preventDefault(); 
-    if (step < 2) {
-      setStep(step + 1);
-    }
-  };
+  // const handleStep = (e: React.FormEvent) => {
+  //   e.preventDefault(); 
+  //   if (step < 2) {
+  //     setStep(step + 1);
+  //   }
+  // };
 
   return (
     <div>
