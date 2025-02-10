@@ -45,14 +45,14 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           <Link
             to="/sign-in"
-            className="border border-[#fa9e1f] py-3 px-4  flex items-center text-[#fa9e1f] font-bold"
+            className="border border-[#fa9e1f] hover:border-[#d37d38]  py-3 px-4  flex items-center text-[#fa9e1f] font-bold"
           >
-            <FaUser className="text-[#fa9e1f]" />
+            <FaUser className="text-[#fa9e1f] " />
             SIGN IN
           </Link>
           <Link
             to="/sign-up"
-            className="bg-[#fa9e1f] py-3 px-7 flex items-center"
+            className="bg-[#fa9e1f] hover:bg-[#d37d38] py-3 px-7 flex items-center"
           >
             <FaUserPlus />
             REGISTER
@@ -72,15 +72,7 @@ const Navbar = () => {
           <li className="text-center text-[14px] font-bold">
             <NavLink className={activeStyle} to="/services">SERVICES</NavLink>
           </li>
-          {/* <li className="text-center text-[14px] font-bold">
-            <NavLink className={activeStyle} to="">PRICING</NavLink>
-          </li> */}
-          {/* <li className="text-center text-[14px] font-bold">
-            <NavLink to="">BLOG</NavLink>
-          </li> */}
-          {/* <li className="text-center text-[14px] font-bold">
-            <NavLink to="">PAGES</NavLink>
-          </li> */}
+        
           <li className="text-center text-[14px] font-bold">
             <NavLink className={activeStyle} to="/contact">CONTACT</NavLink>
           </li>
@@ -132,30 +124,30 @@ const Navbar = () => {
           } transition-transform duration-300 ease-in-out`}
         >
           <div className="float-right p-6" onClick={toggleOffcanvas}>
-            <FaTimes className="text-[25px]" />
+            <FaTimes className="text-[25px] text-[#fa9e1f] "  />
           </div>
-          <nav className="flex flex-col items-start p-9 space-y-5 mt-4">
+          <nav className="flex flex-col items-start p-9 space-y-5 mt-4 ">
             <Link
-              to="#"
-              className="text-lg font-medium text-white "
+              to="/"
+              className="text-lg font-medium text-white hover:text-[#d37d38]  "
             >
               Home
             </Link>
             <Link
-              to="#"
-              className="text-lg font-medium text-white "
+              to="/about"
+              className="text-lg font-medium text-white hover:text-[#d37d38] "
             >
               About
             </Link>
             <Link
-              to="#"
-              className="text-lg font-medium text-white "
+              to="/services"  
+              className="text-lg font-medium text-white hover:text-[#d37d38] "
             >
               Services
             </Link>
             <Link
-              to="#"
-              className="text-lg font-medium text-white "
+              to="/contact"
+              className="text-lg font-medium text-white hover:text-[#d37d38]"
             >
               Contact
             </Link>

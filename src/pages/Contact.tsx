@@ -16,15 +16,15 @@ const Contact = () => {
     }}
   >
     <div className="flex flex-col justify-between items-center">
-       <h1 className="md:text-[60px] text-[40px] text-white font-bold">GET IN <span className="text-[#fa9e1f]">TOUCH</span></h1>
+       <h1 className="md:text-[60px] text-[35px] text-white font-bold">GET IN <span className="text-[#fa9e1f]">TOUCH</span></h1>
        <hr className="text-[#fa9e1f] w-24" />
     </div>
   </div>
 
 
-  <div className="md:flex justify-center items-center bg-[#111111] text-white p-10">
+  <div className="md:flex justify-center items-center bg-[#111111] text-white p-[21px] md:p-10">
     <div  className="w-full lg:w-[60%]  lg:px-10">
-    <h1 className="text-3xl font-bold mb-4">Feel free to drop us a message</h1>
+    <h1 className="md:text-3xl text-2xl font-bold mb-4">Feel free to drop us a message</h1>
     <p className="text-gray-300 mb-8">
       Need to speak to us? Do you have any queries or suggestions? Please contact us about all enquiries, including membership and volunteer work, using the form below.
     </p>
@@ -34,8 +34,8 @@ const Contact = () => {
         
       <div className="mb-6">
         <input
-              type="Firstname"
-              className="w-full py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
+              type="Fullname"
+              className="w-full py-5 md:py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
               placeholder="Enter your firstname"
             
             />
@@ -43,7 +43,7 @@ const Contact = () => {
       <div className="mb-6">
         <input
               type="password"
-              className="w-full py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
+              className="w-full py-5 md:py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
               placeholder="Enter your lastname"
             
             />
@@ -56,7 +56,7 @@ const Contact = () => {
        
         <input
               type="password"
-              className="py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
+              className="w-full py-5 md:py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
               placeholder="Enter your email"
             
             />
@@ -65,7 +65,7 @@ const Contact = () => {
         
         <input
               type="password"
-              className="w-full py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
+              className="w-full py-5 md:py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
               placeholder="subject"
             
             />
@@ -160,7 +160,7 @@ const Contact = () => {
       <p className="text-[14px] text-[#FFFFFF] text-center font-normal leading-5 mb-6">
         Open an account for free and start trading Bitcoins!
       </p>
-      <button className="py-3 px-6 md:px-10 bg-[#fa9e1f] text-[#fff] font-bold text-sm md:text-base">
+      <button className="py-3 px-6 md:px-10 bg-[#fa9e1f] hover:bg-[#d37d38] text-[#fff] font-bold text-sm md:text-base">
         REGISTER NOW
       </button>
     </div>

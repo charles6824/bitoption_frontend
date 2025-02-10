@@ -17,7 +17,7 @@ const VideoSection = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-2 ">
+    <div className="md:flex flex-col md:flex-row items-center gap-2 hidden ">
       {/* Text Content Section */}
       <div className="bg-[#1d1d1d] text-white  p-[69px]  md:px-24 px-5 md:w-[70%] text-center">
         <div className="flex md:flex-row flex-col items-center md:gap-7">
