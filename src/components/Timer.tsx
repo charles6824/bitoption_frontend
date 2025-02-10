@@ -8,7 +8,7 @@ const Timer = () => {
 
 
     useEffect(() => {
-		let interval: NodeJS.Timeout;
+		let interval: any
 		if (otpTimerIsRunning) {
 			interval = setInterval(() => {
 				if (otpSecondsTimer > 0) {
@@ -41,12 +41,8 @@ const Timer = () => {
 
           {otpSecondsTimer > 0 || otpMinutesTimer > 0 ? (
             <p className="text-[#ccc]">Resend OTP</p>
-          ) : resendOtpLoad ? (
-            <div className="flex items-center gap-1">
-              <div className="w-4 h-4 border-4 border-[#556070] border-dotted rounded-full animate-spin mr-4"></div>
-              <p className="text-[#ccc]">Resend OTP</p>
-            </div>
-          ) : (
+          ) 
+           : (
             <button
             //   onClick={resendOtp}
               className={

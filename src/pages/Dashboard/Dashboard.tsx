@@ -68,83 +68,15 @@ const tableHead: any = ["Narration", "Date", "Amount", "Status", ""];
 // ];
 
 const Dashboard = () => {
-	const [period, setPeriod] = useState("1M");
+	const period = "1M";
 	const [history, setHistory] = useState<any>([]);
 	const [cashflow, setCashflow] = useState<any>([]);
 
 	// const periods = ['1D', '1W', '1M', '3M', '6M', '1Y'];
 
-	const getDataForPeriod = (period: string) => {
-		switch (period) {
-			case "1D":
-				return {
-					labels: ["Today"],
-					inflowData: [500],
-					outflowData: [300],
-				};
-			case "1W":
-				return {
-					labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-					inflowData: [300, 500, 400, 600, 700, 500, 800],
-					outflowData: [200, 300, 250, 400, 500, 350, 450],
-				};
-			case "1M":
-				return {
-					labels: Array.from({ length: 30 }, (_, i) => (i + 1).toString()),
-					inflowData: Array.from({ length: 30 }, () =>
-						Math.floor(Math.random() * 1000)
-					),
-					outflowData: Array.from({ length: 30 }, () =>
-						Math.floor(Math.random() * 700)
-					),
-				};
-			case "3M":
-				return {
-					labels: ["Jan", "Feb", "Mar"],
-					inflowData: [3000, 4000, 3500],
-					outflowData: [2000, 3000, 2500],
-				};
-			case "6M":
-				return {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-					inflowData: [3000, 4000, 3500, 3200, 3600, 4000],
-					outflowData: [2000, 3000, 2500, 2100, 2400, 2800],
-				};
-			case "1Y":
-				return {
-					labels: [
-						"Jan",
-						"Feb",
-						"Mar",
-						"Apr",
-						"May",
-						"Jun",
-						"Jul",
-						"Aug",
-						"Sep",
-						"Oct",
-						"Nov",
-						"Dec",
-					],
-					inflowData: [
-						3000, 4000, 3500, 3200, 3600, 4000, 4200, 4500, 4300, 4700, 4800,
-						5000,
-					],
-					outflowData: [
-						2000, 3000, 2500, 2100, 2400, 2800, 2900, 3100, 2700, 3300, 3500,
-						3600,
-					],
-				};
-			default:
-				return {
-					labels: [],
-					inflowData: [],
-					outflowData: [],
-				};
-		}
-	};
+	
 
-	const { } = getDataForPeriod(period);
+	// const { labels, inflowData, outflowData } = getDataForPeriod(period);
 
 	const [refreshing, setRefreshing] = useState(false);
 	const user_data: any = sessionStorage.getItem("userInfo");
@@ -259,7 +191,11 @@ const Dashboard = () => {
 								<tr key={index}>
 									<td className="py-3 ">{table?.description}</td>
 									<td>{formatDate(table.date)}</td>
-									<td className={table.type == "inflow" ? "text-[green]" :"text-[red]"}>
+									<td
+										className={
+											table.type == "inflow" ? "text-[green]" : "text-[red]"
+										}
+									>
 										{table.type == "inflow" ? (
 											<>
 												+$
@@ -307,11 +243,15 @@ const Dashboard = () => {
 
 			{/* chart */}
 			<div className="w-full px-5 ">
-				<CashFlowChart
-					inflowData={cashflow.inflowData}
-					outflowData={cashflow?.outflowData}
-					labels={cashflow?.labels}
-				/>
+				{cahflowLoading ? (
+					<LoadingComponent />
+				) : (
+					<CashFlowChart
+						inflowData={cashflow.inflowData}
+						outflowData={cashflow?.outflowData}
+						labels={cashflow?.labels}
+					/>
+				)}
 			</div>
 		</>
 	);
