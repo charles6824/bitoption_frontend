@@ -20,7 +20,7 @@ const Hero = () => {
           </p>
 
           <button
-            className="mt-8 px-6 py-2 text-[14px] sm:text-[16px] md:text-[18px] font-bold text-[#fa9e1f] border-2 border-[#fa9e1f]  "
+            className="mt-8 px-20 md:px-6 md:py-2 py-4 text-[14px] sm:text-[16px] md:text-[18px] font-bold text-[#fa9e1f] border-2 border-[#fa9e1f] hover:bg-[#d37d38]  hover:text-white"
           >
             LEARN MORE
           </button>
@@ -41,7 +41,7 @@ const Hero = () => {
             Tailored just for you.
           </p>
           <button
-            className="mt-8 px-7 py-2 text-[14px] sm:text-[16px] md:text-[18px] font-bold text-[#fa9e1f] border-2 border-[#fa9e1f]  "
+            className="mt-8 md:px-8 px-20 md:py-2 py-4 text-[14px] sm:text-[16px] md:text-[18px] font-bold text-[#fa9e1f] border-2 border-[#fa9e1f] hover:bg-[#d37d38]  hover:text-white "
           >
             OUR PRICES
           </button>

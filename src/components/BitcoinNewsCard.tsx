@@ -41,7 +41,7 @@ const BitcoinNewsCard = ({card}:{card:card}) => {
       </CardBody>
       <CardFooter className="pt-0 bg-[#1d1d1d]" placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
         <Button 
-          className="bg-[#fa9e1f] py-3 px-7 rounded-none" 
+          className="bg-[#fa9e1f] hover:bg-[#d37d38] md:py-3 py-4 px-24 md:px-7 rounded-none" 
           placeholder="" 
           onPointerEnterCapture={() => {}} 
           onPointerLeaveCapture={() => {}}>

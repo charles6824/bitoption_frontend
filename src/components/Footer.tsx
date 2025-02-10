@@ -69,7 +69,7 @@ const Footer = () => {
           
   
           {/* Footer Bottom */}
-          <div className="mt-10 text-center text-sm text-gray-400">
+          <div className="mt-10 text-center text-sm text-gray-400  border-t border-t-gray-500">
             &copy; 247bitoption. All rights reserved.
           </div>
         </div>

@@ -16,7 +16,6 @@ import LoadingComponent from "../components/LoadingComponent";
 const HomePage = () => {
 
   const {data:packages,isLoading} =useGetAllPackagesQuery({}) as any;
-  console.log('packages',packages)
   return (
     <>
 
@@ -47,7 +46,7 @@ const HomePage = () => {
         </p>
         <Link
           to="/about"
-          className="bg-[#fa9e1f] font-semibold text-[#fff] py-4 px-6 text-sm md:py-3 md:px-8 hover:text-[#d37d38]"
+          className="bg-[#fa9e1f] font-semibold text-[#fff] py-4 px-20 text-sm md:py-3 md:px-8 hover:bg-[#d37d38]"
           >
           READ MORE
         </Link>
@@ -55,7 +54,7 @@ const HomePage = () => {
     </div>
   </div>
 
-  {/* video section and  */}
+  {/* video section   */}
 <div className=" h-full ">
 
 <VidoeSection/>
@@ -73,11 +72,11 @@ const HomePage = () => {
       </p>
       <hr className="w-[50px] border border-[#fa9e1f]" />
     </div>
-    <div className="flex justify-center items-center space-x-4 py-6">
-      <button className="bg-[#fa9e1f] py-2 px-6 md:px-8 text-[#fff] font-bold text-sm">
+    <div className="flex flex-col md:flex-row justify-center items-center md:space-x-4 md:py-6 space-y-6 md:space-y-0">
+      <button className="bg-[#fa9e1f] hover:bg-[#d37d38] py-4 md:py-2 px-28 md:px-8 text-[#fff] font-bold text-sm">
         BUY
       </button>
-      <button className="text-[#fff] bg-[#fa9e1f] py-2 px-6 md:px-8 font-bold text-sm">
+      <button className="text-[#fff] bg-[#fa9e1f] hover:bg-[#d37d38] py-4 md:py-2 px-28 md:px-8 font-bold text-sm">
         SELL
       </button>
     </div>
@@ -114,7 +113,7 @@ const HomePage = () => {
       </p>
       <hr className="w-[50px] border border-[#fa9e1f]" />
     </div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 bg-black  py-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 bg-black py-8">
       {experts &&
         experts.map((expert,index) => (
           <div key={index}>
@@ -139,8 +138,8 @@ const HomePage = () => {
     />
 
     {/* Text Overlay */}
-    <div className="absolute  text-white italic md:text-[15px] text-[20px] md:w-80 w-64 leading-7 font-bold">
-      <p>Bitcoin is one of the most important inventions in all of human history. For the first time ever, anyone can send or receive any amount of money with anyone else, anywhere on the planet, conveniently and without restriction. It’s the dawn of a better, more free world.</p>
+    <div className="absolute  text-white italic md:text-[15px] text-[17px] md:w-80  leading-7 md:font-bold">
+      <p>Bitcoin is one of the most important inventions in all of human history. For the first time ever, anyone can send or receive any amount of money with anyone else, anywhere on the planet, conveniently and without restriction. It's the dawn of a better, more free world.</p>
     </div>
   </div>
   {/* Image Section with Text Overlay */}
@@ -189,7 +188,7 @@ const HomePage = () => {
       <p className="text-[20px] text-[#FFFFFF] text-center font-normal leading-5 mb-6">
         Open an account for free and start trading Bitcoins!
       </p>
-      <button className="py-3 px-6 md:px-10 bg-[#fa9e1f] text-[#fff] font-bold text-sm md:text-base">
+      <button className="py-3 px-20 md:px-10  bg-[#fa9e1f] hover:bg-[#d37d38] text-[#fff] font-bold text-sm md:text-base">
         REGISTER NOW
       </button>
     </div>
