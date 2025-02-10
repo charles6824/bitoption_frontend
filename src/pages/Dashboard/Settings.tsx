@@ -5,7 +5,7 @@ import {
   Tab,
 } from "@material-tailwind/react";
 import { useState } from "react";
-import AddaccountCard from "../../components/AddaccountCard";
+// import AddaccountCard from "../../components/AddaccountCard";
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("details");
   const [withdrawalMethod, setWithdrawalMethod] = useState("");
