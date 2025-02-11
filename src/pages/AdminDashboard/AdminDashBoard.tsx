@@ -1,5 +1,5 @@
 import React from "react";
-import { FaMoneyBillAlt, FaChartLine, FaWallet } from "react-icons/fa";
+import { FaMoneyBillAlt,  FaWallet } from "react-icons/fa";
 import { ImUsers } from "react-icons/im";
 import StatsCard from "../../components/StatsCard";
 import Chart from "../../components/Chart";
