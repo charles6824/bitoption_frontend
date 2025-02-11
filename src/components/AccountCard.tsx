@@ -1,18 +1,12 @@
 
 import { FaUserCircle } from "react-icons/fa";
-
 interface SourceAccountProps {
   cardData: any;
   data:any
 }
-
 const AccountCard: React.FC<SourceAccountProps> = ({
   cardData,
 }) => {
-
-
-
-  
 
   return (
     <>

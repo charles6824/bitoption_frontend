@@ -22,7 +22,7 @@ const Deposit = () => {
 				if (!amount || amount < 1) {
 					return toast.error("Invalid Amount");
 				}
-				setStep(step + 1);
+				setStep((prev) => prev + 1);
 			} else {
 				const model = {
 					amount: amount,
@@ -34,6 +34,7 @@ const Deposit = () => {
 				console.log("response: ", response);
 				if (response.data.status) {
 					toast.success(response.data.message);
+					setStep((prev) => prev + 1)
 				} else {
 					toast.error(response.data.message);
 				}

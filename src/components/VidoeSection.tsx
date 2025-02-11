@@ -48,8 +48,8 @@ const VideoSection = () => {
             {/* Content 4: Digital Wallets */}
             <div>
               <FaWallet className="text-[40px] text-[#fa9e1f] m-auto" />
-              <h1 className="text-lg font-semibold mt-2">Digital Wallets</h1>
-              <p>Store your cryptocurrencies safely in our secure wallets.</p>
+              <h1 className="text-lg font-semibold mt-2">Investments</h1>
+              <p>Invest your cryptocurrencies with us safely at all times.</p>
             </div>
 
             {/* Content 5: Email Alerts */}

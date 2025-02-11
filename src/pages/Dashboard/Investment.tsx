@@ -51,9 +51,9 @@ const Investment = () => {
 								</td>
 								<td
 									className=" py-2 rounded-md text-[#fa9e1f] text-center cursor-pointer flex gap-1 items-center"
-									onClick={() => viewDetails(table)}
-								>
-									<FaRegArrowAltCircleRight />View Details
+									onClick={() => viewDetails(table)}>
+									<FaRegArrowAltCircleRight />
+									<p className="text-black">View Details</p>
 								</td>
 							</tr>
 						))}

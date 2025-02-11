@@ -27,6 +27,16 @@ const LoginPage = () => {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if(!email){
+      toast.error("Please enter email");
+      return;
+    }
+    if(!password){
+      toast.error("Please enter password");
+      return;
+    }
+   
+
   
     const model: loginModel = {
       email,

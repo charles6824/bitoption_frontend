@@ -82,7 +82,7 @@ const Navbar = () => {
       {/* Mobile Navbar */}
       <div className="md:hidden items-center bg-black py-4">
         <div className="flex justify-between items-center space-x-5 px-5">
-          <img src={logo} alt="" className="h-8" />
+        <h1 className="text-[20px] text-white">247bit<span className="text-[#fa9e1f] text-[30px] italic">option</span> </h1>
           <div className="bg-[#fa9e1f] p-3">
             <CiMenuFries
               onClick={toggleOffcanvas}
