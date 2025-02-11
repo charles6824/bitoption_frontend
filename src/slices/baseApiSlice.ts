@@ -91,6 +91,18 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			transformResponse: handleResponse,
 		}),
 
+		transferViaWallet: builder.mutation({
+			query: ({ data }: { data: any }) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/transfer`,
+				method: "POST",
+        body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
 	}),
 });
 
@@ -102,4 +114,5 @@ export const {
 	useResetPasswordMutation,
 	useLogoutMutation,
   useFundWithCryptoMutation,
+  useTransferViaWalletMutation,
 } = baseApiSlice;

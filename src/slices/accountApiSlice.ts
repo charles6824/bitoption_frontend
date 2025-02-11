@@ -28,12 +28,25 @@ export const accountApiSlice = apiSlice.injectEndpoints({
 			}),
 			transformResponse: handleResponse,
 		}),
-		
+
+		nameEnquiry: builder.query({
+			query: (accountNumber) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/accounts/${accountNumber}`,
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
 
 	}),
 });
 
 export const {
 	useGetAccountBalanceQuery,
-    useGetAccountDetailsQuery
+    useGetAccountDetailsQuery,
+    useLazyNameEnquiryQuery
+
 } = accountApiSlice;
