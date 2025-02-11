@@ -85,7 +85,7 @@ const AdminLayout = () => {
       url: "/admin/packages",
     },
     {
-      name: "withdrawals",
+      name: "Withdrawals",
       // icon: <img src={calendar} alt="Calendar Icon" className="w-5 h-5" />,
       icon :<MdPayment/>,
       url: "/admin/withdrawals",
@@ -186,7 +186,7 @@ const AdminLayout = () => {
                     className="w-8 h-8 rounded-full border border-gray-300"
                   /> */}
                   <FaUser />
-                  <span className="text-sm font-medium text-white">{userInfo.data.userDetails.fullName}</span>
+                  <span className="text-sm font-medium text-white">Admin</span>
                   {/* <img src={arrow} alt="" className="w-[20px] h-[20px]" /> */}
                   <FaArrowDown className="text-[#fa9e1f]" />
                 </div>
@@ -195,14 +195,14 @@ const AdminLayout = () => {
 
             <header className="bg-[#1d1d1d]   px-[50px] py-[20px] hidden sm:flex justify-between items-center fixed top-0 left-0 sm:left-[300px] w-full sm:w-[calc(100%-300px)] z-10">
               <div>
-                <h1 className="text-[24px] font-medium text-white">{greeting}, <span className="text-[#fa9e1f]">{userInfo.data.userDetails.fullName}</span> </h1>
+                <h1 className="text-[24px] font-medium text-white">{greeting}, <span className="text-[#fa9e1f]">Admin</span> </h1>
                 <p className="text-[12px] text-[#fff]">Welcome Back! Let’s pick up where you left off</p>
               </div>
               <div className="flex justify-between items-center space-x-6">
                 {/* <img src={notification} alt="" className="" /> */}
                 <div className="hidden sm:flex items-center space-x-2 cursor-pointer">
                   <FaUserCircle className="text-[#fa9e1f]" />
-                  <span className="text-sm font-medium text-white">{userInfo.data.userDetails.fullName}</span>
+                  <span className="text-sm font-medium text-white">Admin</span>
                   {/* <img src={arrow} alt="" className="w-[20px] h-[20px]" /> */}
                   <FaAngleDown className="text-[#fa9e1f]" />
                 </div>
