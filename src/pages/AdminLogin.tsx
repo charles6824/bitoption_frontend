@@ -1,5 +1,5 @@
 import { Carousel } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import bgUser4 from "../assets/images/btcn.jpg"
 import bgUser5 from "../assets/images/bitcoin-7678812_1920.jpg"
 import bgUser7 from "../assets/images/btc.jpg"

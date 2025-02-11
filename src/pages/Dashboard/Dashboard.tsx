@@ -1,6 +1,6 @@
 // import { Table } from "../../components/Table"
 
-import { FaCircle, FaSyncAlt, FaTimes } from "react-icons/fa";
+import { FaCircle, FaSyncAlt } from "react-icons/fa";
 import { Table } from "../../components/Table";
 import CashFlowChart from "../../components/CashFlowChart";
 import { useEffect, useState } from "react";
@@ -13,7 +13,6 @@ import {
 import LoadingComponent from "../../components/LoadingComponent";
 import Modal from "../../components/Modal";
 import PromptsCard from "../../components/PromptsCard";
-import LoadingBtn from "../../components/LoadingBtn";
 
 const tableHead: any = ["Narration", "Date", "Amount", "Status", ""];
 
@@ -258,7 +257,6 @@ const Dashboard = () => {
 					/>
 				)}
 			</div>
-
 
 			{
         showModal && (
