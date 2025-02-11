@@ -88,7 +88,7 @@ const DashboardLayout = () => {
       url: "/packages",
     },
     {
-      name: "withdrawals",
+      name: "Withdrawals",
       // icon: <img src={calendar} alt="Calendar Icon" className="w-5 h-5" />,
       icon :<MdPayment/>,
       url: "/withdrawals",

@@ -1,6 +1,6 @@
 // import { Table } from "../../components/Table"
 
-import { FaCircle, FaSyncAlt } from "react-icons/fa";
+import { FaCircle, FaSyncAlt, FaTimes } from "react-icons/fa";
 import { Table } from "../../components/Table";
 import CashFlowChart from "../../components/CashFlowChart";
 import { useEffect, useState } from "react";
@@ -11,6 +11,10 @@ import {
 	useFetchTransactionsQuery,
 } from "../../slices/transactionSlice";
 import LoadingComponent from "../../components/LoadingComponent";
+import Modal from "../../components/Modal";
+import PromptsCard from "../../components/PromptsCard";
+import LoadingBtn from "../../components/LoadingBtn";
+
 const tableHead: any = ["Narration", "Date", "Amount", "Status", ""];
 
 // const data: any = [
@@ -71,6 +75,7 @@ const Dashboard = () => {
 	const period = "1M";
 	const [history, setHistory] = useState<any>([]);
 	const [cashflow, setCashflow] = useState<any>([]);
+	const [showModal, setShowModal] = useState(false);
 
 	// const periods = ['1D', '1W', '1M', '3M', '6M', '1Y'];
 
@@ -233,7 +238,7 @@ const Dashboard = () => {
 										)}
 									</td>
 									<td>
-										<MdOutlineLocalPrintshop size={23} />
+										<MdOutlineLocalPrintshop size={23} onClick={()=>setShowModal((prev)=>!prev)} />
 									</td>
 								</tr>
 							))}
@@ -253,8 +258,23 @@ const Dashboard = () => {
 					/>
 				)}
 			</div>
-		</>
-	);
+
+
+			{
+        showModal && (
+          <Modal isShowCancelButton={false}	
+		  cancelButtonFunction={() => setShowModal(false)}>
+			<div className="p-10">
+              <PromptsCard title={""}>
+				
+				hhdhdhdhdhd
+									
+                 </PromptsCard>
+		     </div>
+			</Modal>
+					)}
+</>
+);
 };
 
 export default Dashboard;

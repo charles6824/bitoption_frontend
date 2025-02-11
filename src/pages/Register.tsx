@@ -27,6 +27,23 @@ const Register = () => {
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if(!fullName){
+      toast.error("Please fill all the fields")
+      return;
+      
+    }
+
+    if(!email){
+      toast.error("Please enter a valid email")
+      return;
+      
+    }
+    if(!password){
+      toast.error("Please enter a password")
+      return;
+      
+    }
     const model: RegisterModel = {
       fullName,
       email,
