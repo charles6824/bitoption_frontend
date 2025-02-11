@@ -1,15 +1,71 @@
 import hero from "../assets/images/bg-banner.jpg"
 import { FaAddressBook, FaFacebook, FaHome, FaInstagram, FaLink, FaLinkedin, FaTwitter } from "react-icons/fa"
 import { Link } from "react-router-dom"
+import { useContactMutation } from "../slices/baseApiSlice"
+import { toast } from "react-toastify"
+import { useState } from "react"
+import LoadingBtn from "../components/LoadingBtn"
 
 
 const Contact = () => {
+
+  const [firstName,setFirstName] = useState("")
+  const [lastName,setLastName] = useState("")
+  const [email,setEmail] = useState("")
+  const [subject,setSubject] = useState("")
+  const [message,setMessage] = useState("")
+
+const [contact,{isLoading}] = useContactMutation() as any;
+
+interface contactModel{
+ firstName: string
+ lastName: string
+ email: string
+ subject:string
+ message:string
+}
+const handleContact =async (e : React.FormEvent<HTMLFormElement>)=>{
+  e.preventDefault();
+  const fields = { firstName, lastName, email, subject, message };
+
+  for (const [key, value] of Object.entries(fields)) {
+    if (!value) {
+      toast.error(`Please enter your ${key}`);
+      return;
+    }
+  }
+  
+  const model :contactModel ={
+    firstName,
+    lastName,
+    email,
+    subject,
+    message
+}
+
+console.log("model",model);
+try {
+  const response = await contact({data:{payload:model}}).unwrap();
+  if(response?.status){
+    toast.success(response.message)
+  } else{
+    toast.error(response.message)
+  }
+    
+} catch (error:any) {
+  toast.error(error.message)
+ 
+}
+
+}
+
+  
   return (
 
     /* ABOUT HERO*/
     <>
          <div className="w-full h-auto bg-cover bg-center py-12 md:py-20 "
-    style={{
+       style={{
       background: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(${hero})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
@@ -28,13 +84,15 @@ const Contact = () => {
     <p className="text-gray-300 mb-8">
       Need to speak to us? Do you have any queries or suggestions? Please contact us about all enquiries, including membership and volunteer work, using the form below.
     </p>
-    <form className="bg-[#1a1a1a] py-8 md:px-6 rounded-lg shadow-lg">
+    <form onSubmit={handleContact} className="bg-[#1a1a1a] py-8 md:px-6 rounded-lg shadow-lg">
         <div className="md:flex justify-center gap-6">
 
         
       <div className="mb-6">
         <input
-              type="Fullname"
+              value={firstName}
+              onChange={(e) =>setFirstName(e.target.value)}
+              type="text"
               className="w-full py-5 md:py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
               placeholder="Enter your firstname"
             
@@ -42,7 +100,9 @@ const Contact = () => {
       </div>
       <div className="mb-6">
         <input
-              type="password"
+             value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              type="text"
               className="w-full py-5 md:py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
               placeholder="Enter your lastname"
             
@@ -55,7 +115,9 @@ const Contact = () => {
       <div className="mb-6">
        
         <input
-              type="password"
+           value={email}
+            onChange={(e) => setEmail(e.target.value)}
+              type="text"
               className="w-full py-5 md:py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
               placeholder="Enter your email"
             
@@ -64,7 +126,9 @@ const Contact = () => {
       <div className="mb-6">
         
         <input
-              type="password"
+         value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+              type="text"
               className="w-full py-5 md:py-3 bg-[#222222] text-[13px] px-14 border-none  rounded-md focus:outline-none focus:border-[#fa9e1f]"
               placeholder="subject"
             
@@ -74,17 +138,26 @@ const Contact = () => {
 
       <div className="mb-6">
         <textarea
+         value={message}
+          onChange={(e) => setMessage(e.target.value)}
           className="w-full h-32 p-3  text-white rounded-md border bg-[#1d1d1d] border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#fa9e1f]"
           placeholder="MESSAGE"
         ></textarea>
       </div>
       <div>
+        {isLoading ? (<div className="w-[30%]">
+         <LoadingBtn/>
+        
+        </div>) : (<>
+        
+      
         <button
           type="submit"
           className=" bg-[#fa9e1f] text-white py-3 px-8  hover:bg-[#d68715] transition duration-300"
         >
           SEND MESSAGE
         </button>
+        </>)}
       </div>
     </form>
   </div>

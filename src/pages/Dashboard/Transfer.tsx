@@ -179,7 +179,10 @@ const Transfer = () => {
 							/>
 						</div>
 						{transferLoading ? (
-							<LoadingBtn />
+							<div className="w-[30%]">
+
+								<LoadingBtn />
+							</div>
 						) : (
 							<button
 								className=" bg-[#1d1d1d] text-white py-2 px-5 border border-[#fa9e1f]  rounded hover:bg-[#fa9e1f] transition "

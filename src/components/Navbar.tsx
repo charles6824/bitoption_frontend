@@ -1,5 +1,4 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "../assets/images/logo-dark.png";
 import { FaTimes, FaUser, FaUserPlus } from "react-icons/fa";
 import { CiMenuFries } from "react-icons/ci";
 import { useState } from "react";

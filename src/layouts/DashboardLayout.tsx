@@ -295,8 +295,7 @@ const DashboardLayout = () => {
                         </>) : (
                           <div className="flex gap-9">
                             <button onClick={()=>setShowModal(false)} className="bg-black py-2 px-7 text-white">No</button>
-                            <button onClick={handleLogout} className="bg-black py-2 px-7 text-white">YES</button>
-
+                            <button onClick={handleLogout} className="bg-red-600 py-2 px-7 text-white">YES</button>
                           </div>
                         )
                       }
