@@ -103,6 +103,40 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			transformResponse: handleResponse,
 		}),
 
+		contact: builder.mutation({
+			query: ({ data }: { data: any }) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/users/contact-message`,
+				method: "POST",
+				body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+		changePassword: builder.mutation({
+			query: ({ data }: { data: any }) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/users/change-password`,
+				method: "POST",
+				body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+		feedback: builder.mutation({
+			query: ({ data }: { data: any }) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/users/send-feedback`,
+				method: "POST",
+				body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
 	}),
 });
 
@@ -113,6 +147,10 @@ export const {
 	useVerifyOtpMutation,
 	useResetPasswordMutation,
 	useLogoutMutation,
-  useFundWithCryptoMutation,
-  useTransferViaWalletMutation,
+    useFundWithCryptoMutation,
+    useTransferViaWalletMutation,
+	useContactMutation,
+    useChangePasswordMutation,
+    useFeedbackMutation
+
 } = baseApiSlice;

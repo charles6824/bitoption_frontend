@@ -259,7 +259,6 @@ const Dashboard = () => {
 				)}
 			</div>
 
-
 			{
         showModal && (
           <Modal isShowCancelButton={false}	
