@@ -26,8 +26,7 @@ const HomePage = () => {
     <h1 className="text-[#FFF] text-center text-[28px] md:text-[40px] font-bold">
       ABOUT <span className="text-[#fa9e1f]">US</span>
     </h1>
-    <div className="flex flex-
-    {}col md:flex-row items-center justify-center gap-4 py-3">
+    <div className="flex flex-{}col md:flex-row items-center justify-center gap-4 py-3">
       <hr className="w-[50px] border border-[#fa9e1f]" />
       <p className="text-[#fff] text-center uppercase text-sm md:text-base">
         A commercial website that lists wallets, exchanges, and other bitcoin-related info
@@ -39,7 +38,7 @@ const HomePage = () => {
       <div className="text-[#fff] max-w-full md:max-w-[600px] text-center md:text-left">
         <h1 className="text-[24px] md:text-[32px] font-bold mb-4">247 <span className="text-[#fa9e1f]">BITOPTION</span> </h1>
         <p className="w-full leading-relaxed mb-7 text-sm md:text-[17px]">
-          A place for everyone who wants to simply buy and sell Bitcoins. Deposit funds using your
+          A place for everyone who wants to simply invest, buy and sell Bitcoins. Deposit funds using your
           Visa/MasterCard or bank transfer. Instant buy/sell of Bitcoins at fair price is
           guaranteed. Nothing extra. Join over 700,000 users from all over the world satisfied with
           our services.
@@ -73,16 +72,9 @@ const HomePage = () => {
       <hr className="w-[50px] border border-[#fa9e1f]" />
     </div>
     <div className="flex flex-col md:flex-row justify-center items-center md:space-x-4 md:py-6 space-y-6 md:space-y-0">
-      {/* <button className="bg-[#fa9e1f] hover:bg-[#d37d38] py-4 md:py-2 px-28 md:px-8 text-[#fff] font-bold text-sm">
-        BUY
-      </button>
-      <button className="text-[#fff] bg-[#fa9e1f] hover:bg-[#d37d38] py-4 md:py-2 px-28 md:px-8 font-bold text-sm">
-        SELL
-      </button> */}
+    
     </div>
   </div>
-
-
 
   {/* BITCOIN CARD */}
   {isLoading ? (<>

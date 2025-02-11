@@ -4,18 +4,10 @@ const AddaccountCard = () => {
   const [activeState, setActiveState] = useState("crypto");
   const [step, setStep] = useState(1);
 
-  // const handleStep = (e: React.FormEvent) => {
-  //   e.preventDefault(); 
-  //   if (step < 2) {
-  //     setStep(step + 1);
-  //   }
-  // };
+ 
 
   return (
     <div>
-      {/* <h1 className="text-[28px]">Deposit</h1>
-      <p className="text-[12px]">Fund your wallet with crypto or PayPal</p> */}
-
       {/* Toggle Buttons */}
       <div className="w-full my-[30px] flex justify-between items-center gap-[15px] pt-2">
         {/* Crypto Option */}
