@@ -17,7 +17,7 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Deposit from "./pages/Dashboard/Deposit";
 import ForgotPassword from "./pages/ForgotPassword";
-import PreLoader from "./components/PreLoader"
+import PreLoader from "./components/PreLoader";
 import { useEffect, useState } from "react";
 import Transfer from "./pages/Dashboard/Transfer";
 import Investment from "./pages/Dashboard/Investment";
@@ -33,11 +33,9 @@ import AdminTranfer from "./pages/AdminDashboard/AdminTranfer";
 import AdminUsers from "./pages/AdminDashboard/AdminUsers";
 import SinglePackage from "./pages/Dashboard/SinglePackage";
 import Withdrawal from "./pages/Dashboard/Withdrawal";
-
-
+import AdminLogin from "./pages/AdminLogin";
 
 const App = () => {
-
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -61,37 +59,36 @@ const App = () => {
 				</Route>
 				<Route element={<AuthLayout />}>
 					<Route path="/sign-in" index element={<LoginPage />} />
+					<Route path="/admin/sign-in" index element={<AdminLogin />} />
 					<Route path="/sign-up" element={<Register />} />
-					<Route path="/forgot-password" element={<ForgotPassword/>}/>
+					<Route path="/forgot-password" element={<ForgotPassword />} />
 				</Route>
-				
+
 				<Route element={<DashboardLayout />}>
 					<Route path="/dashboard" index element={<Dashboard />} />
-					<Route path="/settings"  element={<Settings />} />
-					<Route path="/deposit"  element={<Deposit />} />
+					<Route path="/settings" element={<Settings />} />
+					<Route path="/deposit" element={<Deposit />} />
 					<Route path="/withdrawals" element={<Withdrawal />} />
 					<Route path="/transfers" element={<Transfer />} />
 					<Route path="/investments" element={<Investment />} />
 					<Route path="/packages" element={<Packages />} />
 					<Route path="/packages/:id" element={<SinglePackage />} />
-					
 				</Route>
 
-				 <Route element={<AdminLayout/>}>
-				    <Route path="/admin/dashboard" index element={<AdminDashBoard />} />
+				<Route element={<AdminLayout />}>
+					<Route path="/admin/dashboard" index element={<AdminDashBoard />} />
 					<Route path="/admin/settings" element={<AdminSettings />} />
-                    <Route path="/admin/deposit" element={<AdminDeposit />} />
-                    <Route path="/admin/withdrawals" element={<AdminWithdrawal />} />
-                     <Route path="/admin/transfers" element={<AdminTranfer />} />
-                     <Route path="/admin/investments" element={<AdminInvestment />} />
-                     <Route path="/admin/packages" element={<AdminPackages />} />
-                     <Route path="/admin/users" element={<AdminUsers />} />
-
-				 </Route>
+					<Route path="/admin/deposit" element={<AdminDeposit />} />
+					<Route path="/admin/withdrawals" element={<AdminWithdrawal />} />
+					<Route path="/admin/transfers" element={<AdminTranfer />} />
+					<Route path="/admin/investments" element={<AdminInvestment />} />
+					<Route path="/admin/packages" element={<AdminPackages />} />
+					<Route path="/admin/users" element={<AdminUsers />} />
+				</Route>
 			</>
 		)
 	);
 	return <RouterProvider router={router} />;
 };
 
-export default App
+export default App;

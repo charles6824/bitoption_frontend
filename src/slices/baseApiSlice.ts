@@ -31,6 +31,18 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			transformResponse: handleResponse,
 		}),
 
+		adminLogin: builder.mutation({
+			query: ({ data }: { data: any }) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/admin/auth`,
+				method: "POST",
+				body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
 		validateAccount: builder.mutation({
 			query: ({ data }: { data: any }) => ({
 				url: `${import.meta.env.VITE_BASE_URL}/users/validate-account`,
@@ -115,4 +127,5 @@ export const {
 	useLogoutMutation,
   useFundWithCryptoMutation,
   useTransferViaWalletMutation,
+  useAdminLoginMutation,
 } = baseApiSlice;
