@@ -95,7 +95,7 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			query: ({ data }: { data: any }) => ({
 				url: `${import.meta.env.VITE_BASE_URL}/deposit/fund-crypto`,
 				method: "POST",
-        body: data,
+				body: data,
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -107,7 +107,7 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			query: ({ data }: { data: any }) => ({
 				url: `${import.meta.env.VITE_BASE_URL}/transfer`,
 				method: "POST",
-        body: data,
+				body: data,
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -149,6 +149,17 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			transformResponse: handleResponse,
 		}),
 
+    fetchBitcoinDetails: builder.query({
+      query: () => "https://api.coingecko.com/api/v3/coins/bitcoin",
+      transformResponse: (response: any) => ({
+        livePrice: response.market_data.current_price.usd,
+        lastTradePrice: response.market_data.high_24h.usd, // Assuming high_24h is last trade price
+        priceChange24h: response.market_data.price_change_percentage_24h,
+        volume24h: response.market_data.total_volume.usd,
+        activeTraders: response.market_data.circulating_supply, // Approximate metric
+      }),
+    }),
+
 	}),
 });
 
@@ -159,8 +170,9 @@ export const {
 	useVerifyOtpMutation,
 	useResetPasswordMutation,
 	useLogoutMutation,
-    useFundWithCryptoMutation,
-    useTransferViaWalletMutation,
-    useAdminLoginMutation,
-	useContactMutation
+	useFundWithCryptoMutation,
+	useTransferViaWalletMutation,
+	useAdminLoginMutation,
+	useContactMutation,
+	useFetchBitcoinDetailsQuery,
 } = baseApiSlice;
