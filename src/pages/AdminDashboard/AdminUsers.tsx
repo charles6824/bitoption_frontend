@@ -4,14 +4,12 @@ const tableHead:any = ["S/N", "Name", "Email", "Status", "Action",""]
 const data:any = [
     {
       id:"1",
-        name:'Daniel',
+        name:'Daniel Charles',
         email:'daniel@example.com',
         status:'Active',
         action: (
             <div className="flex space-x-2">
-              <button className="bg-yellow-400 text-[14px] hover:bg-yellow-500 text-white font-medium py-1 px-4 rounded-full shadow-sm transition duration-200">
-                Edit
-              </button>
+              
               <button className="bg-red-500 text-[14px] hover:bg-red-600 text-white font-medium py-1 px-4 rounded-full shadow-sm transition duration-200">
                 Block
               </button>
@@ -20,14 +18,12 @@ const data:any = [
     },
     {
       id:"2",
-      name:'John',
+      name:'John Doe',
        email:'john@example.com',
        status:'Inactive',
        action: (
         <div className="flex space-x-2">
-          <button className="bg-yellow-400 text-[14px] hover:bg-yellow-500 text-white font-medium py-1 px-4 rounded-full shadow-sm transition duration-200">
-            Edit
-          </button>
+          
           <button className="bg-red-500 text-[14px] hover:bg-red-600 text-white font-medium py-1 px-4 rounded-full shadow-sm transition duration-200">
             Block
           </button>
@@ -39,14 +35,12 @@ const data:any = [
   
     {
       id:"3",
-      name:'Jane',
+      name:'Jane Smith',
        email:'jane@example.com',
        status:'Active',
        action: (
         <div className="flex space-x-2">
-          <button className="bg-yellow-400 text-[14px] hover:bg-yellow-500 text-white font-medium py-1 px-4 rounded-full shadow-sm transition duration-200">
-            Edit
-          </button>
+          
           <button className="bg-red-500 text-[14px] hover:bg-red-600 text-white font-medium py-1 px-4 rounded-full shadow-sm transition duration-200">
             Block
           </button>
@@ -62,7 +56,8 @@ const data:any = [
 const AdminUsers = () => {
   return (
     <div>
-
+      <h1 className="text-[28px]">Users</h1>
+      <p className="text-[12px] pb-10">Manage users on the platform</p>
         <Table data={data} tableHead={tableHead}>
             {data && data.map((table:any)=>(
                 <tr key={table.id}>

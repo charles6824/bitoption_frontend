@@ -78,6 +78,8 @@ const AdminDeposit = () => {
 
 	return (
 		<div className="">
+      <h1 className="text-[28px]">Deposit</h1>
+      <p className="text-[12px]">Fund users wallet</p>
 			<button className="" onClick={() => setShowModal(true)}>
 				ShowModal
 			</button>
