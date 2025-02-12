@@ -162,5 +162,7 @@ export const {
     useFundWithCryptoMutation,
     useTransferViaWalletMutation,
     useAdminLoginMutation,
-	useContactMutation
+	useContactMutation,
+	useChangePasswordMutation,
+    useFeedbackMutation
 } = baseApiSlice;

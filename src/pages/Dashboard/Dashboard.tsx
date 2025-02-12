@@ -1,18 +1,16 @@
 // import { Table } from "../../components/Table"
 
-import { FaCircle, FaSyncAlt } from "react-icons/fa";
+import { FaCircle, FaSyncAlt, FaTimes } from "react-icons/fa";
 import { Table } from "../../components/Table";
 import CashFlowChart from "../../components/CashFlowChart";
 import { useEffect, useState } from "react";
 import { MdOutlineLocalPrintshop } from "react-icons/md";
 import { useGetAccountBalanceQuery } from "../../slices/accountApiSlice";
-import {
-	useFetchCashFlowQuery,
-	useFetchTransactionsQuery,
-} from "../../slices/transactionSlice";
+import {useFetchCashFlowQuery,useFetchTransactionsQuery} from "../../slices/transactionSlice";
 import LoadingComponent from "../../components/LoadingComponent";
 import Modal from "../../components/Modal";
 import PromptsCard from "../../components/PromptsCard";
+import RecieptModal from "../../components/RecieptModal";
 
 const tableHead: any = ["Narration", "Date", "Amount", "Status", ""];
 
@@ -75,9 +73,10 @@ const Dashboard = () => {
 	const [history, setHistory] = useState<any>([]);
 	const [cashflow, setCashflow] = useState<any>([]);
 	const [showModal, setShowModal] = useState(false);
+	const [selectedItem, setSelectedItem] = useState({})
 
 	// const periods = ['1D', '1W', '1M', '3M', '6M', '1Y'];
-
+	console.log("selectedItem: ", selectedItem)
 	
 
 	// const { labels, inflowData, outflowData } = getDataForPeriod(period);
@@ -237,7 +236,10 @@ const Dashboard = () => {
 										)}
 									</td>
 									<td>
-										<MdOutlineLocalPrintshop size={23} onClick={()=>setShowModal((prev)=>!prev)} />
+										<MdOutlineLocalPrintshop className="cursor-pointer" size={23} onClick={()=>{
+											setShowModal((prev)=>!prev)
+											setSelectedItem(table)
+											}} />
 									</td>
 								</tr>
 							))}
@@ -247,25 +249,25 @@ const Dashboard = () => {
 
 			{/* chart */}
 			<div className="w-full px-5 ">
-				{cahflowLoading ? (
-					<LoadingComponent />
-				) : (
+				
 					<CashFlowChart
 						inflowData={cashflow.inflowData}
 						outflowData={cashflow?.outflowData}
 						labels={cashflow?.labels}
 					/>
-				)}
+				
 			</div>
 
 			{
-        showModal && (
+             showModal && (
           <Modal isShowCancelButton={false}	
-		  cancelButtonFunction={() => setShowModal(false)}>
+		   cancelButtonFunction={() => setShowModal(false)}>
 			<div className="p-10">
               <PromptsCard title={""}>
+				<RecieptModal show={setShowModal} selectedItem={selectedItem} formatDate={formatDate} />
+
 				
-				hhdhdhdhdhd
+				<FaTimes onClick={()=>setShowModal((prev)=>!prev)}/>
 									
                  </PromptsCard>
 		     </div>

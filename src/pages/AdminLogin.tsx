@@ -161,11 +161,7 @@ const AdminLogin = () => {
          </>) }
           
         </form>
-        {/* <div className="text-center mt-6">
-          <Link to="/sign-up" className="text-sm text-gray-500 hover:text-gray-700">
-           <p>DO YOU HAVE AN ACCOUNT?<span className="text-[#fa9e1f]">REGISTER NOW</span></p> 
-          </Link>
-          </div> */}
+     
   
       </div>
     </div>
