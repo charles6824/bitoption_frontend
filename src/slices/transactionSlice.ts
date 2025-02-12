@@ -6,6 +6,17 @@ const handleResponse = (response: unknown) => {
 
 export const transactionApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
+		fetchAllTransactions: builder.query({
+			query: () => ({
+				url: `${import.meta.env.VITE_BASE_URL}/transaction`,
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
 		fetchTransactions: builder.query({
 			query: () => ({
 				url: `${import.meta.env.VITE_BASE_URL}/transaction/user`,
@@ -32,5 +43,5 @@ export const transactionApiSlice = apiSlice.injectEndpoints({
 	}),
 });
 
-export const { useFetchTransactionsQuery, useFetchCashFlowQuery } =
+export const { useFetchTransactionsQuery, useFetchCashFlowQuery, useFetchAllTransactionsQuery } =
 	transactionApiSlice;

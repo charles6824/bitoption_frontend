@@ -11,7 +11,7 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  const { data: bitcoinPrice, isLoading, error } = useFetchBitcoinDetailsQuery(undefined, {
+  const { data: bitcoinPrice } = useFetchBitcoinDetailsQuery(undefined, {
     pollingInterval: 60000, // 5 minutes (300,000 ms)
   }) as any;
   const activeStyle = ({isActive}: {isActive: boolean}) => isActive ? "text-[#d37d38]" : "text-white"

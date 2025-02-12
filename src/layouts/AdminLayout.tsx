@@ -61,28 +61,28 @@ const AdminLayout = () => {
       url: "/admin/dashboard",
     },
     {
-      name: "Deposit",
+      name: "Users",
+      // icon: <img src={settings} alt="Settings Icon" className="w-5 h-5" />,
+      icon: <FaUserCircle />,
+      url: "/admin/users",
+    },
+    {
+      name: "Fund Wallet",
       // icon: <img src={dispute} alt="Dispute Resolution Icon" className="w-5 h-5" />,
      icon: <GiPayMoney />,
       url: "/admin/deposit",
-    },
-    {
-      name: "Transfer",
-      // icon: <img src={legal} alt="Legal Expert Icon" className="w-5 h-5" />,
-      icon :<BiTransferAlt/>,
-      url: "/admin/transfers",
-    },
-    {
-      name: "Investments",
-      // icon: <img src={message} alt="Messages Icon" className="w-5 h-5" />,
-      icon:<Folder />,
-      url: "/admin/investments",
     },
     {
       name: "Packages",
       // icon: <img src={message} alt="Messages Icon" className="w-5 h-5" />,
       icon:<LucideChartNoAxesCombined />,
       url: "/admin/packages",
+    },
+    {
+      name: "Investments",
+      // icon: <img src={message} alt="Messages Icon" className="w-5 h-5" />,
+      icon:<Folder />,
+      url: "/admin/investments",
     },
     {
       name: "Withdrawals",
@@ -96,12 +96,7 @@ const AdminLayout = () => {
       icon: <MdOutlineSettings />,
       url: "/admin/settings",
     },
-    {
-      name: "Users",
-      // icon: <img src={settings} alt="Settings Icon" className="w-5 h-5" />,
-      icon: <FaUserCircle />,
-      url: "/admin/users",
-    },
+    
   ];
 
   const toggleSidebar = () => {
