@@ -116,19 +116,6 @@ if (newPassword !== confirmPassword) {
    
 
   ];
-
-  const [image, setImage] = useState("/default-profile.png"); 
-
-  interface ImageChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
-
-  const handleImageChange = (event: ImageChangeEvent): void => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setImage(imageUrl);
-    }
-  };
-
  
   return (
     <div>
@@ -172,19 +159,14 @@ if (newPassword !== confirmPassword) {
         <FaUserCircle className="border-2 border-[#fa9e1f] rounded-full" size={90}/>
       
       </div>
-      <input
-        type="file"
-        id="profile-input"
-        accept="image/*"
-        className="hidden"
-        onChange={handleImageChange}
-      />
+    
     </div>
 
       {/* form */}
           <div className="mt-8 border border-[#ccc] rounded-md p-5 ">
           
-                <div className="py-3 text-black ">
+                <div className="py-3 text-black flex flex-col">
+                  <label htmlFor="">FullName</label>
                   <input
 
                   value={details.fullName}
@@ -195,7 +177,9 @@ if (newPassword !== confirmPassword) {
                    
                   />
                 </div>
-                <div className="py-3 text-black">
+                <div className="py-3 text-black flex flex-col">
+                  <label htmlFor="">Email</label>
+  
                 <input
                 value={details.email}
                 readOnly
@@ -262,11 +246,7 @@ if (newPassword !== confirmPassword) {
           
           </div></>)}
 
-         {/* Add account */}
-          {/* {activeTab === "addbankaccount" && (<><div>
-            <AddaccountCard/>
-            
-            </div></>)} */}
+      
           {activeTab === "sendfeedback" && (<><div>
             <div className="mt-20">
           <select

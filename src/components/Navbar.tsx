@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { FaTimes, FaUser, FaUserPlus } from "react-icons/fa";
 import { CiMenuFries } from "react-icons/ci";
 import { useState } from "react";
+import { useFetchBitcoinDetailsQuery } from "../slices/baseApiSlice";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,9 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-
+  const { data: bitcoinPrice } = useFetchBitcoinDetailsQuery(undefined, {
+    pollingInterval: 60000, // 5 minutes (300,000 ms)
+  }) as any;
   const activeStyle = ({isActive}: {isActive: boolean}) => isActive ? "text-[#d37d38]" : "text-white"
 
   return (
@@ -21,26 +24,27 @@ const Navbar = () => {
         <h1 className="text-[30px] ">247bit<span className="text-[#fa9e1f] text-[30px] italic">option</span> </h1>
         <div className="flex items-center space-x-7 text-[13px]">
           <div>
-            <h1 className="font-bold ">9,450 USD</h1>
+            <h1 className="font-bold ">${bitcoinPrice?.lastTradePrice} USD</h1>
             <p className="text-[#b4a7a1]">last trade price</p>
           </div>
           <div>
-            <h1 className="font-bold">+5.26%</h1>
+            <h1 className="font-bold">{bitcoinPrice?.priceChange24h}%</h1>
             <p className="text-[#b4a7a1]">24 hour price</p>
           </div>
           <div>
-            <h1 className="font-bold">12.820 BTC</h1>
+            <h1 className="font-bold">{bitcoinPrice?.volume24h} BTC</h1>
             <p className="text-[#b4a7a1]">24 hour volume</p>
           </div>
           <div>
-            <h1 className="font-bold">2,231,775</h1>
+            <h1 className="font-bold">{bitcoinPrice?.activeTraders}</h1>
             <p className="text-[#b4a7a1]">active traders</p>
           </div>
           <div>
-            <h1 className="font-bold">56456</h1>
+            <h1 className="font-bold">${bitcoinPrice?.livePrice}</h1>
             <p className="text-[#b4a7a1]">Live Bitcoin price</p>
           </div>
         </div>
+       
         <div className="flex items-center space-x-4">
           <Link
             to="/sign-in"

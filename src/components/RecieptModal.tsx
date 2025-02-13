@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import Logo from "../assets/images/logo-dark.png"
+import Logo from "../assets/images/247.png"
 import { FaCircle, FaTimes } from "react-icons/fa";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -154,10 +154,11 @@ const RecieptModal: React.FC<any> = ({ show,selectedItem,formatDate }) => {
 				className="bg-white w-[345px] rounded-lg relative shadow-2xl"
 				ref={receiptRef}
 			>
-				<div className="bg-[#1d1d1d] text-white flex flex-col justify-center items-center py-4 rounded-t-lg">
-					<img src={Logo} alt="" width="90px" />
-					<h2 className="mt-2">Transaction Receipt</h2>
-				</div>
+				<div className="bg-[#1d1d1d] h-32 text-white flex flex-col justify-center items-center rounded-t-lg">
+                 <img src={Logo} alt="logo" loading="lazy" className=" w-auto" />
+               <h2 className="mt-1 text-sm">Transaction Receipt</h2>
+               </div>
+
 				<div className="text-center py-8 border-b-[0.1px] border-[#f6f7f9]">
 					<h3 className="text-[13px] font-bold text-[#fa9e1f] uppercase">
 						Transaction Success!

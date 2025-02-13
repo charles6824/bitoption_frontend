@@ -18,7 +18,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
 	bg,
 }) => {
 	return (
-		<div className={`${bg} px-6 py-3 rounded-lg shadow-md`}>
+		<div className={`${bg} px-4 py-3 rounded-lg shadow-md`}>
 			<div className="flex items-center space-x-4 pt-2 pb-5">
 				<div className="text-[#fa9e1f]">{icon}</div>
 				<div>
@@ -28,8 +28,8 @@ const StatsCard: React.FC<StatsCardProps> = ({
 			</div>
 			<hr />
       <div className="flex items-center justify-between py-2">
-			  {description1 && <p className="text-gray-400 text-sm py-2">{description1}</p>}
-			  {description2 && <p className="text-gray-400 text-sm py-2">{description2}</p>}
+			  {description1 && <p className="text-gray-400 text-[12px] py-2">{description1}</p>}
+			  {description2 && <p className="text-gray-400 text-[12px] py-2">{description2}</p>}
       </div>
 		</div>
 	);
