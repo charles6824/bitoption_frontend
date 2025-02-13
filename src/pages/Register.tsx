@@ -53,9 +53,11 @@ const Register = () => {
 
     try {
       const response:any = await register({data:{payload:model}}).unwrap();
-      if(response?.data){
-        toast.success("User registration successful")
+      if(response?.status){
+        toast.success(response.message)
         navigate('/sign-in')
+      }else{
+        toast.error(response.message)
       }
     } catch (error:any) {
       toast.error(error.message || "Registration failed")
@@ -64,7 +66,7 @@ const Register = () => {
   }
 
   const handleShow = ()=>{
-    setShowPassword(!showPassword)
+    setShowPassword((prev) =>!prev)
   }
 
 

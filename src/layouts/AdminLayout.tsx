@@ -2,15 +2,24 @@
 
 import { useState } from "react";
 import { Link, Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { FaAngleDown, FaArrowDown,  FaUser, FaUserCircle } from "react-icons/fa";
+// import { FaAngleDown, FaArrowDown,  FaUser, FaUserCircle } from "react-icons/fa";
 import { MdDashboard, MdLogout, MdOutlineSettings, MdPayment } from "react-icons/md";
 import { GiPayMoney } from "react-icons/gi";
-import { BiTransferAlt } from "react-icons/bi";
+// import { BiTransferAlt } from "react-icons/bi";
 import { LucideChartNoAxesCombined,Folder } from "lucide-react";
 import { useLogoutMutation } from "../slices/baseApiSlice";
 import PromptsCard from "../components/PromptsCard";
 import Modal from "../components/Modal";
 import LoadingBtn from "../components/LoadingBtn";
+import {
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Avatar,
+  Typography,
+} from "@material-tailwind/react";
+import { FaUser, FaUserCircle } from "react-icons/fa";
 
 const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -183,7 +192,6 @@ const AdminLayout = () => {
                   <FaUser />
                   <span className="text-sm font-medium text-white">Admin</span>
                   {/* <img src={arrow} alt="" className="w-[20px] h-[20px]" /> */}
-                  <FaArrowDown className="text-[#fa9e1f]" />
                 </div>
               </div>
             </header>
@@ -196,10 +204,33 @@ const AdminLayout = () => {
               <div className="flex justify-between items-center space-x-6">
                 {/* <img src={notification} alt="" className="" /> */}
                 <div className="hidden sm:flex items-center space-x-2 cursor-pointer">
-                  <FaUserCircle className="text-[#fa9e1f]" />
-                  <span className="text-sm font-medium text-white">Admin</span>
-                  {/* <img src={arrow} alt="" className="w-[20px] h-[20px]" /> */}
-                  <FaAngleDown className="text-[#fa9e1f]" />
+                <Menu>
+  <MenuHandler>
+    <div  className="cursor-pointer border-2 border-[#fa9e1f] rounded-full">
+      <FaUserCircle className="w-10 h-10 text-white" />
+    </div>
+  </MenuHandler>
+  <MenuList placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
+    <MenuItem className="flex items-center gap-2" placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
+ 
+      <Typography variant="small" className="font-medium flex items-center gap-2" placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
+        <FaUser className="text-[#fa9e1f]"/>
+        <Link to="/settings">My Profile</Link>
+      </Typography>
+    </MenuItem>
+
+    <hr className="my-2 border-blue-gray-50" />
+
+    <MenuItem className="flex items-center gap-2" placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
+      <MdLogout className="text-[#fa9e1f]" />
+      <Typography variant="small" className="font-medium" placeholder="" onPointerEnterCapture={() => {}} onPointerLeaveCapture={() => {}}>
+        <span onClick={handleLogout}>Sign Out</span>
+      </Typography>
+    </MenuItem>
+  </MenuList>
+</Menu>                  
+
+          
                 </div>
               </div>
             </header>

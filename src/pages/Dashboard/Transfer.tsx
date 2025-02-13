@@ -18,8 +18,7 @@ const Transfer = () => {
 	const [description, setDescription] = useState("");
 	const [showName, setShowName] = useState(false);
 	const [step, setStep] = useState(1);
-	const { data } = useGetAccountDetailsQuery({}) as any;
-	console.log("data", data);
+	// const { data } = useGetAccountDetailsQuery({}) as any;
 	const user_data: any = sessionStorage.getItem("userInfo");
 	const userInfo = user_data && JSON.parse(user_data);
 

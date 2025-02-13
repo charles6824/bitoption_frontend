@@ -182,6 +182,8 @@ export const {
 	useVerifyOtpMutation,
 	useResetPasswordMutation,
 	useLogoutMutation,
+	useChangePasswordMutation,
+    useFeedbackMutation,
 	useFundWithCryptoMutation,
 	useTransferViaWalletMutation,
 	useAdminLoginMutation,

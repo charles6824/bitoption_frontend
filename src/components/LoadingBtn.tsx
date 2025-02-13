@@ -1,9 +1,11 @@
-
-const LoadingBtn = () => {
+interface loadingBtnProps {
+	bg?: string;
+}
+const LoadingBtn = ({bg}:loadingBtnProps) => {
   return (
     <div>
         <button
-			className="w-full tracking-[1.25px] cursor-pointer h-[50px] mt-[23px] rounded-[5px] text-[20px]  text-white bg-[#1d1d1d] flex gap-2 px-5 justify-center items-center"
+			className={`w-full tracking-[1.25px] cursor-pointer h-[50px] mt-[23px] rounded-[5px] text-[20px]  text-white  flex gap-2 px-5 justify-center items-center ${bg}`}
 						type="button"
 						disabled={true}
 					>
