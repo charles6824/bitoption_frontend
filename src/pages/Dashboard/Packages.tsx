@@ -5,6 +5,7 @@ import { useGetAllPackagesQuery } from "../../slices/packageSlice";
 const Packages = () => {
 	const { data: packages, isLoading } = useGetAllPackagesQuery({}) as any;
 	console.log("packages", packages);
+	
 	return (
 		<div>
       <h1 className="text-[28px] mb-6">Packages</h1>
