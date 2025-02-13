@@ -43,6 +43,17 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			transformResponse: handleResponse,
 		}),
 
+		updateUser: builder.mutation({
+			query: (id) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/users/${id}`,
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
 		validateAccount: builder.mutation({
 			query: ({ data }: { data: any }) => ({
 				url: `${import.meta.env.VITE_BASE_URL}/users/validate-account`,
@@ -96,6 +107,39 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 				url: `${import.meta.env.VITE_BASE_URL}/deposit/fund-crypto`,
 				method: "POST",
 				body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
+		allDeposits: builder.query({
+			query: () => ({
+				url: `${import.meta.env.VITE_BASE_URL}/deposit`,
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
+		approveDeposits: builder.query({
+			query: (depositId) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/deposit/approve/${depositId}`,
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
+		declineDeposits: builder.query({
+			query: (depositId) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/deposit/decline/${depositId}`,
+				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -161,17 +205,27 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			transformResponse: handleResponse,
 		}),
 
-    fetchBitcoinDetails: builder.query({
-      query: () => "https://api.coingecko.com/api/v3/coins/bitcoin",
-      transformResponse: (response: any) => ({
-        livePrice: response.market_data.current_price.usd,
-        lastTradePrice: response.market_data.high_24h.usd, // Assuming high_24h is last trade price
-        priceChange24h: response.market_data.price_change_percentage_24h,
-        volume24h: response.market_data.total_volume.usd,
-        activeTraders: response.market_data.circulating_supply, // Approximate metric
-      }),
-    }),
+		allUsers: builder.query({
+			query: () => ({
+				url: `${import.meta.env.VITE_BASE_URL}/users`,
+				method: "Get",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
 
+		fetchBitcoinDetails: builder.query({
+			query: () => "https://api.coingecko.com/api/v3/coins/bitcoin",
+			transformResponse: (response: any) => ({
+				livePrice: response.market_data.current_price.usd,
+				lastTradePrice: response.market_data.high_24h.usd, // Assuming high_24h is last trade price
+				priceChange24h: response.market_data.price_change_percentage_24h,
+				volume24h: response.market_data.total_volume.usd,
+				activeTraders: response.market_data.circulating_supply, // Approximate metric
+			}),
+		}),
 	}),
 });
 
@@ -183,11 +237,16 @@ export const {
 	useResetPasswordMutation,
 	useLogoutMutation,
 	useChangePasswordMutation,
-    useFeedbackMutation,
+	useFeedbackMutation,
 	useFundWithCryptoMutation,
 	useTransferViaWalletMutation,
 	useAdminLoginMutation,
 	useContactMutation,
 	useFetchBitcoinDetailsQuery,
-  useFundAsAdminMutation,
+	useFundAsAdminMutation,
+	useAllUsersQuery,
+  useAllDepositsQuery,
+  useLazyApproveDepositsQuery,
+  useLazyDeclineDepositsQuery,
+  useUpdateUserMutation,
 } = baseApiSlice;

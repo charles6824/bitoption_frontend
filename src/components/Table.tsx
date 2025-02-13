@@ -10,10 +10,10 @@ export function Table({ data, tableHead, children }: TableProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
 
-  const totalPages = Math.ceil(data.length / recordsPerPage);
+  const totalPages = Math.ceil(data?.length / recordsPerPage);
   const startIndex = (currentPage - 1) * recordsPerPage;
   const endIndex = startIndex + recordsPerPage;
-  const currentData = data.slice(startIndex, endIndex);
+  // const currentData = data.slice(startIndex, endIndex);
 
   return (
     <div className="h-full w-full">
