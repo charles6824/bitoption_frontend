@@ -1,9 +1,8 @@
 import { Tab, Tabs, TabsBody, TabsHeader } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { Table } from "../../components/Table";
-import { FaRegArrowAltCircleRight, FaRegTimesCircle, FaTimesCircle } from "react-icons/fa";
+import { FaRegArrowAltCircleRight, FaRegTimesCircle } from "react-icons/fa";
 import Modal from "../../components/Modal";
-import PromptsCard from "../../components/PromptsCard";
 import { useFetchAllInvestmentsQuery } from "../../slices/investmentSlice";
 import LoadingComponent from "../../components/LoadingComponent";
 

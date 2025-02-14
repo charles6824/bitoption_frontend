@@ -1,6 +1,5 @@
 import { FaUserCircle } from "react-icons/fa";
 import {
-	useGetAccountDetailsQuery,
 	useLazyNameEnquiryQuery,
 } from "../../slices/accountApiSlice";
 import { useEffect, useState } from "react";
