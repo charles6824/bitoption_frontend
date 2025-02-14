@@ -30,7 +30,7 @@ const Deposit = () => {
 				};
 				const response: any = await fundWithCrypto({
 					data: { payload: model },
-				});
+				}).unwrap();
 				console.log("response: ", response);
 				if (response.data.status) {
 					toast.success(response.data.message);
@@ -40,7 +40,7 @@ const Deposit = () => {
 				}
 			}
 		} catch (error: any) {
-			toast.error(error.data.message);
+			toast.error(error.error.data.message);
 		}
 	};
 
