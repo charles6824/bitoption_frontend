@@ -3,6 +3,7 @@ import { FaTimes, FaUser, FaUserPlus } from "react-icons/fa";
 import { CiMenuFries } from "react-icons/ci";
 import { useState } from "react";
 import { useFetchBitcoinDetailsQuery } from "../slices/baseApiSlice";
+import logo from "../assets/images/247.png"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,6 @@ const Navbar = () => {
     <>
       {/* Desktop Navbar */}
       <nav className="hidden bg-[#1d1d1d] px-[5%] py-5 text-[#FFF] md:flex justify-between">
-        {/* <img src={logo} alt="" className="h-11" /> */}
         <h1 className="text-[30px] ">247bit<span className="text-[#fa9e1f] text-[30px] italic">option</span> </h1>
         <div className="flex items-center space-x-7 text-[13px]">
           <div>

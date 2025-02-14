@@ -137,7 +137,10 @@ const AdminUsers = () => {
                         <b>{selectedItem?.fullName}</b>?
                       </p>
                       {userLoading ? (
-                        <LoadingBtn />
+                        <div>
+
+                          <LoadingBtn bg="bg-gray-500" />
+                        </div>
                       ) : (
                         <div className="flex justify-center gap-4 mt-6">
                           <button
