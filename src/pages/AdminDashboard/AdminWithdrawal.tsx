@@ -175,7 +175,7 @@ const AdminWithdrawal = () => {
       <div className="mb-6">
 
 			<h1 className="text-[28px]">Withdrawal</h1>
-			<p className="text-[12px]">withdraw funds</p>
+			<p className="text-[12px]">Approve and decline withdrawal requests</p>
       </div>
 			
 
