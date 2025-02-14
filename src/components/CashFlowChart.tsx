@@ -51,7 +51,7 @@ const CashFlowChart: React.FC<CashFlowChartProps> = ({ inflowData, outflowData, 
           display: false,
         },
         ticks: {
-          callback: (value: any) => `₦${value}`,
+          callback: (value: any) => `$${value}`,
           font: {
             size: isMobile ? 10 : 14, // Smaller font for mobile
           },

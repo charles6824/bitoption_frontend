@@ -1,4 +1,4 @@
-import { FaEdit, FaPlus, FaRegTimesCircle, FaTimesCircle, FaTrash } from "react-icons/fa";
+import { FaEdit, FaPlus, FaRegTimesCircle, FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Table } from "../../components/Table";
 import Modal from "../../components/Modal";

@@ -3,7 +3,6 @@ import { FaTimes, FaUser, FaUserPlus } from "react-icons/fa";
 import { CiMenuFries } from "react-icons/ci";
 import { useState } from "react";
 import { useFetchBitcoinDetailsQuery } from "../slices/baseApiSlice";
-import logo from "../assets/images/247.png"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
