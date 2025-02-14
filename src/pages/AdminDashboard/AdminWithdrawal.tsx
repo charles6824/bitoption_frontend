@@ -5,7 +5,7 @@ import {
 	useAllWithdrawalsQuery,
 	useFundAsAdminMutation,
 	useLazyApproveWithdrawalQuery,
-	useLazyDeclineDepositsQuery,
+	useLazyDeclineWithdrawalQuery
 } from "../../slices/baseApiSlice";
 import LoadingBtn from "../../components/LoadingBtn";
 import Modal from "../../components/Modal";
@@ -30,6 +30,7 @@ const AdminWithdrawal = () => {
 		"Method",
 		"Status",
 		"Action",
+		""
 	];
 
 	const [nameEnquiry, { isLoading: nameLoading, data: nameData }] =
@@ -41,7 +42,7 @@ const AdminWithdrawal = () => {
 	const [approveWithdrawal, { isLoading: approveLoading }] =
 		useLazyApproveWithdrawalQuery();
 	const [declineWithdrawal, { isLoading: declineLoading }] =
-		useLazyApproveWithdrawalQuery();
+	useLazyDeclineWithdrawalQuery();
 
 	const {
 		isLoading: allLoading,
@@ -85,7 +86,6 @@ const AdminWithdrawal = () => {
 
 	const handleSubmit = async () => {
 		try {
-			console.log("object");
 			if (!accountNumber || accountNumber.length < 10) {
 				return toast.error("Account Number validation failure");
 			}
@@ -134,7 +134,7 @@ const AdminWithdrawal = () => {
 		}
 	};
 
-	const declineUserDeposit = async () => {
+	const declineUserWithdrawal = async () => {
 		try {
 			const response: any = await declineWithdrawal(selectedItem?._id).unwrap();
 			if (response.status) {
@@ -260,8 +260,7 @@ const AdminWithdrawal = () => {
 																		{index + 1}
 																	</td>
 																	<td>${table.amount}</td>
-																	<td>{table.narration}</td>
-																	<td>{table.method}</td>
+																	<td>{table.mode}</td>
 																	<td>{table.status}</td>
 																	<td className="">
 																		<div className="flex justify-start items-center gap-4 px-4 pt-3">
@@ -348,7 +347,7 @@ const AdminWithdrawal = () => {
 												{approveLoading || declineLoading ? (
 													<LoadingBtn />
 												) : (
-													<div className="flex ite,s-center gap-4 text-white text-sm">
+													<div className="flex items-center gap-4 text-white text-sm">
 														<button
 															className="bg-green-700 px-8 py-2 rounded"
 															onClick={approveUserWithdrawal}
@@ -357,7 +356,7 @@ const AdminWithdrawal = () => {
 														</button>
 														<button
 															className="bg-red-700 px-8 py-2 rounded"
-															onClick={declineUserDeposit}
+															onClick={declineUserWithdrawal}
 														>
 															Decline
 														</button>
