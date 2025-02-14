@@ -33,7 +33,7 @@ const AdminLayout = () => {
     try {
 			await logout({}).unwrap();
 			sessionStorage.clear(); 
-			navigate('/sign-in'); 
+			navigate('/admin/sign-in'); 
 		} catch (error) {
 			console.error('Logout failed:', error);
 		}
@@ -65,43 +65,36 @@ const AdminLayout = () => {
   const navList = [
     { 
       name: "Dashboard",
-      // icon: <img src={dashboard} alt="Dashboard Icon" className="w-5 h-5" />,
       icon: <MdDashboard />,
       url: "/admin/dashboard",
     },
     {
       name: "Users",
-      // icon: <img src={settings} alt="Settings Icon" className="w-5 h-5" />,
       icon: <FaUserCircle />,
       url: "/admin/users",
     },
     {
       name: "Fund Wallet",
-      // icon: <img src={dispute} alt="Dispute Resolution Icon" className="w-5 h-5" />,
      icon: <GiPayMoney />,
       url: "/admin/deposit",
     },
     {
       name: "Packages",
-      // icon: <img src={message} alt="Messages Icon" className="w-5 h-5" />,
       icon:<LucideChartNoAxesCombined />,
       url: "/admin/packages",
     },
     {
       name: "Investments",
-      // icon: <img src={message} alt="Messages Icon" className="w-5 h-5" />,
       icon:<Folder />,
       url: "/admin/investments",
     },
     {
       name: "Withdrawals",
-      // icon: <img src={calendar} alt="Calendar Icon" className="w-5 h-5" />,
       icon :<MdPayment/>,
       url: "/admin/withdrawals",
     },
     {
       name: "Settings",
-      // icon: <img src={settings} alt="Settings Icon" className="w-5 h-5" />,
       icon: <MdOutlineSettings />,
       url: "/admin/settings",
     },

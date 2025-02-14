@@ -6,16 +6,29 @@ import Chart from "../../components/Chart";
 import LoadingComponent from "../../components/LoadingComponent";
 import { Table } from "../../components/Table";
 import { useFetchAllTransactionsQuery } from "../../slices/transactionSlice";
+import { useAllUsersQuery } from "../../slices/baseApiSlice";
+import { useFetchAllInvestmentsQuery } from "../../slices/investmentSlice";
 
 const AdminDashboard: React.FC = () => {
   const tableHead: any = ["Narration", "Date", "Amount", "Status"];
   const [history, setHistory] = useState<any>([]);
   const [totalTransactions, setTotalTransactions] = useState(0)
+  const [totalInvestment, setTotalInvestment] = useState(0)
   const [inflow, setInflow] = useState(0)
   const [outflow, setOutflow] = useState(0)
+  const [totalUsers, setTotalUsers] = useState(0)
+  const [activeUsers, setActiveUsers] = useState(0)
+  const [inActiveUsers, setInactiveUsers] = useState(0)
+  const [pendingInvest, setPendingInvest] = useState(0)
+  const [completedInvest, setCompletedInvest] = useState(0)
 
   const { data: historyData, isLoading: historyLoading } =
       useFetchAllTransactionsQuery({}) as any;
+
+  const { data: userData } = useAllUsersQuery({}) as any;
+    const { data: investData } = useFetchAllInvestmentsQuery({}) as any;
+  
+  
 
 
   const formatDate = (date: any) => {
@@ -39,6 +52,30 @@ const AdminDashboard: React.FC = () => {
       }
     }, [historyData]);
 
+    useEffect(() => {
+      if (userData && userData.status){
+        setTotalUsers(userData.data.length)
+        setActiveUsers(userData.data.filter(a => a.status === "Active").length)
+        setInactiveUsers(userData.data.filter(a => a.status !== "Active").length)
+      }else{
+        setTotalUsers(0)
+        setActiveUsers(0)
+        setInactiveUsers(0)
+      }
+    }, [userData])
+
+    useEffect(() => {
+      if (investData && investData.status){
+        setTotalInvestment(investData.data.reduce((a: any,b: any) => a + Number(b.amount), 0))
+        setPendingInvest(investData.data.filter(a => a.completed !== true).length)
+        setCompletedInvest(investData.data.filter(a => a.completed === true).length)
+      }else{
+        setTotalInvestment(0)
+        setPendingInvest(0)
+        setCompletedInvest(0)
+      }
+    }, [investData])
+
     console.log("total: ", totalTransactions)
   return (
     <div className="p-6 min-h-screen">
@@ -48,20 +85,20 @@ const AdminDashboard: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
         <StatsCard
           title="Total Users"
-          value="1,200"
+          value={Number(totalUsers).toLocaleString()}
           icon={<ImUsers className="w-8 h-8" />}
-          description1="Active: 1,000"
-          description2="Inactive: 35"
+          description1={`Active: ${Number(activeUsers).toLocaleString()}`}
+          description2={`Inactive: ${Number(inActiveUsers).toLocaleString()}`}
         />
         <StatsCard
           title="Total Investments"
-          value="$500,000"
+          value={`$${Number(totalInvestment).toLocaleString()}`}
           icon={<FaMoneyBillAlt className="w-8 h-8" />}
-          description1="pending: 1,000"
-          description2={`completed: 45`}
+          description1={`Pending: ${Number(pendingInvest).toLocaleString()}`}
+          description2={`Completed: ${Number(completedInvest).toLocaleString()}`}
         />
         <StatsCard
-          title="Total Withdrawals"
+          title="Total Transactions"
           value={`$${Number(totalTransactions).toLocaleString()}`}
           icon={<FaWallet className="w-8 h-8" />}
           description1={`Inflow: $${Number(inflow).toLocaleString()}`}
