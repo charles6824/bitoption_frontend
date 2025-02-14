@@ -367,7 +367,10 @@ const AdminDeposit = () => {
 										{selectedItem?.status === "pending" && (
 											<>
 												{approveLoading || declineLoading ? (
-													<LoadingBtn />
+											        
+
+													<LoadingBtn bg="bg-[#1d1d1d]" />
+													
 												) : (
 													<div className="flex ite,s-center gap-4 text-white text-sm">
 														<button
