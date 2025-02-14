@@ -74,7 +74,7 @@ const AdminUsers = () => {
 		}
 	}, [userData]);
 
-  const handleAction = (item) => {
+  const handleAction = (item: any) => {
     setShowModal(true)
     setSelectedItem(item)
   }

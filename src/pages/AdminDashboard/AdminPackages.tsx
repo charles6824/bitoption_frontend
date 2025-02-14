@@ -160,6 +160,8 @@ const AdminPackages = () => {
 		}
 	}, [packageData]);
 
+	console.log("data: ", data)
+
 	return (
 		<>
 			<div>

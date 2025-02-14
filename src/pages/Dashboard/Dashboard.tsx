@@ -93,7 +93,7 @@ const Dashboard = () => {
 	const { data: historyData, isLoading: historyLoading } =
 		useFetchTransactionsQuery({}) as any;
 
-	const { data: cashflowData, isLoading: cahflowLoading } =
+	const { data: cashflowData } =
 		useFetchCashFlowQuery(period) as any;
 
 	const handleRefreshBalance = async () => {

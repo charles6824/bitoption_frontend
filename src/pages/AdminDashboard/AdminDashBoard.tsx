@@ -55,8 +55,8 @@ const AdminDashboard: React.FC = () => {
     useEffect(() => {
       if (userData && userData.status){
         setTotalUsers(userData.data.length)
-        setActiveUsers(userData.data.filter(a => a.status === "Active").length)
-        setInactiveUsers(userData.data.filter(a => a.status !== "Active").length)
+        setActiveUsers(userData.data.filter((a: any)=> a.status === "Active").length)
+        setInactiveUsers(userData.data.filter((a:any) => a.status !== "Active").length)
       }else{
         setTotalUsers(0)
         setActiveUsers(0)
@@ -67,8 +67,8 @@ const AdminDashboard: React.FC = () => {
     useEffect(() => {
       if (investData && investData.status){
         setTotalInvestment(investData.data.reduce((a: any,b: any) => a + Number(b.amount), 0))
-        setPendingInvest(investData.data.filter(a => a.completed !== true).length)
-        setCompletedInvest(investData.data.filter(a => a.completed === true).length)
+        setPendingInvest(investData.data.filter((a:any) => a.completed !== true).length)
+        setCompletedInvest(investData.data.filter((a: any) => a.completed === true).length)
       }else{
         setTotalInvestment(0)
         setPendingInvest(0)

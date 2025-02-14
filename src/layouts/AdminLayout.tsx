@@ -1,11 +1,8 @@
 
-
 import { useState } from "react";
 import { Link, Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
-// import { FaAngleDown, FaArrowDown,  FaUser, FaUserCircle } from "react-icons/fa";
 import { MdDashboard, MdLogout, MdOutlineSettings, MdPayment } from "react-icons/md";
 import { GiPayMoney } from "react-icons/gi";
-// import { BiTransferAlt } from "react-icons/bi";
 import { LucideChartNoAxesCombined,Folder } from "lucide-react";
 import { useLogoutMutation } from "../slices/baseApiSlice";
 import PromptsCard from "../components/PromptsCard";
@@ -16,7 +13,6 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
-  Avatar,
   Typography,
 } from "@material-tailwind/react";
 import { FaUser, FaUserCircle } from "react-icons/fa";
