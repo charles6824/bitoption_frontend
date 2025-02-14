@@ -115,7 +115,7 @@ if (newPassword !== confirmPassword) {
    
    
 
-  ];
+  ]
  
   return (
     <div>

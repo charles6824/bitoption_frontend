@@ -140,7 +140,7 @@ const AdminLogin = () => {
                          {showPassword ?  <FaEyeSlash/> : <FaEye className="text-white"/>}
                         </span>
           </div>
-          {/* <Link to= "/forgot-password" className="capitalize text-[13px] float-right text-[#fa9e1f]">forgot your Password?</Link> */}
+        
 
           {isLoading ? (<>
           <button

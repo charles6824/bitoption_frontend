@@ -6,7 +6,7 @@ import {
   Tab,
 } from "@material-tailwind/react";
 import { useState } from "react";
-import { useChangePasswordMutation, useFeedbackMutation } from "../../slices/baseApiSlice";
+import { useChangePasswordMutation} from "../../slices/adminApiSlice";
 import { toast } from "react-toastify";
 import LoadingBtn from "../../components/LoadingBtn";
 import Modal from "../../components/Modal";
@@ -19,14 +19,16 @@ const AdminSettings = () => {
   const [oldPassword,setOldPassword] = useState("")
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [feedbackType, setFeedbackType] = useState("")
-  const [message,setMessage] = useState("")
+ 
   const [showModal,setShowModal] = useState(false);
   const [changepassword,{isLoading}] = useChangePasswordMutation() as any
-  const [feedback] = useFeedbackMutation()
-  // const user_data: any = sessionStorage.getItem("userInfo");
-	// const userInfo = user_data && JSON.parse(user_data);
-  // const details = userInfo && userInfo?.data?.userDetails
+ 
+  const user_data: any = sessionStorage.getItem("userInfo");
+	const userInfo = user_data && JSON.parse(user_data);
+  const details = userInfo && userInfo.data?.data
+    
+
+
    const navigate= useNavigate();
   
 
@@ -108,22 +110,13 @@ if (newPassword !== confirmPassword) {
     
     },
    
-    // {
-    //   label: "Send feedback",
-    //   value: "sendfeedback",
-    
-    // },
+   
    
    
 
   ];
 
-  const [image, setImage] = useState("/default-profile.png"); 
 
-  interface ImageChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
-
-  
- 
   return (
     <div>
 {/* Tab */}
@@ -176,7 +169,7 @@ if (newPassword !== confirmPassword) {
                   <label htmlFor="">FullName</label>
                   <input
 
-                  value=""
+                  value={details.fullName}
                   readOnly
                     type="text"
                     className=" w-[50%] bg-gray-50 py-3 text-black text-[13px] px-3 border border-[#ccc] rounded-md"
@@ -188,7 +181,7 @@ if (newPassword !== confirmPassword) {
                   <label htmlFor="">Email</label>
   
                 <input
-                value=""
+                value={details.email}
                 readOnly
                 type="email"
                 className="w-[50%] bg-gray-50 py-3 text-black text-[13px] px-3 border border-[#ccc] rounded-md"
