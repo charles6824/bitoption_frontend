@@ -1,10 +1,23 @@
 import hero from "../assets/images/bg-banner.jpg"
-import { FaAddressBook, FaFacebook, FaHome, FaInstagram, FaLink, FaLinkedin, FaTwitter } from "react-icons/fa"
-import { Link } from "react-router-dom"
+import { FaAddressBook,  FaHome, } from "react-icons/fa"
 import { useContactMutation } from "../slices/baseApiSlice"
 import { toast } from "react-toastify"
 import { useState } from "react"
 import LoadingBtn from "../components/LoadingBtn"
+import {motion} from "framer-motion"
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.3 },
+  },
+};
 
 
 const Contact = () => {
@@ -63,19 +76,34 @@ try {
   return (
 
     /* ABOUT HERO*/
-    <>
-         <div className="w-full h-auto bg-cover bg-center py-12 md:py-20 "
-       style={{
-      background: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(${hero})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }}
-  >
-    <div className="flex flex-col justify-between items-center">
-       <h1 className="md:text-[60px] text-[35px] text-white font-bold">GET IN <span className="text-[#fa9e1f]">TOUCH</span></h1>
-       <hr className="text-[#fa9e1f] w-24" />
-    </div>
-  </div>
+    <div>
+        <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+        className="w-full h-auto bg-cover bg-center py-12 md:py-20"
+        style={{
+          background: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(${hero})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <motion.div
+          variants={staggerContainer}
+          className="flex flex-col justify-between items-center"
+        >
+          <motion.h1
+            variants={fadeInUp}
+            className="md:text-[60px] text-[35px] text-white font-bold"
+          >
+            OUR <span className="text-[#fa9e1f]">CONTACT</span>
+          </motion.h1>
+          <motion.hr
+            variants={fadeInUp}
+            className="border-[#fa9e1f] w-24 mt-2"
+          />
+        </motion.div>
+      </motion.div>
 
 
   <div className="md:flex justify-center items-center bg-[#111111] text-white p-[21px] md:p-10">
@@ -190,7 +218,7 @@ try {
     </div>
 
     {/* Social Profiles Section */}
-    <div>
+    {/* <div>
         <div className="flex items-center gap-4">
             <FaLink className="text-[#fa9e1f] text-[24px]" />
             <h1 className="text-xl font-bold uppercase">Social Profiles</h1>
@@ -210,7 +238,7 @@ try {
     </Link>
 </div>
 
-    </div>
+    </div> */}
 </div>
 
   </div>
@@ -239,7 +267,7 @@ try {
     </div>
   </div>
       
-    </>
+    </div>
   )
 }
 

@@ -99,7 +99,9 @@ const AdminDeposit = () => {
 				amount: amount,
 				accountName: nameData.data,
 			};
+     
 
+			// u dont need this in withdrawals
 			const response: any = await fundAsAdmin({
 				data: { payload: model },
 			}).unwrap();
@@ -178,7 +180,7 @@ const AdminDeposit = () => {
 					className=" bg-[#1d1d1d] text-white py-2 px-5 border border-[#fa9e1f]  rounded hover:bg-[#fa9e1f] transition "
 					onClick={() => setShowModal(true)}
 				>
-					ShowModal
+					Fund a User
 				</button>
 			</div>
 

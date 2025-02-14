@@ -2,12 +2,19 @@
 import { Tab, Tabs, TabsBody, TabsHeader } from "@material-tailwind/react";
 import { useState } from "react";
 import { Table } from "../../components/Table";
-import { FaRegArrowAltCircleRight } from "react-icons/fa";
-// import { FaRegArrowAltCircleRight } from "react-icons/fa";
+import { FaRegArrowAltCircleRight, FaTimesCircle } from "react-icons/fa";
+import Modal from "../../components/Modal";
+import PromptsCard from "../../components/PromptsCard";
+import { useFetchAllInvestmentsQuery } from "../../slices/investmentSlice";
 
 const AdminInvestment = () => {
    const [activeTab, setActiveTab] = useState("investment1");
-   const [selectedItem,setSelectedItem] = useState({})
+   const {data} = useFetchAllInvestmentsQuery({}) as any
+   console.log('data', data)
+   
+
+   const [selectedItem, setSelectedItem] = useState<any|null>(null);
+  const [showModal,setShowModal] = useState(false)
 
    const headers=[
     {
@@ -30,48 +37,15 @@ const AdminInvestment = () => {
 		" ",
 	];
 
-  const data = [
-    {
-      id: 1,
-      amountInvested: "$1,000",
-      expectedAmount: "$1,500",
-      startDate: "2024-01-15",
-      status: "Active",
-    },
-    {
-      id: 2,
-      amountInvested: "$500",
-      expectedAmount: "$750",
-      startDate: "2024-02-01",
-      status: "Completed",
-    },
-    {
-      id: 3,
-      amountInvested: "$2,000",
-      expectedAmount: "$3,000",
-      startDate: "2024-02-10",
-      status: "Pending",
-    },
-    {
-      id: 4,
-      amountInvested: "$750",
-      expectedAmount: "$1,125",
-      startDate: "2024-03-05",
-      status: "Active",
-    },
-    {
-      id: 5,
-      amountInvested: "$1,500",
-      expectedAmount: "$2,250",
-      startDate: "2024-04-01",
-      status: "Completed",
-    },
-  ];
+  
   
   const viewDetails = (item:any) => {
     setSelectedItem(item)
+    setShowModal(true)
   }
 
+
+  console.log('selected item',selectedItem);
   return (
     <div>
       <Tabs value={activeTab}>
@@ -171,6 +145,66 @@ const AdminInvestment = () => {
 
       </TabsBody>
     </Tabs>
+
+    {showModal && (
+						<Modal
+							isShowCancelButton={false}
+							cancelButtonFunction={() => setShowModal(false)}
+						>
+							<div className="p-10">
+								<PromptsCard title={""}>
+									<div className="p-6 flex flex-col justify-center items-center relative">
+										{/* Close Button Positioned Properly */}
+										<div className="absolute top-2 right-2">
+											<FaTimesCircle
+												size={40}
+												onClick={() => setShowModal(!showModal)}
+												className="cursor-pointer text-gray-600 hover:text-gray-800"
+											/>
+										</div>
+
+										<h2 className="text-lg font-semibold text-[30px] mb-3">
+											Transaction Details
+										</h2>
+                          {selectedItem?.expectedAmount || "N/A"}
+										<div className="max-w-lg mx-auto p-5 bg-white shadow-lg rounded-lg border border-gray-200">
+											<div className="space-y-6 text-gray-700">
+											
+												
+												
+												<p>
+													<strong>Amount to Receive:</strong> $
+													{selectedItem?.expectedAmount}
+												</p>
+												<p>
+													<strong>Expected Amount:</strong>{" "}
+													{selectedItem?.amountInvested}
+												</p>
+												<p>
+													<strong>Start Date:</strong>{" "}
+													{selectedItem?.startDate
+														? new Date(
+																selectedItem.startDate
+														  ).toLocaleDateString()
+														: "N/A"}
+												</p>
+
+												<p>
+													<strong>Status:</strong>{" "}
+													{selectedItem?.status ? "succesful" : "Failed"}
+												</p>
+												
+											</div>
+										</div>
+									</div>
+								</PromptsCard>
+							</div>
+						</Modal>
+					)}
+
+
+
+    
     </div>
   )
 }

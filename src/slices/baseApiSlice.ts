@@ -124,10 +124,41 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			}),
 			transformResponse: handleResponse,
 		}),
+		
+		allWithdrawals: builder.query({
+			query: () => ({
+				url: `${import.meta.env.VITE_BASE_URL}/withdrawal`,
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
 
 		approveDeposits: builder.query({
 			query: (depositId) => ({
 				url: `${import.meta.env.VITE_BASE_URL}/deposit/approve/${depositId}`,
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+		approveWithdrawal: builder.query({
+			query: (id) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/withdrawal/${id}/approve`,
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+		declineWithdrawal: builder.query({
+			query: (id) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/withdrawal/${id}/decline`,
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
@@ -245,8 +276,11 @@ export const {
 	useFetchBitcoinDetailsQuery,
 	useFundAsAdminMutation,
 	useAllUsersQuery,
-  useAllDepositsQuery,
-  useLazyApproveDepositsQuery,
+     useAllDepositsQuery,
+   useAllWithdrawalsQuery,
+   useLazyApproveDepositsQuery,
+   useLazyApproveWithdrawalQuery,
   useLazyDeclineDepositsQuery,
   useUpdateUserMutation,
+  useDeclineWithdrawalQuery
 } = baseApiSlice;

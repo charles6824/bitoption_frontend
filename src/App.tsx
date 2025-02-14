@@ -62,6 +62,7 @@ const App = () => {
 					<Route path="/admin/sign-in" index element={<AdminLogin />} />
 					<Route path="/sign-up" element={<Register />} />
 					<Route path="/forgot-password" element={<ForgotPassword />} />
+					
 				</Route>
 
 				<Route element={<DashboardLayout />}>
