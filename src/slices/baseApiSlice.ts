@@ -282,5 +282,5 @@ export const {
    useLazyApproveWithdrawalQuery,
   useLazyDeclineDepositsQuery,
   useUpdateUserMutation,
-  useDeclineWithdrawalQuery
+  useLazyDeclineWithdrawalQuery
 } = baseApiSlice;
