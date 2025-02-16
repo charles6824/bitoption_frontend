@@ -19,6 +19,7 @@ const Withdrawal = () => {
 	const [accountNumber, setAccountNumer] = useState("");
 	const [accountName, setAccountName] = useState("");
 	const [bankName, setBankName] = useState("");
+	const [routingNumber, setRoutingNumber] = useState("");
 	const [withdrawalMethod, setWithdrawalMethod] = useState("");
 	const [_isTokenComplete, setIsTokenComplete] = useState(false);
 	const [token, setToken] = useState<string[]>(Array(6).fill(""));
@@ -41,6 +42,11 @@ const Withdrawal = () => {
 
 	const handleStep = async (e: React.FormEvent) => {
 		e.preventDefault();
+		const field={accountName,accountNumber,routingNumber,bankName}
+
+		
+
+
 		try {
 			if (step < 2) {
 				const response: any = await sendOTP({}).unwrap();
@@ -155,6 +161,13 @@ const Withdrawal = () => {
 											className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
 											value={accountName}
 											onChange={(e) => setAccountName(e.target.value)}
+										/>
+										<input
+											type="text"
+											placeholder="Routing Number"
+											className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
+											value={routingNumber}
+											onChange={(e) => setRoutingNumber(e.target.value)}
 										/>
 									</div>
 								)}

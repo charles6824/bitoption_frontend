@@ -197,7 +197,7 @@ const RecieptModal: React.FC<any> = ({ show,selectedItem,formatDate }) => {
 								{selectedItem.status === "completed" ? (
                                       <div className="flex items-center gap-2">
                                         <FaCircle size={8} color="green" />
-                                         <p>Succesfull</p>
+                                         <p>Successful</p>
                                         </div>
                                     ) : selectedItem.status === "pending" ? (
                                    <div className="flex items-center gap-2">
