@@ -164,11 +164,11 @@ const Withdrawal = () => {
 										<select
 											id="bankSelect"
 											className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none "
-											value={selectedBank}
+											value={bankName}
 											onChange={(e) => setBankName(e.target.value)}
 										>
 											<option>Select a bank</option>
-											{banks.map((bank: any) => (
+											{banks.sort((x: any, y: any) => x.NAME.localeCompare(y.NAME)).map((bank: any) => (
 												<option key={bank.ID} value={bank.NAME}>
 													{bank.NAME}
 												</option>
