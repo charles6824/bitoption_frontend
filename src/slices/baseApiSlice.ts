@@ -18,6 +18,17 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			}),
 			transformResponse: handleResponse,
 		}),
+		confirmReg: builder.mutation({
+			query: ({ data }: { data: any }) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/users/register/confirm-registration`,
+				method: "PUT",
+				body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
 
 		login: builder.mutation({
 			query: ({ data }: { data: any }) => ({
@@ -47,6 +58,18 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			query: (id) => ({
 				url: `${import.meta.env.VITE_BASE_URL}/users/${id}`,
 				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
+		updateUserProfile: builder.mutation({
+			query: ({id, data}: {id: any, data: any}) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/users/${id}/user`,
+				method: "PUT",
+				body: data,
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -282,5 +305,7 @@ export const {
    useLazyApproveWithdrawalQuery,
   useLazyDeclineDepositsQuery,
   useUpdateUserMutation,
-  useLazyDeclineWithdrawalQuery
+  useLazyDeclineWithdrawalQuery,
+  useConfirmRegMutation,
+  useUpdateUserProfileMutation,
 } = baseApiSlice;

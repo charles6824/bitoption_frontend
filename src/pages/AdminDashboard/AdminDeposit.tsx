@@ -466,8 +466,8 @@ const AdminDeposit = () => {
 										</div>
 
 										{transferLoading ? (
-											<div className="w-[30%]">
-												<LoadingBtn />
+											<div className="w-[35%]">
+												<LoadingBtn bg="bg-gray-500" />
 											</div>
 										) : (
 											<button

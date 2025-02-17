@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import LoadingBtn from "../../components/LoadingBtn";
 import Modal from "../../components/Modal";
 import PromptsCard from "../../components/PromptsCard";
-import { FaTimes, FaUserCircle } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaTimes, FaUserCircle } from "react-icons/fa";
 import checkIcon from "../../assets/images/checkIcon.png";
 import { useNavigate } from "react-router-dom";
 const AdminSettings = () => {
@@ -13,7 +13,9 @@ const AdminSettings = () => {
 	const [oldPassword, setOldPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-
+	const [showOldPassword, setShowOldPassword] = useState(false);
+	const [showNewPassword, setShowNewPassword] = useState(false);
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [changePassword, { isLoading }] =
 		useChangeAdminPasswordMutation() as any;
@@ -73,6 +75,17 @@ const AdminSettings = () => {
 			value: "changepassword",
 		},
 	];
+	const handleShowOldPassword = ()=>{
+		setShowOldPassword(!showOldPassword)
+	  }
+	const handleShowNewPassword = ()=>{
+		setShowNewPassword(!showNewPassword)
+	  }
+	const handleShowConfirmPassword = ()=>{
+		setShowConfirmPassword(!showConfirmPassword)
+	  }
+
+	  
 
 	return (
 		<div>
@@ -156,27 +169,38 @@ const AdminSettings = () => {
 										onSubmit={handlePasswordChange}
 										className="space-y-4 text-white w-[60%] "
 									>
-										<div>
+										<div className="relative">
+											<span onClick={handleShowOldPassword} className="absolute top-4 right-8 text-black ">
+																	 {showOldPassword ?  <FaEyeSlash/> : <FaEye />}
+																	</span>
+
+   
+
 											<input
 												value={oldPassword}
 												onChange={(e) => setOldPassword(e.target.value)}
-												type="password"
+												type={showOldPassword ? "text" : "password"}
 												className="w-full py-3 border border-[#ccc] text-black  px-4 text-[13px]  rounded-md outline-none "
 												placeholder="Old password"
 											/>
 										</div>
-										<div className="">
+										<div className="relative">
+
+										<span onClick={handleShowNewPassword} className="absolute top-4 right-8 text-black">
+                                           {showNewPassword ?  <FaEyeSlash/> : <FaEye/>} </span>
 											<input
-												type="password"
+												type={showNewPassword ? "text" : "password"}
 												value={newPassword}
 												onChange={(e) => setNewPassword(e.target.value)}
 												className="w-full py-3 border border-[#ccc] text-black  px-4 text-[13px]  rounded-md outline-none"
 												placeholder="New password"
 											/>
 										</div>
-										<div className="">
+										<div className="relative">
+										<span onClick={handleShowConfirmPassword} className="absolute top-4 right-8 text-black ">
+                                            {showConfirmPassword ?  <FaEyeSlash/> : <FaEye />} </span>
 											<input
-												type="password"
+												type={showConfirmPassword ? "text" : "password"}
 												value={confirmPassword}
 												onChange={(e) => setConfirmPassword(e.target.value)}
 												className="w-full py-3 border border-[#ccc] text-black  px-4 text-[13px]  rounded-md outline-none"
@@ -203,35 +227,7 @@ const AdminSettings = () => {
 						</>
 					)}
 
-					{/* {activeTab === "sendfeedback" && (<><div>
-            <div className="mt-20">
-          <select
-            className="border border-[#ccc] p-3 w-[60%] rounded-md outline-none"
-            value={feedbackType}
-            onChange={(e) => setFeedbackType(e.target.value)}
-          >
-            <option>Feedback Type</option>
-            <option value="payment">Payment </option>
-            <option value="account">Account </option>
-          </select>
-           </div>
-           {feedbackType && (
-            <form onSubmit={handleFeedback} className="mt-5">
-              <textarea
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-                className="border w-[60%] py-3 px-3"
-                placeholder="Enter message..."
-              ></textarea>
-              <div className="mt-2">
-                <button type="submit" className="bg-[#1d1d1d] border border-[#fa9e1f] py-2 px-7 rounded-md text-white font-semibold">
-                  Send Message
-                </button>
-              </div>
-            </form>
-          )}
-     
-            </div></>)} */}
+				
 				</TabsBody>
 			</Tabs>
 

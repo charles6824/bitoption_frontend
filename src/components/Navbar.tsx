@@ -20,7 +20,6 @@ const Navbar = () => {
     <>
       {/* Desktop Navbar */}
       <nav className="hidden bg-[#1d1d1d] px-[5%] py-5 text-[#FFF] md:flex justify-between">
-        {/* <img src={logo} alt="" className="h-11" /> */}
         <h1 className="text-[30px] ">247bit<span className="text-[#fa9e1f] text-[30px] italic">option</span> </h1>
         <div className="flex items-center space-x-7 text-[13px]">
           <div>

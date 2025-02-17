@@ -252,7 +252,7 @@ const AdminLayout = () => {
               <PromptsCard title={""}>
 									<div className="p-10 flex flex-col justify-center items-center">
 										<h2 className="text-2xl text-center pt-8 pb-5 font-medium text-gray-900">
-											Are you sure you want to log out?
+											Are you sure you want to <span className="text-red-600">logout?</span>
 										</h2>
 										<div className="mb-8 text-center">
                       {
@@ -262,7 +262,7 @@ const AdminLayout = () => {
                         </>) : (
                           <div className="flex gap-9">
                             <button onClick={()=>setShowModal(false)} className="bg-black py-2 px-7 text-white">No</button>
-                            <button onClick={handleLogout} className="bg-black py-2 px-7 text-white">YES</button>
+                            <button onClick={handleLogout} className="bg-red-500 py-2 px-7 text-white">YES</button>
 
                           </div>
                         )

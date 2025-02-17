@@ -183,7 +183,7 @@ const Dashboard = () => {
 				</div>
 			</div>
 			{/* Table section */}
-			<div className="py-5 px-4 ">
+			<div className="py-5 px-4 shadow-md rounded-[10px] bg-white h-[70vh] overflow-y-scroll my-6">
 				<h1 className="text-[25px] mb-2">Transaction History</h1>
 				{historyLoading ? (
 					<LoadingComponent />
@@ -248,7 +248,7 @@ const Dashboard = () => {
 			</div>
 
 			{/* chart */}
-			<div className="w-full px-5 ">
+			<div className="w-full p-5 bg-white rounded-[10px] shadow-md my-5">
 				
 					<CashFlowChart
 						inflowData={cashflow.inflowData}

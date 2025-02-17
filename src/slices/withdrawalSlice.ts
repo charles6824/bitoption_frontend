@@ -53,8 +53,8 @@ export const withdrawalApiSlice = apiSlice.injectEndpoints({
 
 		sendOTP: builder.query({
 			query: () => ({
-				url: `${import.meta.env.VITE_BASE_URL}/withdrawal/verify-otp`,
-				method: "GET",
+				url: `${import.meta.env.VITE_BASE_URL}/withdrawal/user/verify-otp`,
+				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
 				},
