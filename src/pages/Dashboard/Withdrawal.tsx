@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import AccountCard from "../../components/AccountCard";
@@ -20,6 +20,7 @@ const Withdrawal = () => {
 	const [accountNumber, setAccountNumer] = useState("");
 	const [accountName, setAccountName] = useState("");
 	const [bankName, setBankName] = useState("");
+	const [routingNumber, setRoutingNumber] = useState("");
 	const [withdrawalMethod, setWithdrawalMethod] = useState("");
 	const [_isTokenComplete, setIsTokenComplete] = useState(false);
 	const [token, setToken] = useState<string[]>(Array(6).fill(""));
@@ -38,10 +39,35 @@ const Withdrawal = () => {
 		setToken(tokens);
 	};
 
-  console.log(_isTokenComplete)
+	console.log(_isTokenComplete);
+
+	const [banks, setBanks] = useState<any>([]);
+	const [selectedBank, setSelectedBank] = useState<string>("");
+
+	useEffect(() => {
+		const fetchBanks = async () => {
+			try {
+				const response = await fetch(
+					"https://banks.data.fdic.gov/api/institutions?filters=&fields=NAME,ID&limit=1000&format=json"
+				);
+				const data = await response.json();
+				const bankList = data.data.map((bank: any) => ({
+					ID: bank.data.ID,
+					NAME: bank.data.NAME,
+				}));
+				setBanks(bankList);
+			} catch (error) {
+				console.error("Error fetching bank data:", error);
+			}
+		};
+
+		fetchBanks();
+	}, []);
 
 	const handleStep = async (e: React.FormEvent) => {
 		e.preventDefault();
+		const field = { accountName, accountNumber, routingNumber, bankName };
+
 		try {
 			
 			if (step < 2) {
@@ -68,6 +94,7 @@ const Withdrawal = () => {
 									accountNumber: accountNumber,
 									accountName: accountName,
 									bankName: bankName,
+                  routing: routingNumber,
 								},
 								otp: token.join(""),
 						  };
@@ -134,13 +161,19 @@ const Withdrawal = () => {
 								{/* Conditionally render inputs based on the selected withdrawal method */}
 								{withdrawalMethod === "bank" && (
 									<div className="mt-5">
-										<input
-											type="text"
-											placeholder="Bank Name"
-											className=" bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none"
-											value={bankName}
+										<select
+											id="bankSelect"
+											className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none "
+											value={selectedBank}
 											onChange={(e) => setBankName(e.target.value)}
-										/>
+										>
+											<option>Select a bank</option>
+											{banks.map((bank: any) => (
+												<option key={bank.ID} value={bank.NAME}>
+													{bank.NAME}
+												</option>
+											))}
+										</select>
 										<input
 											type="text"
 											placeholder="Account Number"
@@ -154,6 +187,13 @@ const Withdrawal = () => {
 											className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
 											value={accountName}
 											onChange={(e) => setAccountName(e.target.value)}
+										/>
+										<input
+											type="text"
+											placeholder="Routing Number"
+											className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
+											value={routingNumber}
+											onChange={(e) => setRoutingNumber(e.target.value)}
 										/>
 									</div>
 								)}

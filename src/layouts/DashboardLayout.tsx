@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { FaArrowDown,   FaUser, FaUserCircle } from "react-icons/fa";
+import { FaArrowDown, FaUser, FaUserCircle } from "react-icons/fa";
 import { MdDashboard, MdLogout, MdOutlineSettings, MdPayment } from "react-icons/md";
 import { GiPayMoney } from "react-icons/gi";
 import { BiTransferAlt } from "react-icons/bi";

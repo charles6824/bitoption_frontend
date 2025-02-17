@@ -1,4 +1,4 @@
-import { FaEdit, FaPlus, FaTimesCircle, FaTrash } from "react-icons/fa";
+import { FaEdit, FaPlus, FaRegTimesCircle, FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Table } from "../../components/Table";
 import Modal from "../../components/Modal";
@@ -137,7 +137,7 @@ const AdminPackages = () => {
 				data: { payload: model },
 			}).unwrap();
 			if (response.status) {
-				toast.success(response.message);
+				toast.success("Package updated successfully");
 				setShowModal(false);
 				setName("");
 				setAmount(0);
@@ -159,6 +159,8 @@ const AdminPackages = () => {
 			setData([]);
 		}
 	}, [packageData]);
+
+	console.log("data: ", data)
 
 	return (
 		<>
@@ -212,15 +214,14 @@ const AdminPackages = () => {
 						isShowCancelButton={false}
 						cancelButtonFunction={() => setShowModal(false)}
 					>
-						<div className="p-10">
+						<div className="p-4  w-[45%] ">
 							<PromptsCard title="">
-								<div>
+								<div className="w-full">
 									<div className="absolute top-2 right-2">
-										<FaTimesCircle
-											size={40}
-											onClick={() => setShowModal(false)}
-											className="cursor-pointer text-[#1d1d1d]"
-										/>
+										<FaRegTimesCircle
+												size={25}
+												className="text-red-500 cursor-pointer"
+													onClick={() => setShowModal(false)}/>
 									</div>
 									<h1 className="mb-5 text-center font-bold text-[25px]">
 										{isEditing ? "Edit" : "Add"}{" "}
@@ -258,16 +259,19 @@ const AdminPackages = () => {
 											<label>Duration</label>
 											<input
 												type="text"
-												className="border-2 border-gray-400 p-2 rounded-md w-full"
+												className="border-2 border-gray-400 p-2 rounded-md w-full bg-gray-500]"
 												value={duration}
 												onChange={(e) => setDuration(Number(e.target.value))}
 											/>
 										</div>
 										{createLoading || updateLoading ? (
-											<LoadingBtn />
+											<div>
+
+												<LoadingBtn bg="bg-gray-500" />
+											</div>
 										) : (
 											<button
-												className="bg-[#1d1d1d] py-2 px-7 rounded-sm text-white mt-6"
+												className="bg-[#1d1d1d] w-full py-2 px-7 rounded-sm text-white mt-6"
 												onClick={isEditing ? submitUpdate : submitCreate}
 											>
 												{isEditing ? "Update" : "Add"}
@@ -279,6 +283,9 @@ const AdminPackages = () => {
 						</div>
 					</Modal>
 				)}
+							<div>
+
+							</div>
 
 				{/* Delete Confirmation Modal */}
 				{showDeleteModal && (

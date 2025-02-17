@@ -31,7 +31,7 @@ const Deposit = () => {
 				};
 				const response: any = await fundWithCrypto({
 					data: { payload: model },
-				});
+				}).unwrap();
 				console.log("response: ", response);
 				if (response.data.status) {
 					toast.success(response.data.message);
@@ -41,7 +41,7 @@ const Deposit = () => {
 				}
 			}
 		} catch (error: any) {
-			toast.error(error.data.message);
+			toast.error(error.error.data.message);
 		}
 	};
 
@@ -105,7 +105,7 @@ const Deposit = () => {
 				<>
 					{activeState === "crypto" && (
 						<div className="shadow p-4 rounded-md border-[0.5px] border-[#ccc]">
-							<form className="space-y-6">
+							<form onSubmit={handleStep}  className="space-y-6">
 								{/* Step 1: Amount & Narration */}
 								{step === 1 && (
 									<div className="space-y-6">
@@ -189,11 +189,11 @@ const Deposit = () => {
 									<>
 										{cryptoLoading ? (
 											<div className="w-[25%]">
-												<LoadingBtn  />
+												<LoadingBtn bg="bg-gray-500" />
 											</div>
 										) : (
 											<button
-												onClick={handleStep}
+												
 												className="bg-[#1d1d1d] border border-[#fa9e1f] py-2 mx-6  px-7 rounded-md text-white font-semibold"
 											>
 												{step === 1 ? "Continue" : "I've Sent the Amount"}

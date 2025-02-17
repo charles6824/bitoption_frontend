@@ -1,11 +1,8 @@
 
-
 import { useState } from "react";
 import { Link, Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
-// import { FaAngleDown, FaArrowDown,  FaUser, FaUserCircle } from "react-icons/fa";
 import { MdDashboard, MdLogout, MdOutlineSettings, MdPayment } from "react-icons/md";
 import { GiPayMoney } from "react-icons/gi";
-// import { BiTransferAlt } from "react-icons/bi";
 import { LucideChartNoAxesCombined,Folder } from "lucide-react";
 import { useLogoutMutation } from "../slices/baseApiSlice";
 import PromptsCard from "../components/PromptsCard";
@@ -16,7 +13,6 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
-  Avatar,
   Typography,
 } from "@material-tailwind/react";
 import { FaUser, FaUserCircle } from "react-icons/fa";
@@ -33,7 +29,7 @@ const AdminLayout = () => {
     try {
 			await logout({}).unwrap();
 			sessionStorage.clear(); 
-			navigate('/sign-in'); 
+			navigate('/admin/sign-in'); 
 		} catch (error) {
 			console.error('Logout failed:', error);
 		}
@@ -65,43 +61,36 @@ const AdminLayout = () => {
   const navList = [
     { 
       name: "Dashboard",
-      // icon: <img src={dashboard} alt="Dashboard Icon" className="w-5 h-5" />,
       icon: <MdDashboard />,
       url: "/admin/dashboard",
     },
     {
       name: "Users",
-      // icon: <img src={settings} alt="Settings Icon" className="w-5 h-5" />,
       icon: <FaUserCircle />,
       url: "/admin/users",
     },
     {
       name: "Fund Wallet",
-      // icon: <img src={dispute} alt="Dispute Resolution Icon" className="w-5 h-5" />,
      icon: <GiPayMoney />,
       url: "/admin/deposit",
     },
     {
       name: "Packages",
-      // icon: <img src={message} alt="Messages Icon" className="w-5 h-5" />,
       icon:<LucideChartNoAxesCombined />,
       url: "/admin/packages",
     },
     {
       name: "Investments",
-      // icon: <img src={message} alt="Messages Icon" className="w-5 h-5" />,
       icon:<Folder />,
       url: "/admin/investments",
     },
     {
       name: "Withdrawals",
-      // icon: <img src={calendar} alt="Calendar Icon" className="w-5 h-5" />,
       icon :<MdPayment/>,
       url: "/admin/withdrawals",
     },
     {
       name: "Settings",
-      // icon: <img src={settings} alt="Settings Icon" className="w-5 h-5" />,
       icon: <MdOutlineSettings />,
       url: "/admin/settings",
     },
@@ -263,7 +252,7 @@ const AdminLayout = () => {
               <PromptsCard title={""}>
 									<div className="p-10 flex flex-col justify-center items-center">
 										<h2 className="text-2xl text-center pt-8 pb-5 font-medium text-gray-900">
-											Are you sure you want to log out?
+											Are you sure you want to <span className="text-red-600">logout?</span>
 										</h2>
 										<div className="mb-8 text-center">
                       {
@@ -273,7 +262,7 @@ const AdminLayout = () => {
                         </>) : (
                           <div className="flex gap-9">
                             <button onClick={()=>setShowModal(false)} className="bg-black py-2 px-7 text-white">No</button>
-                            <button onClick={handleLogout} className="bg-black py-2 px-7 text-white">YES</button>
+                            <button onClick={handleLogout} className="bg-red-500 py-2 px-7 text-white">YES</button>
 
                           </div>
                         )
