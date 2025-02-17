@@ -9,6 +9,7 @@ import { useTransferViaWalletMutation } from "../../slices/baseApiSlice";
 import checkIcon from "../../assets/images/checkIcon.png";
 import { useNavigate } from "react-router-dom";
 import LoadingBtn from "../../components/LoadingBtn";
+import BackButton from "../../components/BackButton";
 
 const Transfer = () => {
 	const navigate = useNavigate();
@@ -90,6 +91,7 @@ const Transfer = () => {
 	return (
 		// Transfer
 		<div className="py-2">
+			<BackButton/>
 			<h1 className="text-[28px] mb-2">Transfer</h1>
 			<p className="text-[14px]">Transfer to other Recipient</p>
 			{step === 1 && (
@@ -180,7 +182,7 @@ const Transfer = () => {
 						{transferLoading ? (
 							<div className="w-[30%]">
 
-								<LoadingBtn />
+								<LoadingBtn bg="bg-gray-500" />
 							</div>
 						) : (
 							<button

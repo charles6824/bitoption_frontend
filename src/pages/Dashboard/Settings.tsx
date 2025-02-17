@@ -13,6 +13,7 @@ import PromptsCard from "../../components/PromptsCard";
 import { FaTimes, FaUserCircle } from "react-icons/fa";
 import checkIcon from "../../assets/images/checkIcon.png"
 import { useNavigate } from "react-router-dom";
+import BackButton from "../../components/BackButton";
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("details");
   const [oldPassword,setOldPassword] = useState("")
@@ -119,6 +120,7 @@ if (newPassword !== confirmPassword) {
  
   return (
     <div>
+      <BackButton/>
 {/* Tab */}
    <Tabs value={activeTab}>
       <TabsHeader

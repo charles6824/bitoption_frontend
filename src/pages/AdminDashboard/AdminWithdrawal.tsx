@@ -345,7 +345,8 @@ const AdminWithdrawal = () => {
 										{selectedItem?.status === "pending" && (
 											<>
 												{approveLoading || declineLoading ? (
-													<LoadingBtn />
+
+													<LoadingBtn bg="bg-gray-500"/>
 												) : (
 													<div className="flex items-center gap-4 text-white text-sm">
 														<button

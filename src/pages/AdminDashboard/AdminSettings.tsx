@@ -71,32 +71,7 @@ if (newPassword !== confirmPassword) {
     
   }
 
-  // const handleFeedback =async (e:React.FormEvent)=>{
-  //   e.preventDefault();
-  //   if(!message){
-  //     toast.error("message is required")
-  //     return;
-  //   }
-
-  //   const model = {
-  //      feedbackType,
-  //      message
-  //   };
-
-  //   try {
-  //     const response = await feedback({data:{payload: model}}).unwrap();
-  //      if(response?.status){
-  //       setShowModal(true);
-  //      }else{
-  //       toast.error(response.message);
-  //      }
-      
-  //   } catch (error:any) {
-  //     toast.error(error.message);
-      
-  //   }
-
-  // }
+  
   const data = [
 
     {
