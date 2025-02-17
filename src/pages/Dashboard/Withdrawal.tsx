@@ -42,7 +42,7 @@ const Withdrawal = () => {
 	console.log(_isTokenComplete);
 
 	const [banks, setBanks] = useState<any>([]);
-	const [selectedBank, setSelectedBank] = useState<string>("");
+	
 
 	useEffect(() => {
 		const fetchBanks = async () => {
