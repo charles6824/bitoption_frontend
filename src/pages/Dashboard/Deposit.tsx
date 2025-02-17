@@ -4,6 +4,7 @@ import { useFundWithCryptoMutation } from "../../slices/baseApiSlice";
 import LoadingBtn from "../../components/LoadingBtn";
 import checkIcon from "../../assets/images/checkIcon.png";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../../components/BackButton";
 
 const Deposit = () => {
 	const navigate = useNavigate();
@@ -46,6 +47,7 @@ const Deposit = () => {
 
 	return (
 		<div>
+			<BackButton/>
 			<h1 className="text-[28px]">Deposit</h1>
 			<p className="text-[12px]">Fund your wallet with crypto or PayPal</p>
 

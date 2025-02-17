@@ -3,6 +3,7 @@ import { useBuyPackageMutation, useGetSinglePackageQuery } from "../../slices/pa
 import LoadingBtn from "../../components/LoadingBtn";
 import { useGetAccountBalanceQuery } from "../../slices/accountApiSlice";
 import { toast } from "react-toastify";
+import BackButton from "../../components/BackButton";
 
 const SinglePackage = () => {
   const params = useParams();
@@ -33,6 +34,7 @@ const SinglePackage = () => {
 
   return (
     <div className="w-[60%] mx-auto mt-10 p-8 bg-white shadow-lg rounded-lg">
+      <BackButton/>
     {/* Header */}
     <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Package Details</h1>
 
@@ -65,10 +67,12 @@ const SinglePackage = () => {
 
     {/* Proceed Button */}
     {packageLoading ? (
-      <LoadingBtn />
+      <div className="">
+      <LoadingBtn bg="bg-gray-500"  />
+      </div>
     ) : (
       <button className="w-full bg-[#1d1d1d] text-white font-semibold py-3 rounded-md transition hover:bg-black" onClick={investPackage}>
-        Proceed
+        Proceed 
       </button>
     )}
   </div>

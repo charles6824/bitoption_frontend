@@ -92,6 +92,9 @@ const AdminUsers = () => {
 		setShowModal(false);
 		setShowEditModal(true);
 		setSelectedItem(item);
+		setFullName(item.fullName);
+		setEmail(item.email);
+		setPassword("")
 	};
 
 	const handleStatusUpdate = async () => {
@@ -180,17 +183,57 @@ const AdminUsers = () => {
 							isShowCancelButton={true}
 							cancelButtonFunction={() => setShowModal(false)}
 						>
-							<div className="w-[40%]">
+							<div className="w-[45%]">
 								<PromptsCard title={""}>
-									<div className="p-4 text-center ">
-										<h2 className="text-[20px] font-bold text-blue-500">
+									<div className="p-4  ">
+										<h2 className="text-[20px] font-bold text-[#">
 											Edit User Profile
 										</h2>
 
                     {/* fullName, email and password */}
                     <div className="">
+						
+						<div className="space-y-5 py-3 w-full">
+										<div className="">
+											<label htmlFor="">fullName</label>
+											<input
+											onChange={(e)=>setFullName(e.target.value)}
+												type="text"
+												className="w-full bg-[#f4f4f4] px-4 rounded py-2"
+												value={fullName}
+												
+											/>
+										</div>
+										<div className="">
+											<label htmlFor="">Email</label>
+											<input
+											    onChange={(e)=>setEmail(e.target.value)}
+												type="text"
+												className="w-full bg-[#f4f4f4] px-4 rounded py-2"
+												value={email}
+												
+											/>
+										</div>
+										<div className="">
+											<label htmlFor="">Password</label>
+											<input
+											    onChange={(e)=>setPassword(e.target.value)}
+												type="text"
+												className="w-full bg-[#f4f4f4] px-4 rounded py-2"
+												value={password}
+												
+											/>
+										</div>
+										
+										
+										
 
-                      {userProfileLoading ? <LoadingBtn /> : <button className="" onClick={handleUpdateProfile}>Update Profile</button>}
+										
+									</div>
+
+						
+
+                      {userProfileLoading ? <LoadingBtn bg="bg-gray-500" /> : <button className="bg-[#1d1d1d] py-2 px-5 text-white" onClick={handleUpdateProfile}>Update Profile</button>}
                     </div>
 									</div>
 								</PromptsCard>

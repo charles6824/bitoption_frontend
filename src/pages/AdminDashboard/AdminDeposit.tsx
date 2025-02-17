@@ -368,8 +368,10 @@ const AdminDeposit = () => {
 											<>
 												{approveLoading || declineLoading ? (
 											        
+                                                    <div className="w-[30%]">
 
-													<LoadingBtn bg="bg-[#1d1d1d]" />
+														<LoadingBtn  />
+													</div>
 													
 												) : (
 													<div className="flex ite,s-center gap-4 text-white text-sm">
@@ -466,7 +468,7 @@ const AdminDeposit = () => {
 										</div>
 
 										{transferLoading ? (
-											<div className="w-[35%]">
+											<div className="w-[30%]">
 												<LoadingBtn bg="bg-gray-500" />
 											</div>
 										) : (

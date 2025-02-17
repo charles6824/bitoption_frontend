@@ -11,6 +11,7 @@ import {
 } from "../../slices/withdrawalSlice";
 import { toast } from "react-toastify";
 import LoadingBtn from "../../components/LoadingBtn";
+import BackButton from "../../components/BackButton";
 const Withdrawal = () => {
 	const navigate = useNavigate();
 	const [step, setStep] = useState(1);
@@ -68,6 +69,7 @@ const Withdrawal = () => {
 		const field = { accountName, accountNumber, routingNumber, bankName };
 
 		try {
+			
 			if (step < 2) {
 				const response: any = await sendOTP({}).unwrap();
 				if (response.status) {
@@ -114,10 +116,7 @@ const Withdrawal = () => {
 
 	return (
 		<div className="py-2">
-			<Link to="/withdrawals" className="flex items-center text-[#fa9e1f] mb-1">
-				<FaArrowLeft />
-				Go Back
-			</Link>
+			<BackButton/>
 			<h1 className="text-[28px]">Withdrawal</h1>
 			<p className="text-[12px]">Withdraw to your crypto wallet or bank</p>
 
@@ -221,9 +220,9 @@ const Withdrawal = () => {
 
 						<div className="mt-5">
 							{otpLoading || withdrawLoading ? (
-								<>
-									<LoadingBtn />
-								</>
+								<div className="w-[25%]">
+									<LoadingBtn bg="bg-gray-500" />
+								</div>
 							) : (
 								<button
 									className="py-2 px-7 bg-[#1d1d1d] text-white border border-[#fa9e1f]"

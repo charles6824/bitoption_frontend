@@ -1,5 +1,6 @@
 import { FaUserCircle } from "react-icons/fa";
 import {
+	useGetAccountBalanceQuery,
 	useLazyNameEnquiryQuery,
 } from "../../slices/accountApiSlice";
 import { useEffect, useState } from "react";
@@ -8,6 +9,7 @@ import { useTransferViaWalletMutation } from "../../slices/baseApiSlice";
 import checkIcon from "../../assets/images/checkIcon.png";
 import { useNavigate } from "react-router-dom";
 import LoadingBtn from "../../components/LoadingBtn";
+import BackButton from "../../components/BackButton";
 
 const Transfer = () => {
 	const navigate = useNavigate();
@@ -17,16 +19,15 @@ const Transfer = () => {
 	const [description, setDescription] = useState("");
 	const [showName, setShowName] = useState(false);
 	const [step, setStep] = useState(1);
-	// const { data } = useGetAccountDetailsQuery({}) as any;
 	const user_data: any = sessionStorage.getItem("userInfo");
 	const userInfo = user_data && JSON.parse(user_data);
 
 	const accountDetails = userInfo && userInfo.data.accountDetails;
 
-	console.log("accountDetails", accountDetails);
 
 	const [nameEnquiry, { isLoading: nameLoading, data: nameData }] =
 		useLazyNameEnquiryQuery({}) as any;
+		const {data} = useGetAccountBalanceQuery({}) as any;
 
 	const [transferViaWallet, { isLoading: transferLoading }] =
 		useTransferViaWalletMutation();
@@ -89,6 +90,7 @@ const Transfer = () => {
 	return (
 		// Transfer
 		<div className="py-2">
+			<BackButton/>
 			<h1 className="text-[28px] mb-2">Transfer</h1>
 			<p className="text-[14px]">Transfer to other Recipient</p>
 			{step === 1 && (
@@ -112,7 +114,7 @@ const Transfer = () => {
 									<div className="flex flex-col text-right">
 										<h1 className="text-[#EDEFF2]  text-[25px] md:text-[20px]">
 											Balance: $
-											{Number(accountDetails.balance).toLocaleString("en-US", {
+											{Number(data?.balance).toLocaleString("en-US", {
 												minimumFractionDigits: 2,
 												maximumFractionDigits: 2,
 											})}
@@ -147,7 +149,7 @@ const Transfer = () => {
 									) : (
 										<div className="py-3">
 											<input
-												type="email"
+												type="text"
 												className="w-[60%] py-3  text-[13px] bg-gray-50  px-3 border border-[#ccc] rounded-md "
 												placeholder="Account name"
 												value={nameData && nameData.data}
@@ -158,15 +160,25 @@ const Transfer = () => {
 								</>
 							)}
 						</>
-						<div className="relative py-2">
-							<input
-								type="text"
-								className="w-[60%] py-3 bg-gray-50 border border-[#ccc] text-[13px] px-3   rounded-md "
-								placeholder="Amount"
-								value={amount}
-								onChange={(e) => setAmount(Number(e.target.value))}
-							/>
-						</div>
+						<div className=" w-[60%] flex items-center border border-[#ccc] rounded-md overflow-hidden">
+												<span className="px-3 py-3 bg-gray-100 text-gray-500 border-r border-[#ccc]">
+													$
+												</span>
+												<input
+													type="text"
+													id="crypto"
+													inputMode="numeric"
+													pattern="[0-9]*"
+													placeholder="0.00"
+													className="px-3 py-3 outline-none bg-gray-50 w-full"
+													onInput={(e) => {
+														const target = e.target as HTMLInputElement;
+														target.value = target.value.replace(/\D/g, "");
+													}}
+													value={amount}
+													onChange={(e) => setAmount(Number(e.target.value))}
+												/>
+											</div>
 						<div className="relative py-2">
 							<input
 								type="text"
@@ -178,9 +190,9 @@ const Transfer = () => {
 						</div>
 						{transferLoading ? (
 							<div className="w-[30%]">
-
-								<LoadingBtn />
+								<LoadingBtn bg="bg-gray-500" />
 							</div>
+
 						) : (
 							<button
 								className=" bg-[#1d1d1d] text-white py-2 px-5 border border-[#fa9e1f]  rounded hover:bg-[#fa9e1f] transition "

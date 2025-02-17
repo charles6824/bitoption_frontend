@@ -6,6 +6,7 @@ import Modal from "../../components/Modal";
 import PromptsCard from "../../components/PromptsCard";
 import { FaRegArrowAltCircleRight, FaTimesCircle } from "react-icons/fa";
 import { Data } from "../../interface/package";
+import BackButton from "../../components/BackButton";
 
 const Investment = () => {
 	const tableHead = [
@@ -29,6 +30,7 @@ const Investment = () => {
 
 	return (
 		<div>
+			<BackButton/>
 			<h1 className="text-[28px] mb-6">Investments</h1>
 			{isLoading ? (
 				<LoadingComponent />
