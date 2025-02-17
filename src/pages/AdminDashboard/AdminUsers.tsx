@@ -3,7 +3,7 @@ import { Table } from "../../components/Table";
 import {
 	useAllUsersQuery,
 	useUpdateUserMutation,
-  useUpdateUserProfileMutation,
+	useUpdateUserProfileMutation,
 } from "../../slices/baseApiSlice";
 import PromptsCard from "../../components/PromptsCard";
 import Modal from "../../components/Modal";
@@ -66,14 +66,15 @@ const AdminUsers = () => {
 	const [showModal, setShowModal] = useState(false);
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [selectedItem, setSelectedItem] = useState<any>({});
-  const [fullName, setFullName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+	const [fullName, setFullName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
 	const { isLoading, data: userData, refetch } = useAllUsersQuery({}) as any;
 
 	const [updateUser, { isLoading: userLoading }] = useUpdateUserMutation();
-	const [updateUserProfile, { isLoading: userProfileLoading }] = useUpdateUserProfileMutation();
+	const [updateUserProfile, { isLoading: userProfileLoading }] =
+		useUpdateUserProfileMutation();
 
 	useEffect(() => {
 		if (userData && userData.status) {
@@ -94,7 +95,7 @@ const AdminUsers = () => {
 		setSelectedItem(item);
 		setFullName(item.fullName);
 		setEmail(item.email);
-		setPassword("")
+		setPassword("");
 	};
 
 	const handleStatusUpdate = async () => {
@@ -114,12 +115,15 @@ const AdminUsers = () => {
 
 	const handleUpdateProfile = async () => {
 		try {
-      const model = {
-        fullName: fullName,
-        email: email,
-        password: password
-      }
-			const response: any = await updateUserProfile({id: selectedItem._id, data: {payload: model}}).unwrap();
+			const model = {
+				fullName: fullName,
+				email: email,
+				password: password,
+			};
+			const response: any = await updateUserProfile({
+				id: selectedItem._id,
+				data: { payload: model },
+			}).unwrap();
 			if (response.status) {
 				toast.success(response.message);
 				setShowModal(false);
@@ -181,7 +185,7 @@ const AdminUsers = () => {
 					{showEditModal && (
 						<Modal
 							isShowCancelButton={true}
-							cancelButtonFunction={() => setShowModal(false)}
+							cancelButtonFunction={() => setShowEditModal(false)}
 						>
 							<div className="w-[45%]">
 								<PromptsCard title={""}>
@@ -190,51 +194,57 @@ const AdminUsers = () => {
 											Edit User Profile
 										</h2>
 
-                    {/* fullName, email and password */}
-                    <div className="">
-						
-						<div className="space-y-5 py-3 w-full">
+										{/* fullName, email and password */}
 										<div className="">
-											<label htmlFor="">fullName</label>
-											<input
-											onChange={(e)=>setFullName(e.target.value)}
-												type="text"
-												className="w-full bg-[#f4f4f4] px-4 rounded py-2"
-												value={fullName}
-												
-											/>
-										</div>
-										<div className="">
-											<label htmlFor="">Email</label>
-											<input
-											    onChange={(e)=>setEmail(e.target.value)}
-												type="text"
-												className="w-full bg-[#f4f4f4] px-4 rounded py-2"
-												value={email}
-												
-											/>
-										</div>
-										<div className="">
-											<label htmlFor="">Password</label>
-											<input
-											    onChange={(e)=>setPassword(e.target.value)}
-												type="text"
-												className="w-full bg-[#f4f4f4] px-4 rounded py-2"
-												value={password}
-												
-											/>
-										</div>
-										
-										
-										
+											<div className="space-y-5 py-3 w-full">
+												<div className="">
+													<label htmlFor="">fullName</label>
+													<input
+														onChange={(e) => setFullName(e.target.value)}
+														type="text"
+														className="w-full bg-[#f4f4f4] px-4 rounded py-2"
+														value={fullName}
+													/>
+												</div>
+												<div className="">
+													<label htmlFor="">Email</label>
+													<input
+														onChange={(e) => setEmail(e.target.value)}
+														type="text"
+														className="w-full bg-[#f4f4f4] px-4 rounded py-2"
+														value={email}
+													/>
+												</div>
+												<div className="">
+													<label htmlFor="">Password</label>
+													<input
+														onChange={(e) => setPassword(e.target.value)}
+														type="text"
+														className="w-full bg-[#f4f4f4] px-4 rounded py-2"
+														value={password}
+													/>
+												</div>
+											</div>
 
-										
-									</div>
-
-						
-
-                      {userProfileLoading ? <LoadingBtn bg="bg-gray-500" /> : <button className="bg-[#1d1d1d] py-2 px-5 text-white" onClick={handleUpdateProfile}>Update Profile</button>}
-                    </div>
+											{userProfileLoading ? (
+												<LoadingBtn bg="bg-gray-500" />
+											) : (
+												<div className="flex gap-2 mt-3 items-center ">
+													<button
+														className="bg-[#1d1d1d] py-2 px-5 text-white"
+														onClick={handleUpdateProfile}
+													>
+														Update Profile
+													</button>
+													<button
+														className="bg-[red] py-2 px-5 text-white"
+														onClick={() => setShowEditModal(false)}
+													>
+														Close
+													</button>
+												</div>
+											)}
+										</div>
 									</div>
 								</PromptsCard>
 							</div>

@@ -67,7 +67,7 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 
 		updateUserProfile: builder.mutation({
 			query: ({id, data}: {id: any, data: any}) => ({
-				url: `${import.meta.env.VITE_BASE_URL}/users/${id}/user`,
+				url: `${import.meta.env.VITE_BASE_URL}/users/profile/${id}`,
 				method: "PUT",
 				body: data,
 				headers: {
