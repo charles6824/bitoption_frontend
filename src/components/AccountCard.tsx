@@ -10,7 +10,7 @@ const AccountCard: React.FC<SourceAccountProps> = ({
 
   return (
     <>
-      <div className="w-[60%]">
+      <div className="w-full md:w-[60%]">
         <div className="relative w-full flex items-center">
          
 

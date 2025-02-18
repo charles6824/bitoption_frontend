@@ -92,13 +92,13 @@ const Transfer = () => {
 		<div className="py-2">
 			<BackButton/>
 			<h1 className="text-[28px] mb-2">Transfer</h1>
-			<p className="text-[14px]">Transfer to other Recipient</p>
+			<p className="text-[14px] pb-4">Transfer to other Recipient</p>
 			{step === 1 && (
-				<div className="w-full border p-8">
-					<div className="relative flex items-center w-[60%]">
+				<div className="w-full border p-3 md:p-8">
+					<div className="relative flex items-center w-full md:w-[60%]">
 						<div className="flex-1 flex justify-center items-center ">
 							<div className="rounded-[15px] shadow-md w-full px-[15px] border-2 border-[#fa9e1f] md:px-[30px] py-[30px] bg-[#000]">
-								<div className="flex justify-between items-center">
+								<div className="flex flex-col md:flex-row md:justify-between md:items-center">
 									<div className="flex gap-2 items-center">
 										<FaUserCircle size={50} className="text-white" />
 
@@ -112,7 +112,7 @@ const Transfer = () => {
 										</div>
 									</div>
 									<div className="flex flex-col text-right">
-										<h1 className="text-[#EDEFF2]  text-[25px] md:text-[20px]">
+										<h1 className="text-[#EDEFF2] text-[20px] md:text-[20px]">
 											Balance: $
 											{Number(data?.balance).toLocaleString("en-US", {
 												minimumFractionDigits: 2,
@@ -160,7 +160,7 @@ const Transfer = () => {
 								</>
 							)}
 						</>
-						<div className=" w-[60%] flex items-center border border-[#ccc] rounded-md overflow-hidden">
+						<div className="w-full md:w-[60%] flex items-center border border-[#ccc] rounded-md overflow-hidden">
 												<span className="px-3 py-3 bg-gray-100 text-gray-500 border-r border-[#ccc]">
 													$
 												</span>
@@ -182,7 +182,7 @@ const Transfer = () => {
 						<div className="relative py-2">
 							<input
 								type="text"
-								className="w-[60%] py-3 bg-gray-50 border border-[#ccc] text-[13px] px-3  rounded-md "
+								className="w-full md:w-[60%] py-3 bg-gray-50 border border-[#ccc] text-[13px] px-3  rounded-md "
 								placeholder="Narration"
 								value={description}
 								onChange={(e) => setDescription(e.target.value)}

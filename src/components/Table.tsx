@@ -16,8 +16,13 @@ export function Table({ data, tableHead, children }: TableProps) {
   // const currentData = data.slice(startIndex, endIndex);
 
   return (
-    <div className="h-full w-full">
+    <div className=" h-auto md:h-full w-full">
       <div className="flex flex-col h-full w-full overflow-x-auto">
+      {data.length === 0 ? (
+        <>
+         <p>No data available</p>
+        </>
+      ) : (
         <table className="w-full">
           <thead>
             <tr className="border-b border-[#1d1d1d] bg-[#fa9e1f] text-left text-sm leading-4 text-[#000] font-bold h-11">
@@ -36,21 +41,11 @@ export function Table({ data, tableHead, children }: TableProps) {
             <p>No data available</p>
           )}
         </table>
+      ) }
       </div>
 
-      {!data.length ? (
-        <div className="flex flex-1 flex-col w-full h-[60lvh] justify-center items-center gap-y-[3.125rem]">
-          <img
-            src="/icons/empty-data.svg"
-            alt="empty-data-icon"
-            aria-label="empty-data-icons"
-            width={225}
-            height={1884}
-          />
-        </div>
-      ) : null}
 
-      {data.length ? (
+      {data.length > 0 && (
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-500">Records per page:</span>
@@ -89,7 +84,7 @@ export function Table({ data, tableHead, children }: TableProps) {
             </button>
           </div>
         </div>
-      ) : null}
+      ) }
     </div>
   );
 }

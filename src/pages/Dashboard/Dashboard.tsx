@@ -142,9 +142,9 @@ const Dashboard = () => {
 							<p className="">{userInfo.data.accountDetails.accountStatus}</p>
 						</div>
 					</div>
-					<div className="flex justify-between items-center">
+					<div className="flex flex-col md:flex-row md:justify-between md:items-center">
 						<div className="mt-5">
-							<p className="text-[#fa9e1f] ">
+							<p className="text-[#fa9e1f] text-[20px]">
 								{" "}
 								{userInfo.data.accountDetails.accountNumber}
 							</p>
@@ -168,7 +168,7 @@ const Dashboard = () => {
 								</>
 							) : (
 								<>
-									<p className="text-[25px]">
+									<p className="text-[18px] md:text-[25px]">
 										{" "}
 										Balance: $
 										{Number(accountBalance?.balance).toLocaleString("en-US", {
@@ -183,8 +183,8 @@ const Dashboard = () => {
 				</div>
 			</div>
 			{/* Table section */}
-			<div className="py-5 px-4 shadow-md rounded-[10px] bg-white h-[70vh] overflow-y-scroll my-6">
-				<h1 className="text-[25px] mb-2">Transaction History</h1>
+			<div className="py-5 px-4 shadow-md rounded-[10px] bg-white h-auto md:h-[70vh] overflow-y-scroll my-6">
+				<h1 className="text-[20px] md:text-[25px] mb-2">Transaction History</h1>
 				{historyLoading ? (
 					<LoadingComponent />
 				) : (

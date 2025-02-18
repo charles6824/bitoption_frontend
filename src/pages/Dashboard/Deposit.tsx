@@ -52,7 +52,7 @@ const Deposit = () => {
 			<p className="text-[12px]">Fund your wallet with crypto or PayPal</p>
 
 			{/* Toggle Buttons */}
-			<div className="w-full my-[30px] flex justify-between items-center gap-[15px] pt-2">
+			<div className="w-full my-[30px] flex flex-col md:flex-row justify-between items-center gap-[15px] pt-2">
 				{/* Crypto Option */}
 				<div
 					onClick={() => {
@@ -112,7 +112,7 @@ const Deposit = () => {
 										<div className="flex flex-col space-y-2">
 											{/* input with inside border */}
 
-											<div className=" w-[60%] flex items-center border border-[#ccc] rounded-md overflow-hidden">
+											<div className="w-full md:w-[60%] flex items-center border border-[#ccc] rounded-md overflow-hidden">
 												<span className="px-3 py-3 bg-gray-100 text-gray-500 border-r border-[#ccc]">
 													$
 												</span>
@@ -136,7 +136,7 @@ const Deposit = () => {
 										<div className="flex flex-col space-y-2">
 											<input
 												type="text"
-												className="border border-[#ccc] bg-gray-50 p-4 w-[60%] py-3 rounded-md outline-none"
+												className="border border-[#ccc] bg-gray-50 p-4 w-full md:w-[60%] py-3 rounded-md outline-none"
 												placeholder="Enter your Narration here..."
 												value={narration}
 												onChange={(e) => setNarration(e.target.value)}
@@ -147,7 +147,7 @@ const Deposit = () => {
 
 								{/* Step 2: Confirm Transaction */}
 								{step === 2 && (
-									<div className="w-[90%] px-6 py-3">
+									<div className="w-[90%] md:px-6 py-3 text-wrap">
 										<p className="text-gray-600">
 											To initiate funding, please transfer{" "}
 											<span className="font-bold text-lg text-black">
@@ -159,7 +159,7 @@ const Deposit = () => {
 											be credited to your wallet immediately
 										</p>
 
-										<div className="mt-4">
+										<div className="mt-4 ">
 											<h2 className="text-gray-700 font-semibold text-[25px] pb-4">
 												Wallet Address{" "}
 											</h2>
@@ -169,8 +169,8 @@ const Deposit = () => {
 													<strong>Bitcoin (BTC) address: </strong>{" "}
 													3Fz1tTPxP5jV5QYJzjR9vz5X7WZ1
 												</li>
-												<li>
-													<strong>Ethereum (ETH) address: </strong>{" "}
+												<li className="w-full overflow-scroll">
+													<strong>Ethereum (ETH) address: </strong>
 													0x742d35Cc6634C0532925a3b844Bc454e4438f4
 												</li>
 												<li>
@@ -188,13 +188,13 @@ const Deposit = () => {
 								{step < 3 && (
 									<>
 										{cryptoLoading ? (
-											<div className="w-[25%]">
+											<div className="md:w-[25%]">
 												<LoadingBtn bg="bg-gray-500" />
 											</div>
 										) : (
 											<button
 												
-												className="bg-[#1d1d1d] border border-[#fa9e1f] py-2 mx-6  px-7 rounded-md text-white font-semibold"
+												className="bg-[#1d1d1d] border border-[#fa9e1f] py-2  px-7 rounded-md text-white font-semibold w-[100%] md:w-[60%]"
 											>
 												{step === 1 ? "Continue" : "I've Sent the Amount"}
 											</button>

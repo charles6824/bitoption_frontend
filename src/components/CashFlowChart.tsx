@@ -87,8 +87,15 @@ const CashFlowChart: React.FC<CashFlowChartProps> = ({ inflowData, outflowData, 
   };
 
   return (
-    <div style={{ width: '100%', height: isMobile ? '300px' : '500px' }}>
-      <Bar data={data} options={options} />
+    <div className='w-full h-auto md:h-[500px]'>
+      {(!inflowData && !outflowData) ? (
+        <div className='flex flex-col gap-4 justify-center items-center'>
+        <p className="text-[20px] md:text-[25px]">Char Flow</p>
+        <p className="text-center"> No data available, Fund your account to get started</p>
+        </div>
+      ) : (
+        <Bar data={data} options={options} />
+      )}
     </div>
   );
 };

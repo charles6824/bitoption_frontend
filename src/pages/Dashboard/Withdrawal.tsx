@@ -126,7 +126,7 @@ const Withdrawal = () => {
 						{step === 1 && (
 							<div className="mt-10">
 								<AccountCard cardData={accountDetails} data={data} />
-								<div className="w-[60%] flex items-center border border-[#ccc] rounded-md overflow-hidden mt-5">
+								<div className="w-full md:w-[60%] flex items-center border border-[#ccc] rounded-md overflow-hidden mt-5">
 									<span className="px-3 py-3 bg-gray-100 text-gray-500 border-r border-[#ccc]">
 										$
 									</span>
@@ -148,7 +148,7 @@ const Withdrawal = () => {
 
 								<div className="mt-5">
 									<select
-										className="border border-[#ccc] bg-gray-50 p-4 w-[60%] py-3 rounded-md outline-none"
+										className="border border-[#ccc] bg-gray-50 p-4 w-full md:w-[60%] py-3 rounded-md outline-none"
 										value={withdrawalMethod} // Bind to state
 										onChange={(e) => setWithdrawalMethod(e.target.value)} // Update state
 									>
@@ -163,7 +163,7 @@ const Withdrawal = () => {
 									<div className="mt-5">
 										<select
 											id="bankSelect"
-											className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none "
+											className="bg-gray-50 border border-[#ccc] p-4 w-full md:w-[60%] py-3 rounded-md outline-none "
 											value={bankName}
 											onChange={(e) => setBankName(e.target.value)}
 										>
@@ -177,21 +177,21 @@ const Withdrawal = () => {
 										<input
 											type="text"
 											placeholder="Account Number"
-											className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
+											className="bg-gray-50 border border-[#ccc] p-4 w-full md:w-[60%] py-3 rounded-md outline-none mt-3"
 											value={accountNumber}
 											onChange={(e) => setAccountNumer(e.target.value)}
 										/>
 										<input
 											type="text"
 											placeholder="Account Name"
-											className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
+											className="bg-gray-50 border border-[#ccc] p-4 w-full md:w-[60%] py-3 rounded-md outline-none mt-3"
 											value={accountName}
 											onChange={(e) => setAccountName(e.target.value)}
 										/>
 										<input
 											type="text"
 											placeholder="Routing Number"
-											className="bg-gray-50 border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none mt-3"
+											className="bg-gray-50 border border-[#ccc] p-4 w-full md:w-[60%] py-3 rounded-md outline-none mt-3"
 											value={routingNumber}
 											onChange={(e) => setRoutingNumber(e.target.value)}
 										/>
@@ -203,7 +203,7 @@ const Withdrawal = () => {
 										<input
 											type="text"
 											placeholder="Crypto Wallet Address"
-											className="border border-[#ccc] p-4 w-[60%] py-3 rounded-md outline-none"
+											className="border border-[#ccc] p-4 w-full md:w-[60%] py-3 rounded-md outline-none"
 											value={walletID}
 											onChange={(e) => setWalletID(e.target.value)}
 										/>
@@ -220,7 +220,7 @@ const Withdrawal = () => {
 
 						<div className="mt-5">
 							{otpLoading || withdrawLoading ? (
-								<div className="w-[25%]">
+								<div className="w-[50%] md:w-[25%]">
 									<LoadingBtn bg="bg-gray-500" />
 								</div>
 							) : (
