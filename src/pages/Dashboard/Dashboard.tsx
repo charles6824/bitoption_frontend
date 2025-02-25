@@ -150,7 +150,7 @@ const Dashboard = () => {
 							</p>
 						</div>
 
-						<div className="flex items-center gap-4">
+						<div className="flex items-center justify-center gap-4">
 							<button
 								onClick={handleRefreshBalance}
 								className="text-gray-600 hover:text-gray-900 transition duration-200 flex items-center gap-2"
@@ -167,16 +167,24 @@ const Dashboard = () => {
 									{/* <div className="w-4 h-4 border-4 border-[#FFF] border-dotted rounded-full animate-spin mr-4"></div> */}
 								</>
 							) : (
-								<>
+								<div className="flex flex-col justify-end items-end">
 									<p className="text-[18px] md:text-[25px]">
 										{" "}
-										Balance: $
+										<span className="text-[14px]">Available balance:</span> $
 										{Number(accountBalance?.balance).toLocaleString("en-US", {
 											minimumFractionDigits: 2,
 											maximumFractionDigits: 2,
 										})}
 									</p>
-								</>
+									<p className="text-[14px] md:text-[25px]">
+										{" "}
+										<span className="text-[12px]">Total balance:</span> $
+										{Number(accountBalance?.totalBalance).toLocaleString("en-US", {
+											minimumFractionDigits: 2,
+											maximumFractionDigits: 2,
+										})}
+									</p>
+								</div>
 							)}
 						</div>
 					</div>
