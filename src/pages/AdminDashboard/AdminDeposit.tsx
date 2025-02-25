@@ -105,7 +105,6 @@ const AdminDeposit = () => {
 				amount: amount,
 				accountName: nameData.data,
 			};
-     
 
 			// u dont need this in withdrawals
 			const response: any = await fundAsAdmin({
@@ -116,7 +115,10 @@ const AdminDeposit = () => {
 				setAccountNumber("");
 				setAmount(0);
 				setShowName(false);
-        refetch()
+				setShowViewModal(false);
+				setShowModal(false);
+				setShowAModal(false);
+				refetch();
 			} else {
 				toast.error(response.message);
 			}
@@ -140,7 +142,6 @@ const AdminDeposit = () => {
 				amount: amount,
 				accountName: nameData.data,
 			};
-     
 
 			const response: any = await fundAsAdmin2({
 				data: { payload: model },
@@ -150,7 +151,10 @@ const AdminDeposit = () => {
 				setAccountNumber("");
 				setAmount(0);
 				setShowName(false);
-        refetch()
+				setShowViewModal(false);
+				setShowModal(false);
+				setShowAModal(false);
+				refetch();
 			} else {
 				toast.error(response.message);
 			}
@@ -415,12 +419,9 @@ const AdminDeposit = () => {
 										{selectedItem?.status === "pending" && (
 											<>
 												{approveLoading || declineLoading ? (
-											        
-                                                    <div className="w-[30%]">
-
-														<LoadingBtn  />
+													<div className="w-[30%]">
+														<LoadingBtn />
 													</div>
-													
 												) : (
 													<div className="flex ite,s-center gap-4 text-white text-sm">
 														<button
@@ -457,7 +458,8 @@ const AdminDeposit = () => {
 										<div>
 											<h1 className="text-[28px]">Fund User Wallet</h1>
 											<p className="text-[12px]">
-												Send Money to users within the application (Total Balance)
+												Send Money to users within the application (Total
+												Balance)
 											</p>
 										</div>
 										<FaRegTimesCircle
@@ -545,7 +547,8 @@ const AdminDeposit = () => {
 										<div>
 											<h1 className="text-[28px]">Fund User Wallet</h1>
 											<p className="text-[12px]">
-												Send Money to users within the application (Available Balance)
+												Send Money to users within the application (Available
+												Balance)
 											</p>
 										</div>
 										<FaRegTimesCircle
