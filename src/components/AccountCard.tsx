@@ -7,7 +7,7 @@ interface SourceAccountProps {
 const AccountCard: React.FC<SourceAccountProps> = ({
   cardData,
 }) => {
-
+  console.log("cardData: ", cardData)
   return (
     <>
       <div className="w-full md:w-[60%]">
@@ -37,8 +37,12 @@ const AccountCard: React.FC<SourceAccountProps> = ({
                     </div>
                   </div>
                   <div className="flex flex-col text-right">
-                    <h1 className="text-[#EDEFF2]  text-[14px] md:text-[20px]">
-                    Balance: ${Number(cardData.balance).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    <h1 className="text-[#EDEFF2]  text-[14px] md:text-[14px]">
+                    Available Balance: ${Number(cardData.availableBalance).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+
+                    </h1>
+                    <h1 className="text-[#EDEFF2]  text-[14px] md:text-[14px]">
+                    Total Balance: ${Number(cardData.balance).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
 
                     </h1>
                 
