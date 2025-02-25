@@ -20,7 +20,9 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 		}),
 		confirmReg: builder.mutation({
 			query: ({ data }: { data: any }) => ({
-				url: `${import.meta.env.VITE_BASE_URL}/users/register/confirm-registration`,
+				url: `${
+					import.meta.env.VITE_BASE_URL
+				}/users/register/confirm-registration`,
 				method: "PUT",
 				body: data,
 				headers: {
@@ -66,7 +68,7 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 		}),
 
 		updateUserProfile: builder.mutation({
-			query: ({id, data}: {id: any, data: any}) => ({
+			query: ({ id, data }: { id: any; data: any }) => ({
 				url: `${import.meta.env.VITE_BASE_URL}/users/profile/${id}`,
 				method: "PUT",
 				body: data,
@@ -147,7 +149,7 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 			}),
 			transformResponse: handleResponse,
 		}),
-		
+
 		allWithdrawals: builder.query({
 			query: () => ({
 				url: `${import.meta.env.VITE_BASE_URL}/withdrawal`,
@@ -204,6 +206,18 @@ export const baseApiSlice = apiSlice.injectEndpoints({
 		fundAsAdmin: builder.mutation({
 			query: ({ data }: { data: any }) => ({
 				url: `${import.meta.env.VITE_BASE_URL}/deposit/fund-wallet`,
+				method: "POST",
+				body: data,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}),
+			transformResponse: handleResponse,
+		}),
+
+		fundAsAdmin2: builder.mutation({
+			query: ({ data }: { data: any }) => ({
+				url: `${import.meta.env.VITE_BASE_URL}/deposit/fund-available-wallet`,
 				method: "POST",
 				body: data,
 				headers: {
@@ -298,14 +312,15 @@ export const {
 	useContactMutation,
 	useFetchBitcoinDetailsQuery,
 	useFundAsAdminMutation,
+	useFundAsAdmin2Mutation,
 	useAllUsersQuery,
-     useAllDepositsQuery,
-   useAllWithdrawalsQuery,
-   useLazyApproveDepositsQuery,
-   useLazyApproveWithdrawalQuery,
-  useLazyDeclineDepositsQuery,
-  useUpdateUserMutation,
-  useLazyDeclineWithdrawalQuery,
-  useConfirmRegMutation,
-  useUpdateUserProfileMutation,
+	useAllDepositsQuery,
+	useAllWithdrawalsQuery,
+	useLazyApproveDepositsQuery,
+	useLazyApproveWithdrawalQuery,
+	useLazyDeclineDepositsQuery,
+	useUpdateUserMutation,
+	useLazyDeclineWithdrawalQuery,
+	useConfirmRegMutation,
+	useUpdateUserProfileMutation,
 } = baseApiSlice;
